@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring5.dtd" >
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-course-edit" th:object="${properties}">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">key：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="hidden" name="id" th:value="*{id}">
+                    <input class="form-control" type="text" readonly="true" name="key" th:value="*{key}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">value：</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="value" th:text="*{value}"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">application：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="application" th:value="*{application}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">profile：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="profile" th:value="*{profile}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">版本：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="label" th:value="*{label}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" name="remark" th:text="*{remark}"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <div class="onoffswitch">
+                        <input type="checkbox" th:checked="*{status eq 1 ? true : false}" class="onoffswitch-checkbox"
+                               id="status" name="status" th:value="*{status}">
+                        <label class="onoffswitch-label" for="status">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-control-static col-sm-offset-9">
+                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+
+        /*<![CDATA[*/
+        ctxPath = /*[[@{/}]]*/ '';
+        /*]]>*/
+
+        var prefix = ""
+
+        $("#form-course-edit").validate({
+            rules:{
+                key:{
+                    required:true,
+                    maxlength:50
+                },
+                value:{
+                    required:true,
+                    maxlength:200
+                }
+            },
+            submitHandler:function(form){
+                $.operate.save(prefix+ "/save",data());
+            }
+
+        });
+
+        function data() {
+            var id = $("input[name='id']").val();
+            var key = $("input[name='key']").val();
+            var value = $("textarea[name='value']").val();
+            var application = $("input[name='application']").val();
+            var profile = $("input[name='profile']").val();
+            var label = $("input[name='label']").val();
+            var remark = $("textarea[name='remark']").val();
+            var status = $("input[name='status']").is(':checked') == true ? 1 : 2;
+            return{
+                "id":id,
+                "key":key,
+                "value":value,
+                "application":application,
+                "profile":profile,
+                "label":label,
+                "remark":remark,
+                "status":status
+            }
+        }
+    </script>
+</body>
+</html>

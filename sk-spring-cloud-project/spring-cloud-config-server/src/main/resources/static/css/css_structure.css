@@ -1,0 +1,66 @@
+﻿@charset "utf-8";
+*{box-sizing:border-box}
+html{color:#666;}
+body{background:#ebebeb;margin:0;padding:0;}
+body,.text,.textarea,.input{font:13px/1.6 "\5fae\8f6f\96c5\9ed1","Arial","tahoma";}
+a{text-decoration:none;color:#666}
+ul{list-style:none;margin:0;padding:0}
+img{max-width:100%;height:auto;border:0;vertical-align:top;}
+.clearfix::after{content:"";display:table;clear:both}
+.clearfix{overflow:hidden;zoom:1;}
+.spot{color:#f90}
+.text,.textarea,.input{ width:100%!important;padding:.6rem;border:1px solid #ccc;font-family:"\5fae\8f6f\96c5\9ed1"}
+#pg_margins { max-width:640px; margin:0 auto; overflow:hidden; }
+
+.hd_tel, .hd_home { display:none; }
+.look_more_item { top:11px; }
+#i-book p label { display:none; }
+
+.youlink { padding:10px 20px; line-height: 1.8; }
+.m_code { padding: 15px 10px 65px; }
+.box_info .catetitle,.inside-pages .title { padding:13px 15px 1rem!important;}
+.contact .GD_CONTENT { padding-bottom:10px; }
+.info_content { padding: 20px;}
+.navnum_6{width:16.667%;}
+
+	/* 图片列表个数 
+.iFCB-PRO-1 { width:100%; box-sizing: border-box; }
+*/
+.iFCB-PRO-2,.iFCB-PRO-1 { float:left; width:50%; box-sizing: border-box; }
+.iFCB-PRO-3 { float:left; width:33.333%; box-sizing: border-box; }
+.iFCB-PRO-4 { float:left; width:25%; box-sizing: border-box; }
+.iFCB-PRO-5 { float:left; width:20%; box-sizing: border-box; }
+.iFCB-PRO-6 { float:left; width:16.666%; box-sizing: border-box; }
+.iFCB-PRO-7 { float:left; width:14.28%; box-sizing: border-box; }
+.iFCB-PRO-8 { float:left; width:12.5%; box-sizing: border-box; }
+.iFCB-PRO-9 { float:left; width:11.11%; box-sizing: border-box; }
+.iFCB-PRO-10 { float:left; width:10%; box-sizing: border-box; }
+
+#fixed-foot {  padding: 7px 0 4px; }
+#fixed-foot li a span { display:block; height:22px; width:22px; margin:0 auto; background-repeat:no-repeat!important; background-position:50% 50%!important; background-size:contain!important; }
+
+	/* 栏目分类模式：商城多产品分类 */
+.fullProduct .head { z-index: 9; }
+.fullProduct .info_content { padding: 0; }
+.third_Catalogs .title { display: block; padding-left:10px; line-height: 50px; font-size:16px; font-weight: bold; }
+.third_Catalogs .title a { color: #384d5e; }
+
+/* 人才表单的样式1 */
+.inside-pages .second_menu{margin-left: 30px;margin-bottom: 30px;}
+.inside-pages .second_menu li{line-height:30px;}
+.inside-pages .i-book form p{line-height:30px;}
+.inside-pages .i-book form  label{line-height:30px;display: inline-block !important; width: 15%;font-weight: bold;}
+.inside-pages .i-book form  input { width: 80% !important;}
+.inside-pages .i-book form p input[checked="checked"],
+.inside-pages .i-book form p input[type="radio"]{ width: 20px !important; height:20px;margin: 0 10px;vertical-align: middle;}
+.inside-pages .i-book form .date {padding: .5rem;float: none;}
+.inside-pages p{margin-left: 30px; line-height: 30px;}
+
+
+
+
+
+
+
+
+
