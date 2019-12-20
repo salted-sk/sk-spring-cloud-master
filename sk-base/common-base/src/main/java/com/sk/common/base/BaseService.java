@@ -32,7 +32,7 @@ import static java.util.stream.Collectors.toList;
  * @author zhangqiao
  * @since 2019-03-13 17:25:36
  */
-public class BaseService<T extends BaseEntity, E extends MyMapper<? super T>> {
+public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? super T>> {
 
     protected Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -76,7 +76,6 @@ public class BaseService<T extends BaseEntity, E extends MyMapper<? super T>> {
         Example.Criteria criteria = example.createCriteria();
         consumer.accept(criteria, example);
         criteria.andEqualTo("deleted",false);
-        @SuppressWarnings("unchecked")
         List list = dao.selectByExample(example);
         //判断返回类型与对应数据库实体类型是否相同
         boolean sameClass = (getOfClass() == getInstanceOf().getClass());
@@ -90,6 +89,7 @@ public class BaseService<T extends BaseEntity, E extends MyMapper<? super T>> {
      * @param sameClass 返回类型与对应数据库实体类型是否相同
      * @return 返回结果
      */
+    @SuppressWarnings("unchecked")
     private List<T> selectList(List list, boolean sameClass) {
         List<T> resultList = list;
         if (!sameClass) {
@@ -364,7 +364,6 @@ public class BaseService<T extends BaseEntity, E extends MyMapper<? super T>> {
     /**
      * 获取当前数据库实体类Class
      */
-    @SuppressWarnings("unchecked")
     private Class getOfClass() {
         ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
         Class t = (Class) superClass.getActualTypeArguments()[0];

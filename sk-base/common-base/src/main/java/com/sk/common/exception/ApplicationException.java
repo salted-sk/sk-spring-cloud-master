@@ -4,7 +4,7 @@ import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.ResultCode;
 
 /**
- * TODO
+ * 应用异常
  *
  * @author zhangqiao
  * @since 2019/11/28 10:08
