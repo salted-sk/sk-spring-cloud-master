@@ -12,6 +12,7 @@
     <artifactId>sk-rabbitmq</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>consumer</module>
         <module>producer</module>
     </modules>
 
