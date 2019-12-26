@@ -46,11 +46,7 @@
 	<script th:src="@{/ajax/libs/select/select2.js}"></script>
 	<script type="text/javascript">
 
-		/*<![CDATA[*/
-		ctxPath = /*[[@{/}]]*/ '';
-		/*]]>*/
-
-		var prefix = "/" + ctxPath + "admin/tang/yong/li/dynamicNews"
+		var prefix = "/" + ctx + "admin/tang/yong/li/dynamicNews"
 
 		$("#form-course-add").validate({
 			rules:{

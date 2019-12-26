@@ -2,9 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
-<link href="/ajax/libs/jquery-layout/jquery.layout-latest.css"
-      th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
 <body class="gray-bg">
 
 <div class="container-div ui-layout-center">
@@ -75,9 +72,6 @@
 </div>
 
 <div th:include="include :: footer"></div>
-<!-- jquery-export 表格导出插件 -->
-<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
-<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
     ctxPath = /*[[@{/}]]*/ '';

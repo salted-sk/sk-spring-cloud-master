@@ -15,6 +15,7 @@
         <module>fastdfs</module>
         <module>sk-redis</module>
         <module>sk-rabbitmq</module>
+        <module>sk-static-resource-server</module>
     </modules>
 
     <dependencies>
