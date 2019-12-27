@@ -36,7 +36,7 @@ public class IndexController {
      * 跳转到首页。
      */
     @GetMapping("/")
-    public String index(Principal principal, HttpServletRequest request, Model model) {
+    public String index(Principal principal, Model model) {
         model.addAttribute("username", principal.getName());
         return "index";
     }

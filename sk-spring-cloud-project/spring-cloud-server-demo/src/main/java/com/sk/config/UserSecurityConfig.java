@@ -1,6 +1,9 @@
 package com.sk.config;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sk.common.config.po.CommonCode;
+import com.sk.common.config.po.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
@@ -74,9 +77,12 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return ((request, response, authenticationException) -> {
+            Result result = new Result();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().println("{\"code\":403,\"message\":\"小老弟，你是没注册还是密码错了啊！\",\"data\":\"\"}");
+            result.setCode(CommonCode.UNAUTHORISE.code());
+            result.setMessage("小老弟，你是没注册还是密码错了啊！");
+            response.getWriter().println(JSON.toJSON(result));
             response.getWriter().flush();
         });
     }
