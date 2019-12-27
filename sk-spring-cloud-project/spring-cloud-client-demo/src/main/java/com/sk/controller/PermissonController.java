@@ -38,7 +38,7 @@ public class PermissonController {
     public Result getPermissionJson() {
         try {
             //随机设置超时时间，进入熔断
-            TimeUnit.SECONDS.sleep(new Random().nextInt(300));
+            Thread.sleep(new Random().nextInt(300));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
