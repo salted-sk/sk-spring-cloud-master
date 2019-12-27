@@ -8,6 +8,7 @@ import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class PermissionController extends BaseController {
      *
      * @return
      */
+//    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("port", port);
@@ -52,6 +54,7 @@ public class PermissionController extends BaseController {
      * @param syspermission
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
     @ResponseBody
     public List<SysPermission> getList(SysPermission syspermission) {
@@ -59,6 +62,7 @@ public class PermissionController extends BaseController {
         return syspermissions;
     }
 
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @GetMapping("/getList")
     @ResponseBody
     public Result getList(Principal principal) {
@@ -78,6 +82,7 @@ public class PermissionController extends BaseController {
      * @param principal
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @GetMapping("/getList.json")
     @ResponseBody
     public Result getListJson(Principal principal) {
@@ -96,6 +101,7 @@ public class PermissionController extends BaseController {
      * @param syspermission
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @RequestMapping(value = "/tableList", method = RequestMethod.POST)
     @ResponseBody
     public TableDataInfo tableList(SysPermission syspermission) {
@@ -115,6 +121,7 @@ public class PermissionController extends BaseController {
      *
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:SAVE')")
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public String toAdd() {
         return prefix + "/add";
@@ -127,6 +134,7 @@ public class PermissionController extends BaseController {
      * @param model
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:SAVE')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") int id, Model model) {
         SysPermission permission = permissionService.selectOne(id);
@@ -140,6 +148,7 @@ public class PermissionController extends BaseController {
      * @param syspermission
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:SAVE')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(SysPermission syspermission) {
@@ -153,6 +162,7 @@ public class PermissionController extends BaseController {
      * @param ids
      * @return
      */
+    @PreAuthorize("hasAuthority('PERMISSION:DELETE')")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(Integer[] ids) {

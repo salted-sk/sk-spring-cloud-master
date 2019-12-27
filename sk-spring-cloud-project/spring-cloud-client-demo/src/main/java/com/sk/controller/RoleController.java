@@ -8,6 +8,7 @@ import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class RoleController extends BaseController {
      *
      * @return
      */
+//    @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("port", port);
@@ -52,6 +54,7 @@ public class RoleController extends BaseController {
      * @param sysRole
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
     @ResponseBody
     public Result getList(SysRole sysRole) {
@@ -65,6 +68,7 @@ public class RoleController extends BaseController {
      * @param principal
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @GetMapping("/getList.json")
     @ResponseBody
     public Result getListJson(Principal principal) {
@@ -83,6 +87,7 @@ public class RoleController extends BaseController {
      * @param sysRole
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @RequestMapping(value = "/tableList", method = RequestMethod.POST)
     @ResponseBody
     public TableDataInfo tableList(SysRole sysRole) {
@@ -101,6 +106,7 @@ public class RoleController extends BaseController {
      *
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:SAVE')")
     @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
     public String toAdd() {
         return prefix + "/add";
@@ -113,6 +119,7 @@ public class RoleController extends BaseController {
      * @param model
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:SAVE')")
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") int id, Model model) {
         SysRole sysRole = roleService.selectOne(id);
@@ -134,6 +141,7 @@ public class RoleController extends BaseController {
      * @param sysRole
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:SAVE')")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(SysRole sysRole) {
@@ -147,6 +155,7 @@ public class RoleController extends BaseController {
      * @param ids
      * @return
      */
+    @PreAuthorize("hasAuthority('ROLE:DELETE')")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(Integer[] ids) {

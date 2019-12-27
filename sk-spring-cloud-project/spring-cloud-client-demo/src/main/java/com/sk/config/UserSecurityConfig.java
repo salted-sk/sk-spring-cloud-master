@@ -1,7 +1,6 @@
 package com.sk.config;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 @EnableOAuth2Sso
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-    @Value("${app.sso.login.url}")
-    private String ssoLoginUrl;
-
     @Value("${app.sso.logout.url}")
     private String ssoLogoutUrl;
 
@@ -44,10 +37,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling()
-                .accessDeniedHandler(handleAccessDeniedForUser())
-                .and()
-            .headers()
+        http.headers()
                 .frameOptions()
                 .disable()
                 .and()
@@ -86,24 +76,5 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
             response.getWriter().flush();
         });
     }
-
-    /**
-     * 自定义AccessDeniedHandler来处理Ajax请求。
-     * @return
-     */
-    private AccessDeniedHandler handleAccessDeniedForUser() {
-        return (request, response, accessDeniedException) -> {
-            String requestedWithHeader = request.getHeader("X-Requested-With");
-            if ("XMLHttpRequest".equals(requestedWithHeader)) {
-                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                response.setContentType("application/json");
-                response.getOutputStream().write(objectMapper.writeValueAsBytes(accessDeniedException.getMessage()));
-            } else {
-                response.sendRedirect(ssoLoginUrl);
-            }
-        };
-    }
-
-
 
 }

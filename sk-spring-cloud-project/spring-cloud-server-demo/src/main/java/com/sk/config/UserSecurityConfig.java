@@ -96,14 +96,15 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
             String requestedWithHeader = request.getHeader("X-Requested-With");
             if ("XMLHttpRequest".equals(requestedWithHeader)) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                response.setContentType("application/json");
-                response.getOutputStream().write(objectMapper.writeValueAsBytes(accessDeniedException.getMessage()));
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().println("{\"code\":403,\"message\":\"小老弟，系统好像异常了呢啊！\",\"data\":\"\"}");
+                response.getWriter().flush();
             } else {
-                response.sendRedirect(ssoLoginUrl);
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().println("{\"code\":403,\"message\":\"小老弟，你好像没有权限访问！\",\"data\":\"\"}");
+                response.getWriter().flush();
             }
         };
     }
-
-
-
 }
