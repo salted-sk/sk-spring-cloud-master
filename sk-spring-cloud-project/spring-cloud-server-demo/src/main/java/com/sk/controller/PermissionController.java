@@ -61,14 +61,14 @@ public class PermissionController extends BaseController {
 
     @GetMapping("/getList")
     @ResponseBody
-    public Map getList(Principal principal) {
+    public Result getList(Principal principal) {
         List<SysPermission> syspermissions = permissionService.selectList();
         Map<String, Object> map = new HashMap<>();
         map.put("端口", port);
         map.put("数据", syspermissions);
         map.put("数据来源", "service-b");
         map.put("调用者", principal.getName());
-        return map;
+        return success(map);
     }
 
 
@@ -80,14 +80,14 @@ public class PermissionController extends BaseController {
      */
     @GetMapping("/getList.json")
     @ResponseBody
-    public Map getListJson(Principal principal) {
+    public Result getListJson(Principal principal) {
         List<SysPermission> syspermissions = permissionService.selectList();
         Map<String, Object> map = new HashMap<>();
         map.put("数据", syspermissions);
         map.put("数据来源", "service-b");
         map.put("调用者", principal.getName());
         map.put("desc", "访问此数据需要有效的token");
-        return map;
+        return success(map);
     }
 
     /**

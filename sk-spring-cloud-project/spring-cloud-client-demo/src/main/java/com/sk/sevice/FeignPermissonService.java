@@ -1,5 +1,6 @@
 package com.sk.sevice;
 
+import com.sk.common.config.po.Result;
 import com.sk.config.FeignConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,6 +18,6 @@ import java.util.Map;
 public interface FeignPermissonService {
 
     @GetMapping("/server-demo/permission/getList.json")
-    Map getListJson();
+    Result getListJson();
 
 }

@@ -1,5 +1,6 @@
 package com.sk.controller;
 
+import com.sk.common.config.po.Result;
 import com.sk.sevice.FeignPermissonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,9 @@ public class PermissonController {
     private FeignPermissonService permissonService;
 
     @GetMapping("/getList")
-    public Map getPermissionJson() {
-        Map map = permissonService.getListJson();
-        return map;
+    public Result getPermissionJson() {
+        Result result = permissonService.getListJson();
+        return result;
     }
 
 }

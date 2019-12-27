@@ -1,7 +1,9 @@
 package com.sk.config;
 
+import com.alibaba.fastjson.JSON;
+import com.sk.common.config.po.CommonCode;
+import com.sk.common.config.po.Result;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -43,18 +45,24 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
 
     private AccessDeniedHandler handleAccessDeniedForUser() {
         return (request, response, accessDeniedException) -> {
+            Result result = new Result();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().println("{\"code\":403,\"message\":\"小老弟，你好像没有权限访问呀！\",\"data\":\"\"}");
+            result.setCode(CommonCode.UNAUTHORISE.code());
+            result.setMessage(CommonCode.UNAUTHORISE.message());
+            response.getWriter().println(JSON.toJSON(result));
             response.getWriter().flush();
         };
     }
 
     private AuthenticationEntryPoint authenticationEntryPoint() {
         return (HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) -> {
+            Result result = new Result();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().println("{\"code\":401,\"message\":\"小老弟，你的令牌好像不对啊！\",\"data\":\"\"}");
+            result.setCode(CommonCode.UNAUTHORISE.code());
+            result.setMessage("小老弟，你的令牌好像不对啊！");
+            response.getWriter().println(JSON.toJSON(result));
             response.getWriter().flush();
         };
     }
