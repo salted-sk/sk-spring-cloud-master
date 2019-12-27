@@ -4,7 +4,7 @@
 <head th:include="include :: header"></head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-class-edit" th:object="${sysPermission}">
+    <form class="form-horizontal m" id="form-class-edit" th:object="${permission}">
 
         <div class="form-group">
             <label class="col-sm-3 control-label">权限名称：</label>
@@ -45,7 +45,7 @@
             }
         },
         submitHandler:function(form){
-            $.operate.save(ctx + "permission/editSave",data());
+            $.operate.save(ctx + "permission/save",data());
         }
 
     });

@@ -129,8 +129,8 @@ public class PermissionController extends BaseController {
      */
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") int id, Model model) {
-        SysPermission syspermission = permissionService.selectOne(id);
-        model.addAttribute("syspermission", syspermission);
+        SysPermission permission = permissionService.selectOne(id);
+        model.addAttribute("permission", permission);
         return prefix + "/edit";
     }
 
