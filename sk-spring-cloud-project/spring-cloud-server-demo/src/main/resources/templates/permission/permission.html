@@ -27,15 +27,12 @@
 
                             <a class="btn btn-warning btn-rounded btn-sm"
                                onclick="$.form.reset($('form').attr('id'))"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            <a class="btn btn-outline btn-rounded btn-sm" href="/service-b/role/getList">
-                                <i class="fa fa-anchor"></i> 服务A
-                            </a>
                             <a class="btn btn-outline btn-rounded btn-sm" href="/logout">
                                 <i class="fa fa-scissors"></i> 退出
                             </a>
                             <span class="btn btn-outline btn-rounded btn-sm">
                                 <i class="fa fa-adjust"></i> 端口
-                                <span th:text="${port}">
+                                <span th:text="${port}"/>
                             </span>
                         </li>
                     </ul>
