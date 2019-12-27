@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json;charset=UTF-8");
             result.setCode(CommonCode.UNAUTHORISE.code());
-            result.setMessage("小老弟，你是没注册还是密码错了啊！");
+            result.setMessage(authenticationException.getMessage());
             response.getWriter().println(JSON.toJSON(result));
             response.getWriter().flush();
         });

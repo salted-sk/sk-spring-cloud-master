@@ -29,7 +29,7 @@
                             <a class="btn btn-warning btn-rounded btn-sm"
                                onclick="$.form.reset($('form').attr('id'))"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             <a class="btn btn-outline btn-rounded btn-sm" th:href="@{/permission/getList}" target="_blank">
-                                <i class="fa fa-anchor"></i> 服务B
+                                <i class="fa fa-anchor"></i> 权限数据（来自server服务）
                             </a>
                             <a class="btn btn-outline btn-rounded btn-sm" th:href="@{/logout}">
                                 <i class="fa fa-scissors"></i> 退出
@@ -71,7 +71,7 @@
             url: ctx + "role/tableList",
             createUrl: ctx + "role/toAdd",
             updateUrl: ctx + "role/edit/{id}",
-            removeUrl: ctx + "role/del",
+            removeUrl: ctx + "role/delete",
             sortName: "create_time",
             sortOrder: "desc",
             modalName: "角色",

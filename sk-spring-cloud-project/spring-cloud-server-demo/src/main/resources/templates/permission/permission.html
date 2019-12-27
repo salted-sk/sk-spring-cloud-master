@@ -67,7 +67,7 @@
             url: ctx + "permission/tableList",
             createUrl: ctx + "permission/toAdd",
             updateUrl: ctx + "permission/edit/{id}",
-            removeUrl: ctx + "permission/del",
+            removeUrl: ctx + "permission/delete",
             sortName: "create_time",
             sortOrder: "desc",
             modalName: "权限",
@@ -83,6 +83,10 @@
                 {
                     field: 'name',
                     title: '权限名称'
+                },
+                {
+                    field: 'url',
+                    title: 'url'
                 },
                 {
                     field: 'status',

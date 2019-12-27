@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,12 +36,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private SysUserService userService;
 
     @Autowired
-    private SysUserRoleService userRoleService;
-
-    @Autowired
-    private SysRolePermissionService rolePermissionService;
-
-    @Autowired
     private SysPermissionService permissionService;
 
     @Autowired
@@ -49,24 +44,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = userService.getUserByUsername(username);
-        if (EmptyUtils.isNotEmpty(user)) {
+        if (EmptyUtils.isNotEmpty(user) && !user.getDeleted()) {
+            if (user.getStatus() != 1) {
+                //当前用户被锁
+                return User.withUsername(username)
+                        .password(user.getPassword())
+                        .authorities(new ArrayList<>())
+                        .accountLocked(true)
+                        .build();
+            }
+            //获取当前用户的所有权限
+            List<SysPermission> userPermissions = permissionService.userPermissions(user.getId());
             //获取当前用户权限集合
             Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-            //获取当前用户角色集合
-            List<SysUserRole> userRoles = userRoleService
-                    .selectList((criteria, example) ->
-                            criteria.andEqualTo("userId", user.getId()));
-            //获取用户角色的所有权限
-            userRoles.forEach(userRole -> {
-                List<SysRolePermission> rolePermissions = rolePermissionService
-                        .selectList((criteria, example) ->
-                                criteria.andEqualTo("roleId", userRole.getId()));
-                rolePermissions.forEach(rolePermission -> {
-                    SysPermission permission = permissionService.selectOne(rolePermission.getPermissionId());
-                    if (EmptyUtils.isNotEmpty(permission)) {
-                        authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
-                    }
-                });
+            userPermissions.forEach(permission -> {
+                authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
             });
             return User.withUsername(username)
                     .password(user.getPassword())
@@ -75,5 +67,33 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return null;
     }
+
+//    private Set<SimpleGrantedAuthority> grantedAuthority(SysUser user) {
+//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+//        //获取当前默认角色集合
+//        List<SysUserRole> defaultRoles = userRoleService
+//                .selectList((criteria, example) ->
+//                        criteria.andEqualTo("defaultRole", true)
+//                                .andEqualTo("status", 1));
+//        //获取当前用户角色集合
+//        List<SysUserRole> userRoles = userRoleService
+//                .selectList((criteria, example) ->
+//                        criteria.andEqualTo("userId", user.getId())
+//                                .andEqualTo("status", 1));
+//        //获取用户角色的所有权限
+//        userRoles.forEach(userRole -> {
+//            List<SysRolePermission> rolePermissions = rolePermissionService
+//                    .selectList((criteria, example) ->
+//                            criteria.andEqualTo("roleId", userRole.getId())
+//                                    .andEqualTo("status", 1));
+//            rolePermissions.forEach(rolePermission -> {
+//                SysPermission permission = permissionService.selectOne(rolePermission.getPermissionId());
+//                if (EmptyUtils.isNotEmpty(permission)) {
+//                    authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
+//                }
+//            });
+//        });
+//        return authorities;
+//    }
 
 }

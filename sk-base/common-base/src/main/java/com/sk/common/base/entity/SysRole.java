@@ -24,6 +24,12 @@ public class SysRole extends BaseEntity<Integer> {
     private String name;
 
     /**
+     * 是否默认角色
+     */
+    @Column(name = "default_role")
+    private Boolean defaultRole;
+
+    /**
 	 * 描述    
      */
     @Column(name = "description")

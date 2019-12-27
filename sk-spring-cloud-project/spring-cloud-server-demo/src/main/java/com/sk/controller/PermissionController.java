@@ -41,7 +41,7 @@ public class PermissionController extends BaseController {
      *
      * @return
      */
-//    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("port", port);

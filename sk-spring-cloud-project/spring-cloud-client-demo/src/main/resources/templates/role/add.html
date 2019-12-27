@@ -70,7 +70,7 @@
 				}
 			},
 			submitHandler:function(form){
-				$.operate.save(prefix + "/addSave",data());
+				$.operate.save(prefix + "/save",data());
 			}
 
 		});
@@ -78,7 +78,7 @@
 		function data() {
             var code = $("input[name='code']").val();
 			var name = $("input[name='name']").val();
-			var description = $("input[name='description']").val();
+			var description = $("textarea[name='description']").val();
             var status = $("input[name='status']").is(':checked') == true ? 1 : 2;
             return{
                 "code":code,

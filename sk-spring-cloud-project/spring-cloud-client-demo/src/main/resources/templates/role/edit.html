@@ -5,7 +5,7 @@
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
     <form class="form-horizontal m" id="form-class-edit" th:object="${sysRole}">
-
+        <input type="hidden" name="id" th:value="*{id}">
         <div class="form-group">
             <label class="col-sm-3 control-label">角色名称：</label>
             <div class="col-sm-8">
@@ -53,7 +53,7 @@
             }
         },
         submitHandler:function(form){
-            $.operate.save(ctx + "role/editSave",data());
+            $.operate.save(ctx + "role/save",data());
         }
 
     });
@@ -61,7 +61,7 @@
     function data() {
         var id = $("input[name='id']").val();
         var name = $("input[name='name']").val();
-        var description = $("input[name='description']").val();
+        var description = $("textarea[name='description']").val();
         var status = $("input[name='status']").is(':checked') == true ? 1 : 2;
         return{
             "id":id,
