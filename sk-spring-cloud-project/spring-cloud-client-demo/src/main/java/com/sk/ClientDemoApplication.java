@@ -2,6 +2,7 @@ package com.sk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableGlobalMethodSecurity(prePostEnabled = true)//配置使用Security权限
 @SpringCloudApplication
 @EnableFeignClients
+@EnableHystrix
 public class ClientDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClientDemoApplication.class,args);
