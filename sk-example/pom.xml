@@ -12,7 +12,7 @@
     <artifactId>sk-example</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>fastdfs</module>
+        <module>sk-fastdfs</module>
         <module>sk-redis</module>
         <module>sk-rabbitmq</module>
         <module>sk-static-resource-server</module>
