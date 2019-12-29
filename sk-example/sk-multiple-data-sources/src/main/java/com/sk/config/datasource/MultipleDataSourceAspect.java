@@ -68,6 +68,10 @@ public class MultipleDataSourceAspect {
             MultileDataSourceHolder.setDataSourceKey(dataSource.value());
             log.info("数据源切换至" + dataSource.value());
         }
-        return jp.proceed();
+        Object result = jp.proceed();
+        // 将数据源置为默认数据源
+        MultileDataSourceHolder.clearDataSourceKey();
+        log.info("初始化数据源！");
+        return result;
     }
 }
