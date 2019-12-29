@@ -106,38 +106,65 @@
                 },
                 {
                     field: 'key',
-                    width: '25%',
-                    title: 'key'
+                    title: 'key',
+                    cellStyle: function (value, row, index) {
+                        return {
+                            css: {
+                                "min-width": "200px",
+                                "white-space": "nowrap",
+                                "text-overflow": "ellipsis",
+                                "overflow": "hidden",
+                                "max-width": "250px",
+                            }
+                        }
+                    },
+                    formatter:paramsMatter
                 },
                 {
                     field: 'value',
-                    width: '30%',
-                    title: 'value'
+                    title: 'value',
+                    cellStyle: function (value, row, index) {
+                        return {
+                            css: {
+                                "min-width": "250px",
+                                "white-space": "nowrap",
+                                "text-overflow": "ellipsis",
+                                "overflow": "hidden",
+                                "max-width": "300px",
+                            }
+                        }
+                    },
+                    formatter:paramsMatter
                 },
                 {
                     field: 'application',
                     width: '4%',
+                    overflow : 'hidden',
                     title: 'app'
                 },
                 {
                     field: 'profile',
                     width: '4%',
+                    overflow : 'hidden',
                     title: 'profile'
                 },
                 {
                     field: 'label',
                     width: '4%',
+                    overflow : 'hidden',
                     title: '版本'
                 },
                 {
                     field: 'remark',
                     title: '描述',
+                    overflow : 'hidden',
                     visible:false
                 },
                 {
                     field: 'status',
                     title: '状态',
                     width: '3%',
+                    overflow : 'hidden',
                     align: 'center',
                     formatter: function (value, row, index) {
                         if (value == '1') {
@@ -169,6 +196,12 @@
         $.table.init(options);
     }
 
+    function paramsMatter(value, row, index) {
+        var span=document.createElement('span');
+        span.setAttribute('title',value);
+        span.innerHTML = value;
+        return span.outerHTML;
+    }
 </script>
 </body>
 </html>

@@ -17,9 +17,21 @@
     <link th:href="@{http://112.124.3.225:8100/ruoyi/css/ry-ui.min.css}" rel="stylesheet"/>
     <link th:href="@{http://112.124.3.225:8100/ajax/libs/layui/css/modules/laydate/default/layui.css}" rel="stylesheet"/>
     <link th:href="@{http://112.124.3.225:8100/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+    <!-- 使用oauth2时无法使用除get以外的请求 csrf(跨站请求伪造解决) -->
+    <!-- 亦可在服务端使失效csrf -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <div th:fragment="footer">
     <script th:src="@{http://112.124.3.225:8100/js/jquery.min.js}"></script>
+    <script>
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        })
+    </script>
+    <!-- 跨域伪造问题结束 -->
     <script th:src="@{http://112.124.3.225:8100/js/bootstrap.min.js}"></script>
 
     <!-- bootstrap-table 表格插件 -->
