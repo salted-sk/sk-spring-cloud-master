@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sk-example</artifactId>
+        <groupId>com.sk</groupId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <description>一个多数据源的demo</description>
+
+    <artifactId>sk-multiple-data-sources</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sk</groupId>
+            <artifactId>common-base</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
+        <!-- spring aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+    </dependencies>
+</project>

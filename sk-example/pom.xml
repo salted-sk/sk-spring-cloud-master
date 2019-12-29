@@ -16,6 +16,7 @@
         <module>sk-redis</module>
         <module>sk-rabbitmq</module>
         <module>sk-static-resource-server</module>
+        <module>sk-multiple-data-sources</module>
     </modules>
 
     <dependencies>

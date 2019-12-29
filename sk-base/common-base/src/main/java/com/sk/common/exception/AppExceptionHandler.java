@@ -27,6 +27,7 @@ public class AppExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Result errorHandler(Exception ex) {
         log.error(ex.getMessage());
+        ex.printStackTrace();
         Result result = new Result();
         result.setCode(CommonCode.ERROR.code());
         result.setMessage(CommonCode.ERROR.message());
