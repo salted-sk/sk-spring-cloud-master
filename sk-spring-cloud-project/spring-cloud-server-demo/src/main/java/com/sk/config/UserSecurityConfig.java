@@ -26,11 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 @EnableOAuth2Sso
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-    @Value("${app.sso.login.url}")
-    private String ssoLoginUrl;
-
     @Value("${app.sso.logout.url}")
     private String ssoLogoutUrl;
 
@@ -55,7 +50,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**")
                 .and()
             .authorizeRequests()
-                .antMatchers("/login", "/actuator/health")
+                .antMatchers("/actuator/health")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

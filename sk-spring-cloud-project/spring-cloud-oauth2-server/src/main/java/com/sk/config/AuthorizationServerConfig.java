@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeSe
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 
@@ -51,10 +50,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(jwtAccessTokenConverter())
-                //多节点下使用redis持久化token
-                .tokenStore(jwtTokenStore())
+                //多节点下可使用redis持久化token
+                .tokenStore(jwtTokenStore());
                 //使用jdbc保存code以达到多节点认证
-                .authorizationCodeServices(authorizationCodeServices());
+                //.authorizationCodeServices(authorizationCodeServices());
     }
 
     @Bean
@@ -78,7 +77,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return jwtAccessTokenConverter;
     }
 
-//    //使用reids来持久化token
+    //使用reids来持久化token
 //    @Autowired
 //    private RedisConnectionFactory redisConnectionFactory;
 //
