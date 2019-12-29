@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2019/12/26 22:35
  */
 @SpringBootApplication
+//@EnableRedisHttpSession
 public class OauthServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(OauthServerApplication.class,args);
