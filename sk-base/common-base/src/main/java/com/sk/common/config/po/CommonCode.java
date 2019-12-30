@@ -20,6 +20,8 @@ public enum CommonCode implements ResultCode {
 
     CACHE_ERROR(false, 903, "缓存异常！"),
 
+    LOGIN_ERROR(false,400, "用户名或密码错误！"),
+
     UNAUTHORISE(false,401, "权限不足！");
 
     //操作是否成功
