@@ -21,13 +21,12 @@ public class AppExceptionHandler {
 
     /**
      * 全局异常捕捉处理
-     * @param ex
+     * @param e
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    public Result errorHandler(Exception ex) {
-        log.error(ex.getMessage());
-        ex.printStackTrace();
+    public Result errorHandler(Exception e) {
+        log.error(e.getMessage(), e);
         Result result = new Result();
         result.setCode(CommonCode.ERROR.code());
         result.setMessage(CommonCode.ERROR.message());
@@ -36,12 +35,12 @@ public class AppExceptionHandler {
 
     /**
      * 无权限调用捕捉处理
-     * @param ex
+     * @param e
      * @return
      */
     @ExceptionHandler(value = AccessDeniedException.class)
-    public Result accessHandler(Exception ex) {
-        log.error(ex.getMessage());
+    public Result accessHandler(Exception e) {
+        log.error(e.getMessage(), e);
         Result result = new Result();
         result.setCode(CommonCode.UNAUTHORISE.code());
         result.setMessage(CommonCode.UNAUTHORISE.message());
@@ -50,15 +49,15 @@ public class AppExceptionHandler {
 
     /**
      * 拦截捕捉自定义异常 MyException.class
-     * @param ex
+     * @param e
      * @return
      */
     @ExceptionHandler(value = ApplicationException.class)
-    public Result myErrorHandler(ApplicationException ex) {
-        log.error(ex.getMessage());
+    public Result myErrorHandler(ApplicationException e) {
+        log.error(e.getMessage(), e);
         Result result = new Result();
-        result.setCode(ex.getCode());
-        result.setMessage(ex.getMessage());
+        result.setCode(e.getCode());
+        result.setMessage(e.getMessage());
         return result;
     }
 

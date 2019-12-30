@@ -3,6 +3,7 @@ package com.sk.config;
 import com.alibaba.fastjson.JSON;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
+import com.sk.config.filter.ValidateCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,13 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //设置在登录之前校验此验证码过滤器
+        http.addFilterBefore(new ValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class);
         http.formLogin()
                 .loginPage("/login")
                 //自定义登陆验证异常
                 .failureHandler(authenticationFailureHandler())
                 .and()
             .authorizeRequests()
-                .antMatchers("/login", "/logout/otherservice", "/mobile/login", "/actuator/health")
+                .antMatchers("/login", "/code/**", "/mobile/login", "/actuator/health")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
