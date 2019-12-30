@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * 验证token
+ * TODO 我觉得应该继承这个AbstractUserDetailsAuthenticationProvider类 实现里面的验证 但是我不想写了怎么滴
  *
  * @author zhangqiao
  * @since 2019/11/19 15:09
