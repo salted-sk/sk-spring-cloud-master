@@ -78,7 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 // 失效时间
-                .tokenValiditySeconds(1)
+                .tokenValiditySeconds(3600)
                 .userDetailsService(userDetailsService)
                 .and()
             .authorizeRequests()
