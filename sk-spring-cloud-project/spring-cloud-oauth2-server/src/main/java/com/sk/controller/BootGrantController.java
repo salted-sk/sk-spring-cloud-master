@@ -1,4 +1,4 @@
-package com.sk.oauth.controller;
+package com.sk.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;

@@ -1,4 +1,4 @@
-package com.sk.oauth.service;
+package com.sk.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
