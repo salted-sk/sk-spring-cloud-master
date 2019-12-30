@@ -69,7 +69,7 @@
             <form class="login100-form validate-form" th:action="@{/mobile/login}" method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="手机号不能为空">
                     <span class="label-input100">手机号</span>
-                    <input class="input100" type="text" value="13211111111" name="mobile" placeholder="请输入手机号">
+                    <input class="input100" type="text" value="zhangsan" name="mobile" placeholder="请输入手机号">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -77,6 +77,15 @@
                     <span class="label-input100">验证码（测试123456即可）</span>
                     <input class="input100" type="text" value="123456" name="smsCode" placeholder="请输入验证码">
                     <span class="focus-input100"></span>
+                </div>
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" type="checkbox" id="ckb2" name="remember-me">
+                        <label class="label-checkbox100" for="ckb2">记住我</label>
+                    </div>
+                    <div>
+                        <a href="javascript:" class="txt1">忘记密码？</a>
+                    </div>
                 </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">登 录</button>
@@ -94,7 +103,7 @@
 <script>
     $(function () {
         $('#imgcode').click(function() {
-            var url =  ctx + "code/validate/code?"+ Math.random();
+            var url = ctx + "code/validate/code?"+ Math.random();
             $("#imgcode").attr("src", url);
         });
         // $.ajax({

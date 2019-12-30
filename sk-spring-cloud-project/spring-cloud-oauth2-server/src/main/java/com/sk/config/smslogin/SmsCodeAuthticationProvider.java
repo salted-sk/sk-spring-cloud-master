@@ -17,25 +17,21 @@ public class SmsCodeAuthticationProvider implements AuthenticationProvider {
 
 	private UserDetailsService userDetailsService;
 
-	@Override
+    @Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
 		UserDetails userDetails = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
 		if (userDetails == null) {
 			throw new InternalAuthenticationServiceException("无法获取用户信息");
 		}
-		SmsCodeAuthenticationToken tokenResult = new SmsCodeAuthenticationToken(userDetails, authenticationToken.getAuthorities());
+		SmsCodeAuthenticationToken tokenResult = new SmsCodeAuthenticationToken(userDetails, userDetails.getAuthorities());
 		tokenResult.setDetails(authenticationToken.getDetails());
 		return tokenResult;
 	}
 
-	@Override
+    @Override
 	public boolean supports(Class<?> aClass) {
 		return SmsCodeAuthenticationToken.class.isAssignableFrom(aClass);
-	}
-
-	public UserDetailsService getUserDetailsService() {
-		return userDetailsService;
 	}
 
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
