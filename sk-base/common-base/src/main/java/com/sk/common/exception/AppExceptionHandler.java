@@ -40,7 +40,7 @@ public class AppExceptionHandler {
      */
     @ExceptionHandler(value = AccessDeniedException.class)
     public Result accessHandler(Exception e) {
-        log.error(e.getMessage(), e);
+        log.error(e.getMessage());
         Result result = new Result();
         result.setCode(CommonCode.UNAUTHORISE.code());
         result.setMessage(CommonCode.UNAUTHORISE.message());
@@ -54,7 +54,7 @@ public class AppExceptionHandler {
      */
     @ExceptionHandler(value = ApplicationException.class)
     public Result myErrorHandler(ApplicationException e) {
-        log.error(e.getMessage(), e);
+        log.error(e.getMessage());
         Result result = new Result();
         result.setCode(e.getCode());
         result.setMessage(e.getMessage());

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring5.dtd" >
+      xmlns:th="http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring5.dtd"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -45,10 +46,10 @@
         </div>
 
         <div class="btn-group hidden-xs" id="toolbar" role="group">
-            <a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()">
+            <a sec:authorize="hasAuthority('ROLE:SAVE')" class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()">
                 <i class="fa fa-plus"></i> 新增
             </a>
-            <a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()">
+            <a sec:authorize="hasAuthority('ROLE:DELETE')" class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()">
                 <i class="fa fa-trash-o"></i> 删除
             </a>
         </div>

@@ -22,7 +22,8 @@
             <form class="login100-form validate-form" th:action="@{/login}" method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="用户名不能为空">
                     <span class="label-input100">用户名</span>
-                    <input class="input100" type="text" value="zhangsan" name="username" placeholder="请输入用户名">
+                    <input class="input100" type="text" value="zhangsan" placeholder="请输入用户名" onchange="syncnum('account', this);">
+                    <input type="hidden" name="username" id="account" value="account:zhangsan">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -33,7 +34,7 @@
                 </div>
 
                 <div class="flex-sb-m w-full p-b-30 wrap-input100 validate-input m-b-18" data-validate="验证码不能为空">
-                    <input type="text" name="validateCode" value="abcd" class="input100" placeholder="验证码" maxlength="5">
+                    <input type="text" name="validateCode" value="ABCD" class="input100" placeholder="验证码" maxlength="5">
                     <div>
                         <a href="javascript:void(0);" title="点击更换验证码">
                             <img th:src="@{/code/validate/code}" width="90%" id="imgcode"/>
@@ -69,7 +70,8 @@
             <form class="login100-form validate-form" th:action="@{/mobile/login}" method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="手机号不能为空">
                     <span class="label-input100">手机号</span>
-                    <input class="input100" type="text" value="zhangsan" name="mobile" placeholder="请输入手机号">
+                    <input class="input100" type="text" value="13275829049" placeholder="请输入手机号" onchange="syncnum('mobile', this);">
+                    <input type="hidden" name="mobile" id="mobile" value="mobile:13275829049">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -112,5 +114,9 @@
         //     dataType:"json",
         // });
     })
+
+    function syncnum(type, obj) {
+        $("#" + type).val(obj.value);
+    }
 </script>
 </html>

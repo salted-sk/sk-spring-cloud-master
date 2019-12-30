@@ -22,12 +22,19 @@ public class SysUserService extends BaseService<SysUser, SysUserDao> {
      * @return
      */
     public SysUser getUserByUsername(String username) {
-        if (EmptyUtils.isNotEmpty(username)) {
+        return selectOne(() -> {
             SysUser user = new SysUser();
             user.setAccount(username);
-            return selectOne(user);
-        }
-        return null;
+            return user;
+        });
+    }
+
+    public SysUser getUserByMobile(String mobile) {
+        return selectOne(() -> {
+            SysUser user = new SysUser();
+            user.setPhone(mobile);
+            return user;
+        });
     }
     
 }

@@ -43,11 +43,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser user = userService.getUserByUsername(username);
+        String[] loginInfo = username.split(":", 2);
+        SysUser user;
+        if (loginInfo.length > 1) {
+            if ("mobile".equals(loginInfo[0])) {
+                user = userService.getUserByMobile(loginInfo[1]);
+            } else  {
+                user = userService.getUserByUsername(loginInfo[1]);
+            }
+        } else {
+            user = userService.getUserByUsername(username);
+        }
         if (EmptyUtils.isNotEmpty(user) && !user.getDeleted()) {
             if (user.getStatus() != 1) {
                 //当前用户被锁
-                return User.withUsername(username)
+                return User.withUsername(user.getTrueName())
                         .password(user.getPassword())
                         .authorities(new ArrayList<>())
                         .accountLocked(true)
@@ -60,7 +70,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             userPermissions.forEach(permission -> {
                 authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
             });
-            return User.withUsername(username)
+            return User.withUsername(user.getTrueName())
                     .password(user.getPassword())
                     .authorities(authorities)
                     .build();
