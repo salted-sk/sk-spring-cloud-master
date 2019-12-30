@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
 import com.sk.config.filter.ValidateCodeFilter;
+import com.sk.config.smslogin.SmsCodeAuthenticationSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -18,8 +19,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * 认证服务器配置
@@ -33,6 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private DataSource dataSource;
+
+    //验证短信登陆配置
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     /**
      * 配置自定义验证用户名、密码和授权的服务。
@@ -57,10 +68,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //设置在登录之前校验此验证码过滤器
         http.addFilterBefore(new ValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class);
+        //添加短信登陆
+        http.apply(smsCodeAuthenticationSecurityConfig);
         http.formLogin()
                 .loginPage("/login")
                 //自定义登陆验证异常
                 .failureHandler(authenticationFailureHandler())
+                .and()
+            .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                // 失效时间
+                .tokenValiditySeconds(1)
+                .userDetailsService(userDetailsService)
                 .and()
             .authorizeRequests()
                 .antMatchers("/login", "/code/**", "/mobile/login", "/actuator/health")
@@ -78,6 +97,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf()
                 .disable()
                 .cors();
+    }
+
+    /**
+     * 设置记住我功能
+     *
+     * @return
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository () {
+        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+        tokenRepositoryImpl.setDataSource(dataSource);
+        // 启动时自动创建表   如果数据库有该表，再设置为true，启动会报错
+//        tokenRepositoryImpl.setCreateTableOnStartup(true);
+        return tokenRepositoryImpl;
     }
 
     @Bean

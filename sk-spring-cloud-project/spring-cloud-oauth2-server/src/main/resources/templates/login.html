@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="flex-sb-m w-full p-b-30 wrap-input100 validate-input m-b-18" data-validate="验证码不能为空">
-                    <input type="text" name="validateCode" class="input100" placeholder="验证码" maxlength="5">
+                    <input type="text" name="validateCode" value="abcd" class="input100" placeholder="验证码" maxlength="5">
                     <div>
                         <a href="javascript:void(0);" title="点击更换验证码">
                             <img th:src="@{/code/validate/code}" width="90%" id="imgcode"/>
@@ -78,8 +78,14 @@
                     <input class="input100" type="text" value="123456" name="smsCode" placeholder="请输入验证码">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 validate-input m-b-18" data-validate="记住我功能使用">
-                    <input name="remeber-me" type="checkbox" value="true"/>
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">记住我</label>
+                    </div>
+                    <div>
+                        <a href="javascript:" class="txt1">忘记密码？</a>
+                    </div>
                 </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">登 录</button>

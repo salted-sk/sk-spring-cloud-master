@@ -22,7 +22,7 @@ public enum CommonCode implements ResultCode {
 
     VALIDATE_ERROR(false, 904, "验证码错误！"),
 
-    LOGIN_ERROR(false,400, "用户名或密码错误！"),
+    LOGIN_ERROR(false,400, "用户不存在或密码错误！"),
 
     UNAUTHORISE(false,401, "权限不足！");
 
