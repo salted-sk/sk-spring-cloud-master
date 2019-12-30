@@ -5,6 +5,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.sk.common.config.po.Result;
 import com.sk.sevice.FeignPermissonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +35,7 @@ public class PermissonController {
                             value = "200")
             }
     )
+    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @GetMapping("/getList")
     public Result getPermissionJson() {
         try {

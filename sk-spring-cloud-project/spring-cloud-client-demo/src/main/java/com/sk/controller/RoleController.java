@@ -55,7 +55,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @PreAuthorize("hasAuthority('ROLE:QUERY')")
-    @RequestMapping(value = "/getList", method = RequestMethod.POST)
+    @RequestMapping("/getList")
     @ResponseBody
     public Result getList(SysRole sysRole) {
         List<SysRole> sysRoles = roleService.selectList(sysRole);
