@@ -11,7 +11,7 @@ import com.sk.common.config.po.ResultCode;
  */
 public class ServiceException extends ApplicationException {
 
-    private static final long serialVersionUID = -2678203134198782909L;
+    private static final long serialVersionUID = 1L;
 
     private static final ResultCode RESULT_CODE = CommonCode.SERVICE_ERROR;
 

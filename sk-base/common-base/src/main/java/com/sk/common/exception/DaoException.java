@@ -11,7 +11,7 @@ import com.sk.common.config.po.ResultCode;
  */
 public class DaoException extends ApplicationException {
 
-    private static final long serialVersionUID = -7980532772047897013L;
+    private static final long serialVersionUID = 1L;
 
     private static final ResultCode RESULT_CODE = CommonCode.DAO_ERROR;
 
