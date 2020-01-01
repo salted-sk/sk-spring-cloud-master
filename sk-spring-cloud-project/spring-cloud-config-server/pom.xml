@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.sk</groupId>
             <artifactId>common-base</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <!-- 配置服务安全验证 -->
