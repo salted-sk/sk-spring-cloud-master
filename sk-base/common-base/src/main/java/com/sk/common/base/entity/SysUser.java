@@ -38,7 +38,7 @@ public class SysUser extends BaseEntity<Integer> {
 	 * 性别 0女 1男    
      */
     @Column(name = "sex")
-    private Object sex;
+    private String sex;
 
     /**
 	 * 真实姓名    

@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2019/12/26 22:35
  */
 @SpringBootApplication
-//@EnableRedisHttpSession
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)//使用redis管理session并设置超时时间（配置文件设置无效）
 public class OauthServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(OauthServerApplication.class,args);

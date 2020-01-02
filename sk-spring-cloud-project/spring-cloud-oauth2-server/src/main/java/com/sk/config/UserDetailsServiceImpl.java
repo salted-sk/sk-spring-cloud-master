@@ -1,12 +1,8 @@
 package com.sk.config;
 
 import com.sk.common.base.entity.SysPermission;
-import com.sk.common.base.entity.SysRolePermission;
 import com.sk.common.base.entity.SysUser;
-import com.sk.common.base.entity.SysUserRole;
 import com.sk.common.base.service.SysPermissionService;
-import com.sk.common.base.service.SysRolePermissionService;
-import com.sk.common.base.service.SysUserRoleService;
 import com.sk.common.base.service.SysUserService;
 import com.sk.common.utils.EmptyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +53,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (EmptyUtils.isNotEmpty(user) && !user.getDeleted()) {
             if (user.getStatus() != 1) {
                 //当前用户被锁
-                return User.withUsername(user.getTrueName())
+                return LoginUser.withUsername(username)
+                        .truename(user.getTrueName())
                         .password(user.getPassword())
                         .authorities(new ArrayList<>())
                         .accountLocked(true)
@@ -70,7 +67,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             userPermissions.forEach(permission -> {
                 authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
             });
-            return User.withUsername(user.getTrueName())
+            return LoginUser.withUsername(username)
+                    .truename(user.getTrueName())
+                    .account(user.getAccount())
+                    .sex(user.getSex())
                     .password(user.getPassword())
                     .authorities(authorities)
                     .build();

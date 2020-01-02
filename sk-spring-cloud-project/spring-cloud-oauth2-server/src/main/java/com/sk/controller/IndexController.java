@@ -1,6 +1,8 @@
 package com.sk.controller;
 
 import com.sk.common.utils.EmptyUtils;
+import com.sk.config.LoginUser;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +38,10 @@ public class IndexController {
      */
     @GetMapping("/")
     public String index(Principal principal, Model model) {
-        model.addAttribute("username", principal.getName());
+        if (principal != null && ((AbstractAuthenticationToken) principal).getPrincipal() instanceof LoginUser){
+            LoginUser user = (LoginUser) ((AbstractAuthenticationToken) principal).getPrincipal();
+            model.addAttribute("username", user.getTruename());
+        }
         return "index";
     }
 
