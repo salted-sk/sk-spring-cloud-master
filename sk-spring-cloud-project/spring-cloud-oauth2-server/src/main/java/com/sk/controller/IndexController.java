@@ -2,6 +2,7 @@ package com.sk.controller;
 
 import com.sk.common.utils.EmptyUtils;
 import com.sk.config.LoginUser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,14 @@ import java.security.Principal;
 @Controller
 public class IndexController {
 
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
     @GetMapping("/login")
     public String login(Principal principal, HttpServletResponse response) {
         if (EmptyUtils.isNotEmpty(principal)) {
             try {
-                response.sendRedirect("/");
+                response.sendRedirect(contextPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }

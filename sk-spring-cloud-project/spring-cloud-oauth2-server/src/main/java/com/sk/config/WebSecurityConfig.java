@@ -116,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
-        return ((request, response, authenticationException) -> {
+        return (request, response, authenticationException) -> {
             Result result = new Result();
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.setContentType("application/json;charset=UTF-8");
@@ -124,7 +124,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             result.setMessage(CommonCode.LOGIN_ERROR.message());
             response.getWriter().println(JSON.toJSON(result));
             response.getWriter().flush();
-        });
+        };
     }
 
     @Bean

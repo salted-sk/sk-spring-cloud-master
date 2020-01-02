@@ -104,19 +104,29 @@
 <script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 <script>
     $(function () {
+        logout();
+
         $('#imgcode').click(function() {
             var url = ctx + "code/validate/code?"+ Math.random();
             $("#imgcode").attr("src", url);
         });
-        // $.ajax({
-        //     type:"GET",
-        //     url:"/service-a/logout",
-        //     dataType:"json",
-        // });
     })
 
     function syncnum(type, obj) {
         $("#" + type).val(type + ":" + obj.value);
+    }
+
+    function logout() {
+        $.ajax({
+            type:"GET",
+            url:"/client-demo/logout",
+            dataType:"json",
+        });
+        $.ajax({
+            type:"GET",
+            url:"/server-demo/logout",
+            dataType:"json",
+        });
     }
 </script>
 </html>

@@ -59,7 +59,12 @@
     function logout() {
         $.ajax({
             type:"GET",
-            url:"/service-a/logout",
+            url:"/client-demo/logout",
+            dataType:"json",
+        });
+        $.ajax({
+            type:"GET",
+            url:"/server-demo/logout",
             dataType:"json",
         });
     }

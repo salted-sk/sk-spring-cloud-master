@@ -56,7 +56,7 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
     }
 
     private AuthenticationEntryPoint authenticationEntryPoint() {
-        return (HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) -> {
+        return (request, response, authenticationException) -> {
             Result result = new Result();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json;charset=UTF-8");
