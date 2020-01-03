@@ -18,9 +18,20 @@
         </dependency>
 
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.1.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sk</groupId>
+            <artifactId>common-base</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>redis.clients</groupId>-->
+<!--            <artifactId>jedis</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
     </dependencies>
 </project>

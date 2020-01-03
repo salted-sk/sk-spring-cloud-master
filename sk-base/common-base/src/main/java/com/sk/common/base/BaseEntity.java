@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ *为redis缓存添加序列化
  *
  * 基础信息
  * @author zhangqiao
  * @since 2019/8/31 20:12
  */
 @Data
-public class BaseEntity<K> {
+public class BaseEntity<K> implements Serializable {
+
+    private static final long serialVersionUID = -8923849233764013911L;
 
     /**
      * 主键

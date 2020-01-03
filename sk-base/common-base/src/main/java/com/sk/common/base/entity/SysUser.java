@@ -5,17 +5,19 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
- * 系统用户实体
+ * 系统用户实体（为redis缓存添加序列化）
  *
  * @author zhangqiao
  * @since 2019-11-11 09:25:07
  */
 @Table(name = "sys_user")
 @Data
-public class SysUser extends BaseEntity<Integer> {
+public class SysUser extends BaseEntity<Integer> implements Serializable {
 
+    private static final long serialVersionUID = -8696317106204698095L;
     /**
 	 * 登陆账号    
      */
