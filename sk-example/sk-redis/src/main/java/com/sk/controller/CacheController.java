@@ -31,6 +31,11 @@ public class CacheController {
         return cacheService.getUser(id);
     }
 
+    @GetMapping("/getsk/{id}")
+    public SysUser getskUser(@PathVariable("id") Integer id) {
+        return cacheService.getskUser(id);
+    }
+
     @GetMapping("/save")
     public SysUser save(SysUser user) {
         return cacheService.save(user);

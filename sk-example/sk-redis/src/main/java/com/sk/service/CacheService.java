@@ -46,6 +46,11 @@ public class CacheService extends BaseService<SysUser, SysUserDao> {
         return selectOne(id);
     }
 
+    @Cacheable(value = "sk", key = "#id")
+    public SysUser getskUser(Integer id) {
+        return selectOne(id);
+    }
+
     /**
      * 缓存的为返回值
      *
@@ -58,7 +63,8 @@ public class CacheService extends BaseService<SysUser, SysUserDao> {
         return selectOne(user.getId());
     }
 
-    @CacheEvict(value = "user", key = "#id")
+    //allEntries = true删除所有缓存（同一value）
+    @CacheEvict(value = "user", key = "#id", allEntries = true)//key = "#p0"第一个参数为key名称
     public int delete(Integer id) {
         return undelete(id);
     }

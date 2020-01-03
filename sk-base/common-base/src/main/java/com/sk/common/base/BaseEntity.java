@@ -1,6 +1,9 @@
 package com.sk.common.base;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,16 +11,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- *为redis缓存添加序列化
- *
  * 基础信息
+ *
  * @author zhangqiao
  * @since 2019/8/31 20:12
  */
 @Data
-public class BaseEntity<K> implements Serializable {
-
-    private static final long serialVersionUID = -8923849233764013911L;
+public class BaseEntity<K> {
 
     /**
      * 主键
@@ -41,12 +41,16 @@ public class BaseEntity<K> implements Serializable {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime updateTime;
 
 }
