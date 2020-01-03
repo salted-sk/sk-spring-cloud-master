@@ -22,10 +22,6 @@
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <exclusions>
                 <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>HdrHistogram</artifactId>
                     <groupId>org.hdrhistogram</groupId>
                 </exclusion>
