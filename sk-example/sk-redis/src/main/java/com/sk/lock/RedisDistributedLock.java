@@ -10,7 +10,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.nio.charset.Charset;
 import java.util.UUID;
 

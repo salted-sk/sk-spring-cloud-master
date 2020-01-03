@@ -1,7 +1,6 @@
 package com.sk.config;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
 import org.springframework.beans.factory.annotation.Value;
