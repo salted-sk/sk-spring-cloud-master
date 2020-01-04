@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.common.base.dao.SysPermissionDao">
+
+    <resultMap type="com.sk.common.base.entity.SysPermission" id="SysPermissionMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="deleted" column="deleted" jdbcType="BOOLEAN"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectUserPermissions" resultMap="SysPermissionMap">
+        SELECT  DISTINCT
+            sp.id,
+            sp.`name`,
+            sp.parent_id,
+            sp.url
+        FROM
+            sys_permission sp
+        LEFT JOIN sys_role_permission srp ON srp.permission_id = sp.id
+        WHERE
+            srp.role_id IN (
+                SELECT
+                    r.id
+                FROM
+                    sys_role r
+                WHERE
+                    r.default_role = 1
+                AND r.`status` = 1
+                AND r.deleted = 0
+                UNION
+                    SELECT
+                        ur.role_id
+                    FROM
+                        sys_user_role ur
+                    WHERE
+                        ur.user_id = #{userId}
+                    AND ur.`status` = 1
+                    AND ur.deleted = 0
+            )
+        AND srp.`status` = 1
+        AND srp.deleted = 0
+        AND sp.`status` = 1
+        AND sp.deleted = 0
+    </select>
+
+</mapper>
