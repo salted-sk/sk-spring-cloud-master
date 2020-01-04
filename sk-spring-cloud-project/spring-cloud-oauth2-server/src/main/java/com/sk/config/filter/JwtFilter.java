@@ -34,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		Principal principal = request.getUserPrincipal();
-		if (principal != null){
+		if (principal != null && !"logout".equals(request.getServletPath())){
 			String account = principal.getName();
 			String sessionId = userMap.get(account);
 			HttpSession session = request.getSession();

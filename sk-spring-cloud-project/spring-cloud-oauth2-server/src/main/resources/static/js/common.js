@@ -2,7 +2,9 @@
  * 全局js异常处理。
  */
 $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
-    alert(JSON.parse(jqxhr.responseText)['error']);
+    console.log(jqxhr)
+    console.log(JSON.parse(jqxhr.responseText)['error'])
+    // alert(JSON.parse(jqxhr.responseText)['error']);
 });
 
 // /**

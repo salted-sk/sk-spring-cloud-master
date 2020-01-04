@@ -12,11 +12,15 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 授权服务器配置
@@ -58,13 +62,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .accessTokenConverter(jwtAccessTokenConverter())
                 //多节点下可使用redis持久化token
                 .tokenStore(jwtTokenStore());
+                //扩展jwttoken
+                TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+                List<TokenEnhancer> enhancerList = new ArrayList<>();
+                enhancerList.add(tokenEnhancer());
+                enhancerList.add(jwtAccessTokenConverter());
+                tokenEnhancerChain.setTokenEnhancers(enhancerList);
+                endpoints.tokenEnhancer(tokenEnhancerChain);
+
                 //使用jdbc保存code以达到多节点认证
                 //.authorizationCodeServices(authorizationCodeServices());
     }
 
     @Bean
     public TokenStore jwtTokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
+        JwtTokenStore tokenStore =  new JwtTokenStore(jwtAccessTokenConverter());
+        return tokenStore;
     }
 
     /**
@@ -82,6 +95,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         jwtAccessTokenConverter.setSigningKey("sk");   // JWT key-value
         return jwtAccessTokenConverter;
     }
+
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return new ExtTokenEnhancer();
+    }
+
 
     //使用reids来持久化token
 //    @Autowired

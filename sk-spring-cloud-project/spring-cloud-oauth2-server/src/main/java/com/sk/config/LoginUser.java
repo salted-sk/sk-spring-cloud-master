@@ -29,6 +29,7 @@ public class LoginUser implements UserDetails, CredentialsContainer {
     private String account;
     private String truename;
     private String sex;
+    private String serverSession;
     private String password;
     private final String username;
     private final Set<GrantedAuthority> authorities;

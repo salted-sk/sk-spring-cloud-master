@@ -153,10 +153,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
-            String username = request.getParameter("username");
-            if (EmptyUtils.isNotEmpty(username)){
-                JwtFilter.userMap().put(username, request.getSession().getId());
+            LoginUser loginUser = ((LoginUser) authentication.getPrincipal());
+            String account = loginUser.getAccount();
+            if (EmptyUtils.isNotEmpty(account)){
+                JwtFilter.userMap().put(account, request.getSession().getId());
             }
+            loginUser.setServerSession(request.getSession().getId());
             //调用默认的successhandler
             new SavedRequestAwareAuthenticationSuccessHandler().onAuthenticationSuccess(request, response, authentication);
         };
