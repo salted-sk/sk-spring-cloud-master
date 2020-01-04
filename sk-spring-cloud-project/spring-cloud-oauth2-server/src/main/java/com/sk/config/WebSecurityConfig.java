@@ -3,6 +3,8 @@ package com.sk.config;
 import com.alibaba.fastjson.JSON;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
+import com.sk.common.utils.EmptyUtils;
+import com.sk.config.filter.JwtFilter;
 import com.sk.config.filter.ValidateCodeFilter;
 import com.sk.config.smslogin.SmsCodeAuthenticationSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -75,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 //自定义登陆验证异常
                 .failureHandler(authenticationFailureHandler())
+                .successHandler(authenticationSuccessHandler())
                 .and()
             .rememberMe()
                 .tokenRepository(persistentTokenRepository())
@@ -141,6 +145,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    //登录成功处理
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            String username = request.getParameter("username");
+            if (EmptyUtils.isNotEmpty(username)){
+                JwtFilter.userMap().put(username, request.getSession().getId());
+            }
+            //调用默认的successhandler
+            new SavedRequestAwareAuthenticationSuccessHandler().onAuthenticationSuccess(request, response, authentication);
+        };
     }
 
 }

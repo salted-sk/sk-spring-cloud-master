@@ -50,7 +50,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints){
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 //若无，refresh_token会有UserDetailsService is required错误
                 .userDetailsService(userDetailsService)
@@ -72,7 +72,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * @return
      */
     @Bean
-    public AuthorizationCodeServices authorizationCodeServices(){
+    public AuthorizationCodeServices authorizationCodeServices() {
         return new JdbcAuthorizationCodeServices(dataSource);
     }
 
