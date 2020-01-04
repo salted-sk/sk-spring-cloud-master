@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Table(name = "sys_user")
 @Data
-public class SysUser extends BaseEntity<Integer> {
+public class SysUser extends BaseEntity {
 
     /**
 	 * 登陆账号

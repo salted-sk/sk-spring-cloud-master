@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @since 2019/8/31 20:12
  */
 @Data
-public class BaseEntity<K> {
+public class BaseEntity {
 
     /**
      * 主键
@@ -25,7 +25,7 @@ public class BaseEntity<K> {
     @Id
     @OrderBy("desc")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private K id;
+    private Integer id;
 
     /**
      * 状态

@@ -205,7 +205,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 成功数/0失败
      */
-    public int saveAndUpdate(Object[] ids, T t) {
+    public int saveAndUpdate(Integer[] ids, T t) {
         int ret = 0;
         if (t != null) {
             Example example = new Example(getOfClass());
@@ -259,7 +259,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param id ID
      * @return 1成功/0失败
      */
-    public int delete(Object id) {
+    public int delete(Integer id) {
         return EmptyUtils.isNotEmpty(id) ? dao.deleteByPrimaryKey(id) : 0;
     }
 
@@ -269,7 +269,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param ids IDs
      * @return 成功数/0失败
      */
-    public int delete(Object[] ids) {
+    public int delete(Integer[] ids) {
         int ret = 0;
         Example example = new Example(getOfClass());
         Example.Criteria criteria = example.createCriteria();
@@ -330,7 +330,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @return 1成功/0失败
      */
     @SuppressWarnings("unchecked")
-    public int undelete(Object id) {
+    public int undelete(Integer id) {
         T t = getInstanceOf();
         t.setId(id);
         t.setDeleted(true);
@@ -343,7 +343,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param ids IDs
      * @return 成功数/0失败
      */
-    public int undelete(Object[] ids) {
+    public int undelete(Integer[] ids) {
         T t = getInstanceOf();
         t.setDeleted(true);
         return saveAndUpdate(ids, t);

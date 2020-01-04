@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Table(name = "sys_user_role")
 @Data
-public class SysUserRole extends BaseEntity<Integer> {
+public class SysUserRole extends BaseEntity {
 
     /**
 	 * 用户id    
