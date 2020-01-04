@@ -23,6 +23,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -93,6 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
             .logout()
+		        .logoutSuccessHandler(logoutSuccessHandler())
                 .logoutUrl("/logout")
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
@@ -157,6 +161,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             //调用默认的successhandler
             new SavedRequestAwareAuthenticationSuccessHandler().onAuthenticationSuccess(request, response, authentication);
         };
+    }
+
+    //退出成功后处理
+    @Bean
+	public LogoutSuccessHandler logoutSuccessHandler() {
+	    return (request, response, authentication) -> {
+		    String requestedWith = request.getHeader("X-Requested-With");
+		    if ("XMLHttpRequest".equals(requestedWith)) {
+			    Result result = new Result();
+			    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			    response.setContentType("application/json;charset=UTF-8");
+			    result.setCode(CommonCode.UNAUTHORISE.code());
+			    result.setMessage("您已掉线或已在别处登录！");
+			    response.getWriter().println(JSON.toJSON(result));
+			    response.getWriter().flush();
+		    } else {
+			    //调用默认的successhandler
+			    new SimpleUrlLogoutSuccessHandler().onLogoutSuccess(request, response, authentication);
+		    }
+	    };
     }
 
 }

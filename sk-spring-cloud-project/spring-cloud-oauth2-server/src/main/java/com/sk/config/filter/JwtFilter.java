@@ -44,21 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			String sessionId = userMap.get(account);
 			HttpSession session = request.getSession();
 			if (EmptyUtils.isNotEmpty(sessionId) && !session.getId().equals(sessionId)) {
-//				Enumeration em = session.getAttributeNames();
-//				while(em.hasMoreElements()){
-//					session.removeAttribute(em.nextElement().toString());
-//				}
-//				//使session失效
-//				session.invalidate();
-//				Result result = new Result();
-//				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//				response.setContentType("application/json;charset=UTF-8");
-//				result.setCode(CommonCode.SERVICE_ERROR.code());
-//				result.setMessage("您已在别处登录！");
-//				response.getWriter().println(JSON.toJSON(result));
 				response.sendRedirect("logout");
-//				response.getWriter().flush();
-				return;
 			}
 		}
 		filterChain.doFilter(request, response);
