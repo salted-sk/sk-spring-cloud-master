@@ -1,10 +1,6 @@
 package com.sk.config.filter;
 
-import com.alibaba.fastjson.JSON;
-import com.sk.common.config.po.CommonCode;
-import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
@@ -20,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
