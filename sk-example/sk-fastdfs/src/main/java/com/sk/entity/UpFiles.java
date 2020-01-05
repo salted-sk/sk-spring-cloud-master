@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @since 2019-12-04 13:40:59
  */
 @Table(name = "up_files")
-public class UpFiles extends BaseEntity<Integer> {
+public class UpFiles extends BaseEntity {
 
     /**
 	 *     

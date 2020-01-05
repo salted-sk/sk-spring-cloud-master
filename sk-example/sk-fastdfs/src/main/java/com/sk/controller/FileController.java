@@ -57,7 +57,6 @@ public class FileController extends BaseController {
         files.setUrl(fileUrl);
         files.setName(fileName.getOriginalFilename());
         upFilesService.saveAndUpdate(files);
-        System.err.println(fileUrl);
         return "fileUpload";
     }
 
