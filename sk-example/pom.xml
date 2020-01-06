@@ -17,6 +17,7 @@
         <module>sk-rabbitmq</module>
         <module>sk-static-resource-server</module>
         <module>sk-multiple-data-sources</module>
+        <module>sk-netty</module>
     </modules>
 
     <dependencies>
