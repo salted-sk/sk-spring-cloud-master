@@ -11,6 +11,12 @@ import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * qq登陆配置
+ *
+ * @author zhangqiao
+ * @since 2020/1/7 13:17
+ */
 public class QQOAuth2Template extends OAuth2Template {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());

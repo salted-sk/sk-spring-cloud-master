@@ -4,6 +4,12 @@ import com.sk.config.social.qq.api.QQ;
 import com.sk.config.social.qq.api.QQImpl;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
+/**
+ * qq授权信息配置
+ *
+ * @author zhangqiao
+ * @since 2020/1/7 13:17
+ */
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 
 	private String appId;

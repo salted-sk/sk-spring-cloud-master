@@ -1,7 +1,10 @@
 package com.sk.config.social.qq.config;
 
+import com.sk.config.properties.SocialProperties;
 import com.sk.config.social.SocialAutoConfigurerAdapter;
+import com.sk.config.social.SocialConfig;
 import com.sk.config.social.qq.connet.QQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -15,22 +18,18 @@ import org.springframework.social.connect.ConnectionFactory;
  * @since 2020/1/7 13:17
  */
 @Configuration
-@EnableSocial
 @Order(2)
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
-    @Value("${spring.social.qq.client-id}")
-    private String qqClientId;
-
-    @Value("${spring.social.qq.client-secret}")
-    private String qqClientSecret;
-
-    @Value("${spring.social.qq.filterProcessesUrl}")
-    private String providerId;
+    @Autowired
+    private SocialProperties socialProperties;
 
 	@Override
     protected ConnectionFactory<?> createConnectionFactory() {
-		return new QQConnectionFactory(providerId, qqClientId, qqClientSecret);
+		return new QQConnectionFactory(
+				socialProperties.getQq().getFilterProcessesUrl(),
+				socialProperties.getQq().getClientId(),
+				socialProperties.getQq().getClientSecret());
 	}
 
 }

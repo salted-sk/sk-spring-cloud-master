@@ -41,21 +41,7 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
     private final boolean enabled;
 
     public LoginUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this(username, password, true, true, true, true, authorities);
-    }
-
-    public LoginUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        if (username != null && !"".equals(username) && password != null) {
-            this.username = username;
-            this.password = password;
-            this.enabled = enabled;
-            this.accountNonExpired = accountNonExpired;
-            this.credentialsNonExpired = credentialsNonExpired;
-            this.accountNonLocked = accountNonLocked;
-            this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
-        } else {
-            throw new IllegalArgumentException("Cannot pass null or empty values to constructor");
-        }
+        this(username, password, null, null, null, null, true, true, true, true, authorities);
     }
 
     public LoginUser(String account, String truename, String imageUrl, String sex, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
@@ -265,17 +251,15 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
 
             for(int var5 = 0; var5 < var4; ++var5) {
                 String role = var3[var5];
-                Assert.isTrue(!role.startsWith("ROLE_"), () -> {
-                    return role + " cannot start with ROLE_ (it is automatically added)";
-                });
+                Assert.isTrue(!role.startsWith("ROLE_"), () -> role + " cannot start with ROLE_ (it is automatically added)");
                 authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
             }
 
-            return this.authorities((Collection)authorities);
+            return this.authorities(authorities);
         }
 
         public LoginUser.UserBuilder authorities(GrantedAuthority... authorities) {
-            return this.authorities((Collection)Arrays.asList(authorities));
+            return this.authorities(Arrays.asList(authorities));
         }
 
         public LoginUser.UserBuilder authorities(Collection<? extends GrantedAuthority> authorities) {
@@ -284,7 +268,7 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
         }
 
         public LoginUser.UserBuilder authorities(String... authorities) {
-            return this.authorities((Collection)AuthorityUtils.createAuthorityList(authorities));
+            return this.authorities(AuthorityUtils.createAuthorityList(authorities));
         }
 
         public LoginUser.UserBuilder accountExpired(boolean accountExpired) {
@@ -308,7 +292,7 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
         }
 
         public LoginUser build() {
-            String encodedPassword = (String)this.passwordEncoder.apply(this.password);
+            String encodedPassword = this.passwordEncoder.apply(this.password);
             return new LoginUser(this.account, this.truename, this.imageUrl, this.sex, this.username, encodedPassword, !this.disabled, !this.accountExpired, !this.credentialsExpired, !this.accountLocked, this.authorities);
         }
     }

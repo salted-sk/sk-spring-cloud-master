@@ -1,4 +1,4 @@
-package com.sk.config.social.weixin.api.impl;
+package com.sk.config.social.weixin.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sk.config.social.weixin.api.Weixin;

@@ -9,5 +9,7 @@ package com.sk.config.social.weixin.api;
  * @since 2020/1/7 13:17
  */
 public interface Weixin {
+
     WeixinUserInfo getUserInfo(String openId);
+
 }

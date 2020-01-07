@@ -32,6 +32,7 @@ public class QQUserInfo {
      * 	性别。 如果获取不到则默认返回”男”
      */
     private String gender;
+
     private String gender_type;
 	/**
 	 * 省(直辖市)

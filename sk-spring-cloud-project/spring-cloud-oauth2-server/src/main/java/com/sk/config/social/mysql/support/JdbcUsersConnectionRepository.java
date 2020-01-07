@@ -35,7 +35,6 @@ public class JdbcUsersConnectionRepository implements UsersConnectionRepository 
         this.textEncryptor = textEncryptor;
     }
 
-    @Override
     public void setConnectionSignUp(ConnectionSignUp connectionSignUp) {
         this.connectionSignUp = connectionSignUp;
     }

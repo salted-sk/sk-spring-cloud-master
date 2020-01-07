@@ -11,10 +11,6 @@
 
     <artifactId>spring-cloud-oauth2-server</artifactId>
 
-    <properties>
-        <spring.social.version>2.0.0.M4</spring.social.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,27 +91,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- 使用spring-social实现三方登陆 -->
         <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-config</artifactId>
-            <version>${spring.social.version}</version>
+            <groupId>com.sk</groupId>
+            <artifactId>spring-social</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-core</artifactId>
-            <version>${spring.social.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-security</artifactId>
-            <version>${spring.social.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-web</artifactId>
-            <version>${spring.social.version}</version>
-        </dependency>
+
     </dependencies>
 
     <build>

@@ -6,6 +6,12 @@ import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 
+/**
+ * qq登陆配置
+ *
+ * @author zhangqiao
+ * @since 2020/1/7 13:17
+ */
 public class QQAdapter implements ApiAdapter<QQ> {
 
 	@Override
