@@ -17,8 +17,10 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 
 /**
- * @author zhailiang
+ * 三方登陆配置
  *
+ * @author zhangqiao
+ * @since 2020/1/7 13:17
  */
 @Configuration
 @EnableSocial

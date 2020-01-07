@@ -9,8 +9,10 @@ import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.connect.ConnectionFactory;
 
 /**
- * @author zhailiang
+ * qq登陆配置
  *
+ * @author zhangqiao
+ * @since 2020/1/7 13:17
  */
 @Configuration
 @EnableSocial
