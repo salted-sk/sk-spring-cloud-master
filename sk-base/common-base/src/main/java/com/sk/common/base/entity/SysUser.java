@@ -35,6 +35,12 @@ public class SysUser extends BaseEntity {
     private String phone;
 
     /**
+     * 用户头像
+     */
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    /**
 	 * 性别 0女 1男    
      */
     @Column(name = "sex")

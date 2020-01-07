@@ -45,6 +45,7 @@ public class IndexController {
         if (principal != null && ((AbstractAuthenticationToken) principal).getPrincipal() instanceof LoginUser){
             LoginUser user = (LoginUser) ((AbstractAuthenticationToken) principal).getPrincipal();
             model.addAttribute("username", user.getTruename());
+            model.addAttribute("imageUrl", user.getImageUrl());
         }
         return "index";
     }

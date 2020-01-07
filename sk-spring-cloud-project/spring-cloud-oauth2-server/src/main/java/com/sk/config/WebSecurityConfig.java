@@ -27,6 +27,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -50,6 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //验证短信登陆配置
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
+    //三方登陆支持
+    @Autowired
+    private SpringSocialConfigurer springSocialConfigurer;
 
     /**
      * 配置自定义验证用户名、密码和授权的服务。
@@ -76,6 +81,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new ValidateCodeFilter(), UsernamePasswordAuthenticationFilter.class);
         //添加短信登陆
         http.apply(smsCodeAuthenticationSecurityConfig);
+        //支持三方登陆
+        http.apply(springSocialConfigurer);
         http.formLogin()
                 .loginPage("/login")
                 //自定义登陆验证异常
@@ -89,7 +96,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .and()
             .authorizeRequests()
-                .antMatchers("/login", "/code/**", "/mobile/login", "/actuator/health")
+                .antMatchers(
+                        "/auth/**",//三方账号登陆
+                        "/social/**",//三方账号注册绑定等
+                        "/login",
+                        "/code/**",
+                        "/mobile/login",
+                        "/actuator/health")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

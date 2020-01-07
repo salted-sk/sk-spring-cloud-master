@@ -13,7 +13,7 @@ import java.util.Map;
  * @author zhangqiao
  * @since 2019/11/19 15:09
  */
-public class ExtTokenEnhancer implements TokenEnhancer {
+public class TokenEnhancerExtension implements TokenEnhancer {
 
 	@Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {

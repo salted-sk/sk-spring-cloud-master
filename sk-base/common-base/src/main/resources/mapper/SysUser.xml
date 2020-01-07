@@ -7,6 +7,7 @@
         <result property="account" column="account" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
         <result property="sex" column="sex" jdbcType="OTHER"/>
         <result property="trueName" column="true_name" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>

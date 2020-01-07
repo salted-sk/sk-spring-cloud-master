@@ -96,11 +96,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return jwtAccessTokenConverter;
     }
 
+    //扩展token信息
     @Bean
     public TokenEnhancer tokenEnhancer() {
-        return new ExtTokenEnhancer();
+        return new TokenEnhancerExtension();
     }
-
 
     //使用reids来持久化token
 //    @Autowired

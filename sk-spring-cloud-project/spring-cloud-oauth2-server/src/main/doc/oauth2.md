@@ -121,3 +121,77 @@ body中选中form-data添加上面四个对应参数使用post提交 即可获�
 java.io.EOFException: No content to map to Object due to end of input
 在oauth_client_details表中的字段additional_information要么为null要么为json格式字符串，否则报错，虽不影响使用
 
+
+
+
+
+
+
+### oauth2之qq登陆
+
+1.获取code
+
+https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101820834&redirect_uri=http://www.xn--sksu-h70j.xyz/&state=123456
+
+2.获取token
+
+https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=101820834&client_secret=8eab79840e3ab53c5a39c43a1f4c3a27&code=（上一步获取的code）&redirect_uri=http://www.xn--sksu-h70j.xyz/
+
+3.获取openid
+
+https://graph.qq.com/oauth2.0/me?access_token=（上一步获取的token）
+
+4.获取用户信息
+
+https://graph.qq.com/user/get_user_info?access_token=（上面获取的token）&oauth_consumer_key=101820834&openid=（上一步获取的openid）
+
+
+
+三方登陆注册方式
+
+##### 1.手动注册
+
+1.注释代码
+
+```
+com.sk.config.social.SocialConfig
+@Override
+	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
+		...
+		//将此代码注释掉
+		if(connectionSignUp != null) {
+			repository.setConnectionSignUp(connectionSignUp);
+		}
+		return repository;
+	}
+```
+
+2.配置跳转url
+
+```
+@Override   
+protected <T> T postProcess(T object) {      
+		...        
+	//设置第三方注册页面默认跳转到/signin           
+	filter.setSignupUrl("/social/register");      
+	return (T) filter;   
+}
+```
+
+##### 2.自动注册
+
+1.见手动注册
+
+2.添加自动注册
+
+```
+@Override   
+public String execute(Connection<?> connection) {      
+	//根据社交用户信息默认创建用户并返回用户唯一标识
+    //在此处添加注册逻辑即可
+    return autoSignup(connection);   
+}
+```
+
+
+

@@ -1,0 +1,31 @@
+package com.sk.config.social.qq.config;
+
+import com.sk.config.social.SocialAutoConfigurerAdapter;
+import com.sk.config.social.qq.connet.QQConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.social.config.annotation.EnableSocial;
+import org.springframework.social.connect.ConnectionFactory;
+
+/**
+ * @author zhailiang
+ *
+ */
+@Configuration
+@EnableSocial
+@Order(2)
+public class QQAutoConfig extends SocialAutoConfigurerAdapter {
+
+    @Value("${spring.social.qq.client-id}")
+    private String qqClientId;
+
+    @Value("${spring.social.qq.client-secret}")
+    private String qqClientSecret;
+
+	@Override
+    protected ConnectionFactory<?> createConnectionFactory() {
+		return new QQConnectionFactory("qqlogin", qqClientId, qqClientSecret);
+	}
+
+}

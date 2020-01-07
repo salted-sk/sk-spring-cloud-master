@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUserDetails;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
@@ -23,11 +24,12 @@ import java.util.function.Function;
  * @since 2020/1/2 9:34
  */
 @Data
-public class LoginUser implements UserDetails, CredentialsContainer {
+public class LoginUser implements UserDetails, CredentialsContainer, SocialUserDetails {
     private static final long serialVersionUID = 520L;
     private static final Log logger = LogFactory.getLog(LoginUser.class);
     private String account;
     private String truename;
+    private String imageUrl;
     private String sex;
     private String serverSession;
     private String password;
@@ -56,10 +58,11 @@ public class LoginUser implements UserDetails, CredentialsContainer {
         }
     }
 
-    public LoginUser(String account, String truename, String sex, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public LoginUser(String account, String truename, String imageUrl, String sex, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         if (username != null && !"".equals(username) && password != null) {
             this.account = account;
             this.truename = truename;
+            this.imageUrl = imageUrl;
             this.sex = sex;
             this.username = username;
             this.password = password;
@@ -145,6 +148,7 @@ public class LoginUser implements UserDetails, CredentialsContainer {
         sb.append("Truename: ").append(this.truename).append("; ");
         sb.append("Sex: ").append(this.sex).append("; ");
         sb.append("Username: ").append(this.username).append("; ");
+        sb.append("ImageUrl: ").append(this.imageUrl).append("; ");
         sb.append("Password: [PROTECTED]; ");
         sb.append("Enabled: ").append(this.enabled).append("; ");
         sb.append("AccountNonExpired: ").append(this.accountNonExpired).append("; ");
@@ -193,9 +197,15 @@ public class LoginUser implements UserDetails, CredentialsContainer {
         return withUsername(userDetails.getUsername()).password(userDetails.getPassword()).accountExpired(!userDetails.isAccountNonExpired()).accountLocked(!userDetails.isAccountNonLocked()).authorities(userDetails.getAuthorities()).credentialsExpired(!userDetails.isCredentialsNonExpired()).disabled(!userDetails.isEnabled());
     }
 
+    @Override
+    public String getUserId() {
+        return this.account;
+    }
+
     public static class UserBuilder {
         private String account;
         private String truename;
+        private String imageUrl;
         private String sex;
         private String username;
         private String password;
@@ -223,6 +233,11 @@ public class LoginUser implements UserDetails, CredentialsContainer {
         public LoginUser.UserBuilder sex(String sex) {
             Assert.notNull(sex, "username cannot be null");
             this.sex = sex;
+            return this;
+        }
+        public LoginUser.UserBuilder imageUrl(String imageUrl) {
+            Assert.notNull(sex, "imageUrl cannot be null");
+            this.imageUrl = imageUrl;
             return this;
         }
         public LoginUser.UserBuilder username(String username) {
@@ -292,9 +307,9 @@ public class LoginUser implements UserDetails, CredentialsContainer {
             return this;
         }
 
-        public UserDetails build() {
+        public LoginUser build() {
             String encodedPassword = (String)this.passwordEncoder.apply(this.password);
-            return new LoginUser(this.account, this.truename, this.sex, this.username, encodedPassword, !this.disabled, !this.accountExpired, !this.credentialsExpired, !this.accountLocked, this.authorities);
+            return new LoginUser(this.account, this.truename, this.imageUrl, this.sex, this.username, encodedPassword, !this.disabled, !this.accountExpired, !this.credentialsExpired, !this.accountLocked, this.authorities);
         }
     }
 

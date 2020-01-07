@@ -5,12 +5,18 @@ import com.sk.common.base.entity.SysUser;
 import com.sk.common.base.service.SysPermissionService;
 import com.sk.common.base.service.SysUserService;
 import com.sk.common.utils.EmptyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +31,7 @@ import java.util.Set;
  * @since 2019/11/19 15:12
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDetailsService {
 
     @Autowired
     private SysUserService userService;
@@ -35,6 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    private static Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -49,10 +57,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else {
             user = userService.getUserByUsername(username);
         }
+        return getUserDetails(user);
+    }
+
+    @Override
+    public SocialUserDetails loadUserByUserId(String account) throws UsernameNotFoundException {
+        SysUser user = userService.getUserByUsername(account);
+        return getUserDetails(user);
+    }
+
+    public LoginUser getUserDetails(SysUser user) {
         if (EmptyUtils.isNotEmpty(user) && !user.getDeleted()) {
             if (user.getStatus() != 1) {
                 //当前用户被锁
-                return LoginUser.withUsername(username)
+                return LoginUser.withUsername(user.getAccount())
                         .truename(user.getTrueName())
                         .password(user.getPassword())
                         .authorities(new ArrayList<>())
@@ -66,43 +84,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             userPermissions.forEach(permission -> {
                 authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
             });
-            return LoginUser.withUsername(username)
+            return LoginUser.withUsername(user.getAccount())
                     .truename(user.getTrueName())
                     .account(user.getAccount())
                     .sex(user.getSex())
+                    .imageUrl(user.getImageUrl())
                     .password(user.getPassword())
                     .authorities(authorities)
                     .build();
         }
         return null;
     }
-
-//    private Set<SimpleGrantedAuthority> grantedAuthority(SysUser user) {
-//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-//        //获取当前默认角色集合
-//        List<SysUserRole> defaultRoles = userRoleService
-//                .selectList((criteria, example) ->
-//                        criteria.andEqualTo("defaultRole", true)
-//                                .andEqualTo("status", 1));
-//        //获取当前用户角色集合
-//        List<SysUserRole> userRoles = userRoleService
-//                .selectList((criteria, example) ->
-//                        criteria.andEqualTo("userId", user.getId())
-//                                .andEqualTo("status", 1));
-//        //获取用户角色的所有权限
-//        userRoles.forEach(userRole -> {
-//            List<SysRolePermission> rolePermissions = rolePermissionService
-//                    .selectList((criteria, example) ->
-//                            criteria.andEqualTo("roleId", userRole.getId())
-//                                    .andEqualTo("status", 1));
-//            rolePermissions.forEach(rolePermission -> {
-//                SysPermission permission = permissionService.selectOne(rolePermission.getPermissionId());
-//                if (EmptyUtils.isNotEmpty(permission)) {
-//                    authorities.add(new SimpleGrantedAuthority(permission.getUrl()));
-//                }
-//            });
-//        });
-//        return authorities;
-//    }
 
 }
