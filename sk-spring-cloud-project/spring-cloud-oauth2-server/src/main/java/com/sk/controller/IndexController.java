@@ -2,6 +2,8 @@ package com.sk.controller;
 
 import com.sk.common.utils.EmptyUtils;
 import com.sk.config.LoginUser;
+import com.sk.config.properties.SocialProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class IndexController {
 
     @Value("${server.servlet.context-path}")
     private String contextPath;
+
+    @Autowired
+    private SocialProperties socialProperties;
 
     @GetMapping("/login")
     public String login(Principal principal, HttpServletResponse response) {

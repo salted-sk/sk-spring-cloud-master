@@ -25,9 +25,12 @@ public class QQAutoConfig extends SocialAutoConfigurerAdapter {
     @Value("${spring.social.qq.client-secret}")
     private String qqClientSecret;
 
+    @Value("${spring.social.qq.filterProcessesUrl}")
+    private String providerId;
+
 	@Override
     protected ConnectionFactory<?> createConnectionFactory() {
-		return new QQConnectionFactory("qqlogin", qqClientId, qqClientSecret);
+		return new QQConnectionFactory(providerId, qqClientId, qqClientSecret);
 	}
 
 }
