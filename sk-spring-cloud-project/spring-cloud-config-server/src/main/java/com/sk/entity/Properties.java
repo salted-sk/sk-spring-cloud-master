@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @since 2019-12-12 11:11:39
  */
 @Table(name = "properties")
-public class Properties extends BaseEntity<Integer> {
+public class Properties extends BaseEntity {
 
     /**
 	 *     

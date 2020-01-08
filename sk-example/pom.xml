@@ -18,6 +18,7 @@
         <module>sk-static-resource-server</module>
         <module>sk-multiple-data-sources</module>
         <module>sk-netty</module>
+        <module>sk-blog</module>
     </modules>
 
     <dependencies>
