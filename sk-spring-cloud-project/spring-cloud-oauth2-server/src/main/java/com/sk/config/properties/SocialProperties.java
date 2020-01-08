@@ -10,11 +10,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2020/1/7 17:21
  */
 @Data
-@ConfigurationProperties(prefix = "spring.social")
+@ConfigurationProperties(prefix = "sk.spring.social")
 public class SocialProperties {
 
     QqProperties qq = new QqProperties();
 
-    VxProperties vx = new VxProperties();
+    VxProperties weixin = new VxProperties();
+
+    WeiboProperties weibo = new WeiboProperties();
 
 }

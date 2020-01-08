@@ -2,12 +2,10 @@ package com.sk.config.social.weixin.config;
 
 import com.sk.config.properties.SocialProperties;
 import com.sk.config.social.SocialAutoConfigurerAdapter;
-import com.sk.config.social.qq.connet.QQConnectionFactory;
 import com.sk.config.social.weixin.connect.WeixinConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.connect.ConnectionFactory;
 
 /**
@@ -17,7 +15,6 @@ import org.springframework.social.connect.ConnectionFactory;
  * @since 2020/1/7 13:17
  */
 @Configuration
-@Order(2)
 public class WeixinAuthConfig extends SocialAutoConfigurerAdapter {
 
     @Autowired
@@ -26,9 +23,9 @@ public class WeixinAuthConfig extends SocialAutoConfigurerAdapter {
     @Override
     protected ConnectionFactory<?> createConnectionFactory() {
         return new WeixinConnectionFactory(
-                socialProperties.getVx().getFilterProcessesUrl(),
-                socialProperties.getVx().getClientId(),
-                socialProperties.getVx().getClientSecret());
+                socialProperties.getWeixin().getFilterProcessesUrl(),
+                socialProperties.getWeixin().getClientId(),
+                socialProperties.getWeixin().getClientSecret());
     }
 
 //    /**

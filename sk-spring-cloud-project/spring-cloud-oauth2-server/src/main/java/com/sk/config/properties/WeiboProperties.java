@@ -9,7 +9,7 @@ import lombok.Data;
  * @since 2020/1/7 17:22
  */
 @Data
-public class QqProperties {
+public class WeiboProperties {
 
     private String clientId;
 

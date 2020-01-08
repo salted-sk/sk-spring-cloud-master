@@ -96,8 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .and()
             .authorizeRequests()
-                .antMatchers(
-                        "/auth/**",//三方账号登陆
+                .antMatchers("/auth/**",//三方账号登陆
                         "/social/**",//三方账号注册绑定等
                         "/login",
                         "/code/**",
