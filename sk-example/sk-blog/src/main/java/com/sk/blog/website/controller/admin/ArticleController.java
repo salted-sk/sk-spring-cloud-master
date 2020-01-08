@@ -76,7 +76,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public RestResponseBo publishArticle(ContentVo contents, HttpServletRequest request) {
         UserVo users = this.user(request);
-        contents.setAuthorId(users.getUid());
+        contents.setAuthorId(users.getId());
         contents.setType(Types.ARTICLE.getType());
         if (StringUtils.isBlank(contents.getCategories())) {
             contents.setCategories("默认分类");
@@ -92,7 +92,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public RestResponseBo modifyArticle(ContentVo contents, HttpServletRequest request) {
         UserVo users = this.user(request);
-        contents.setAuthorId(users.getUid());
+        contents.setAuthorId(users.getId());
         contents.setType(Types.ARTICLE.getType());
         String result = contentsService.updateArticle(contents);
         if (!WebConst.SUCCESS_RESULT.equals(result)) {

@@ -33,7 +33,7 @@ public class CommentController extends BaseController {
         UserVo users = this.user(request);
         CommentVoExample commentVoExample = new CommentVoExample();
         commentVoExample.setOrderByClause("coid desc");
-        commentVoExample.createCriteria().andAuthorIdNotEqualTo(users.getUid());
+        commentVoExample.createCriteria().andAuthorIdNotEqualTo(users.getId());
         PageInfo<CommentVo> commentsPaginator = commentsService.getCommentsWithPage(commentVoExample, page, limit);
         request.setAttribute("comments", commentsPaginator);
         return "admin/comment_list";

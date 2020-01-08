@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>SSO Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" th:href="@{http://112.124.3.225:8100/favicon.ico}">
+    <link rel="stylesheet" type="text/css" href="http://112.124.3.225:8100/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+</head>
+
+<body>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(/img/bg-login.jpg);">
+                <span class="login100-form-title-1">登 录</span>
+            </div>
+
+            <form class="login100-form validate-form" th:action="@{login}" method="post">
+                <div class="wrap-input100 validate-input m-b-26" data-validate="用户名不能为空">
+                    <span class="label-input100">用户名</span>
+                    <input class="input100" type="text" value="zhangsan" placeholder="请输入用户名" onchange="syncnum('account', this);">
+                    <input type="hidden" name="username" id="account" value="account:zhangsan">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="密码不能为空">
+                    <span class="label-input100">密码</span>
+                    <input class="input100" type="password" value="123456" name="password" placeholder="请输入密码">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-b-30 wrap-input100 validate-input m-b-18" data-validate="验证码不能为空">
+                    <input type="text" name="validateCode" value="ABCD" class="input100" placeholder="验证码" maxlength="5">
+                    <div>
+                        <a href="javascript:void(0);" title="点击更换验证码">
+                            <img th:src="@{/code/validate/code}" width="90%" id="imgcode"/>
+                        </a>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">记住我</label>
+                    </div>
+                    <div>
+                        <a href="javascript:" class="txt1">忘记密码？</a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">登 录</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    <a th:href="@{auth/qq}"><img th:src="@{/img/qq.jpg}" width="50px" height="50px"></a>
+                    <a th:href="@{auth/weixin}"><img th:src="@{/img/weixin.jpg}" width="50px" height="50px"></a>
+                    <a th:href="@{auth/weibo}"><img th:src="@{/img/weibo.jpg}" width="50px" height="50px"></a>
+                </div>
+                <div class="page-header">
+                    <h3 class="page-title">
+                        <a  href="http://www.xn--sksu-h70j.xyz:8080/index">图片墙</a>
+                    </h3>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(/img/bg-login.jpg);">
+                <span class="login100-form-title-1">登 录</span>
+            </div>
+
+            <form class="login100-form validate-form" th:action="@{mobile/login}" method="post">
+                <div class="wrap-input100 validate-input m-b-26" data-validate="手机号不能为空">
+                    <span class="label-input100">手机号</span>
+                    <input class="input100" type="text" value="13275829049" placeholder="请输入手机号" onchange="syncnum('mobile', this);">
+                    <input type="hidden" name="mobile" id="mobile" value="mobile:13275829049">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="验证码不能为空">
+                    <span class="label-input100">验证码（测试123456即可）</span>
+                    <input class="input100" type="text" value="123456" name="smsCode" placeholder="请输入验证码">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" type="checkbox" id="ckb2" name="remember-me">
+                        <label class="label-checkbox100" for="ckb2">记住我</label>
+                    </div>
+                    <div>
+                        <a href="javascript:" class="txt1">忘记密码？</a>
+                    </div>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">登 录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{http://112.124.3.225:8100/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{http://112.124.3.225:8100/ajax/libs/validate/jquery.validate.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<script>
+    $(function () {
+        logout();
+
+        $('#imgcode').click(function() {
+            var url = ctx + "code/validate/code?"+ Math.random();
+            $("#imgcode").attr("src", url);
+        });
+    })
+
+    function syncnum(type, obj) {
+        $("#" + type).val(type + ":" + obj.value);
+    }
+
+    function logout() {
+        $.ajax({
+            type:"GET",
+            url:"/client-demo/logout",
+            dataType:"json",
+        });
+        $.ajax({
+            type:"GET",
+            url:"/server-demo/logout",
+            dataType:"json",
+        });
+    }
+</script>
+</html>

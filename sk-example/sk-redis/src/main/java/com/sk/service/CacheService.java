@@ -64,6 +64,7 @@ public class CacheService extends BaseService<SysUser, SysUserDao> {
     }
 
     //allEntries = true删除所有缓存（同一value）
+    @Override
     @CacheEvict(value = "user", key = "#id", allEntries = true)//key = "#p0"第一个参数为key名称
     public int delete(Integer id) {
         return undelete(id);

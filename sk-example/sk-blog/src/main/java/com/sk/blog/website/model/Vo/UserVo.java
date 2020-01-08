@@ -1,15 +1,19 @@
 package com.sk.blog.website.model.Vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author 
  */
+@Data
 public class UserVo implements Serializable {
     /**
      * user表主键
      */
-    private Integer uid;
+    private Integer id;
 
     /**
      * 用户名称
@@ -25,6 +29,8 @@ public class UserVo implements Serializable {
      * 用户的邮箱
      */
     private String email;
+    private String phone;
+    private String sex;
 
     /**
      * 用户的主页
@@ -56,85 +62,24 @@ public class UserVo implements Serializable {
      */
     private String groupName;
 
+    private Integer status;
+
+    /**
+     * 删除状态 0正常 1删除
+     */
+    private Boolean deleted;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
+
+
     private static final long serialVersionUID = 1L;
 
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getHomeUrl() {
-        return homeUrl;
-    }
-
-    public void setHomeUrl(String homeUrl) {
-        this.homeUrl = homeUrl;
-    }
-
-    public String getScreenName() {
-        return screenName;
-    }
-
-    public void setScreenName(String screenName) {
-        this.screenName = screenName;
-    }
-
-    public Integer getCreated() {
-        return created;
-    }
-
-    public void setCreated(Integer created) {
-        this.created = created;
-    }
-
-    public Integer getActivated() {
-        return activated;
-    }
-
-    public void setActivated(Integer activated) {
-        this.activated = activated;
-    }
-
-    public Integer getLogged() {
-        return logged;
-    }
-
-    public void setLogged(Integer logged) {
-        this.logged = logged;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
 }

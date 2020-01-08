@@ -2,16 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.blog.website.dao.UserVoMapper">
   <resultMap id="BaseResultMap" type="com.sk.blog.website.model.Vo.UserVo">
-    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="home_url" jdbcType="VARCHAR" property="homeUrl" />
     <result column="screen_name" jdbcType="VARCHAR" property="screenName" />
     <result column="created" jdbcType="INTEGER" property="created" />
     <result column="activated" jdbcType="INTEGER" property="activated" />
     <result column="logged" jdbcType="INTEGER" property="logged" />
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result property="sex" column="sex" jdbcType="OTHER"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="deleted" column="deleted" jdbcType="BOOLEAN"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

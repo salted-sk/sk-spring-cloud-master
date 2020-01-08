@@ -35,7 +35,7 @@ public class UserServiceImpl implements IUserService {
             userVo.setPassword(encodePwd);
             userDao.insertSelective(userVo);
         }
-        return userVo.getUid();
+        return userVo.getId();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public void updateByUid(UserVo userVo) {
-        if (null == userVo || null == userVo.getUid()) {
+        if (null == userVo || null == userVo.getId()) {
             throw new TipException("userVo is null");
         }
         int i = userDao.updateByPrimaryKeySelective(userVo);

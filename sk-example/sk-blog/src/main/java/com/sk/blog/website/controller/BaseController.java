@@ -44,7 +44,7 @@ public abstract class BaseController {
     }
 
     public Integer getUid(HttpServletRequest request){
-        return this.user(request).getUid();
+        return this.user(request).getId();
     }
 
     public String render_404() {

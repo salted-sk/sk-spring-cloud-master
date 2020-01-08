@@ -81,13 +81,14 @@ public class IndexController extends BaseController {
      */
     @PostMapping(value = "/profile")
     @ResponseBody
-    public RestResponseBo saveProfile(@RequestParam String screenName, @RequestParam String email, HttpServletRequest request, HttpSession session) {
+    public RestResponseBo saveProfile(@RequestParam String screenName, @RequestParam String email, @RequestParam String phone, HttpServletRequest request, HttpSession session) {
         UserVo users = this.user(request);
         if (StringUtils.isNotBlank(screenName) && StringUtils.isNotBlank(email)) {
             UserVo temp = new UserVo();
-            temp.setUid(users.getUid());
+            temp.setId(users.getId());
             temp.setScreenName(screenName);
             temp.setEmail(email);
+            temp.setPhone(phone);
             userService.updateByUid(temp);
             logService.insertLog(LogActions.UP_INFO.getAction(), GsonUtils.toJsonString(temp), request.getRemoteAddr(), this.getUid(request));
 
@@ -120,7 +121,7 @@ public class IndexController extends BaseController {
 
         try {
             UserVo temp = new UserVo();
-            temp.setUid(users.getUid());
+            temp.setId(users.getId());
             String pwd = TaleUtils.MD5encode(users.getUsername() + password);
             temp.setPassword(pwd);
             userService.updateByUid(temp);
