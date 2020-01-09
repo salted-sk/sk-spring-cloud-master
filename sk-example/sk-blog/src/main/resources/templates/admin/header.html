@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="Coderthemes" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}"/>
+    <link rel="shortcut icon" th:href="@{/sk/images/favicon.png}"/>
     <link th:href="@{//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/sk/css/style.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,7 +25,7 @@
         <div class="text-center p-t-10" style="margin: 0 auto;">
             <div class="pull-left" style="padding-left: 10px;">
                 <a th:href="@{/admin/index}">
-                    <img th:src="@{/admin/images/logo.png}" width="50" height="50"/>
+                    <img th:src="@{/sk/images/logo.png}" width="50" height="50"/>
                 </a>
             </div>
             <div class="pull-left" style="padding-left: 10px;">
@@ -46,7 +46,7 @@
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="dropdown">
                         <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown"
-                           aria-expanded="true"><img th:src="${commons.gravatar(session.login_user.email)}" alt="user-img"
+                           aria-expanded="true"><img th:src="${session.login_user.homeUrl}" alt="user-img"
                                                      class="img-circle"/> </a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{${commons.site_url()}}" target="_blank"><i class="fa fa-eye"

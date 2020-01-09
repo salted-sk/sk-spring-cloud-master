@@ -207,17 +207,17 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
         }
 
         public UserBuilder account(String account) {
-            Assert.notNull(account, "username cannot be null");
+            Assert.notNull(account, "account cannot be null");
             this.account = account;
             return this;
         }
         public UserBuilder truename(String truename) {
-            Assert.notNull(truename, "username cannot be null");
+            Assert.notNull(truename, "truename cannot be null");
             this.truename = truename;
             return this;
         }
         public UserBuilder sex(String sex) {
-            Assert.notNull(sex, "username cannot be null");
+            Assert.notNull(sex, "sex cannot be null");
             this.sex = sex;
             return this;
         }

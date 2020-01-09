@@ -1,6 +1,7 @@
 package com.sk.blog.website.controller.admin;
 
-import com.sk.blog.website.service.ISiteService;
+import com.sk.blog.entity.BlogSysUser;
+import com.sk.blog.service.BlogSysUserService;
 import com.sk.blog.website.constant.WebConst;
 import com.sk.blog.website.controller.BaseController;
 import com.sk.blog.website.dto.LogActions;
@@ -12,12 +13,15 @@ import com.sk.blog.website.model.Vo.ContentVo;
 import com.sk.blog.website.model.Vo.LogVo;
 import com.sk.blog.website.model.Vo.UserVo;
 import com.sk.blog.website.service.ILogService;
+import com.sk.blog.website.service.ISiteService;
 import com.sk.blog.website.service.IUserService;
 import com.sk.blog.website.utils.GsonUtils;
 import com.sk.blog.website.utils.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -46,12 +51,24 @@ public class IndexController extends BaseController {
     @Resource
     private IUserService userService;
 
+    @Autowired
+    private BlogSysUserService usersService;
+
     /**
      * 页面跳转
      * @return
      */
     @GetMapping(value = {"","/index"})
-    public String index(HttpServletRequest request){
+    public String index(Principal principal, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        UserVo userVo = (UserVo) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
+        if (userVo == null) {
+            BlogSysUser user = usersService.getUserByUsername(principal.getName());
+            userVo = new UserVo();
+            user.setPassword("");
+            BeanUtils.copyProperties(user, userVo);
+            request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userVo);
+        }
         LOGGER.info("Enter admin index method");
         List<CommentVo> comments = siteService.recentComments(5);
         List<ContentVo> contents = siteService.recentContents(5);

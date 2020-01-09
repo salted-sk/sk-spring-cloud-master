@@ -1,27 +1,19 @@
 package com.sk.blog.website.controller.admin;
 
-import com.sk.blog.website.constant.WebConst;
 import com.sk.blog.website.controller.BaseController;
-import com.sk.blog.website.dto.LogActions;
 import com.sk.blog.website.exception.TipException;
-import com.sk.blog.website.model.Bo.RestResponseBo;
-import com.sk.blog.website.model.Vo.UserVo;
 import com.sk.blog.website.service.ILogService;
 import com.sk.blog.website.service.IUserService;
-import com.sk.blog.website.utils.TaleUtils;
 import com.sk.common.utils.EmptyUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -46,7 +38,7 @@ public class AuthController extends BaseController {
     public String login(Principal principal, HttpServletResponse response) {
         if (EmptyUtils.isNotEmpty(principal)) {
             try {
-                response.sendRedirect("admin/index");
+                response.sendRedirect("/admin/index");
             } catch (IOException e) {
                 e.printStackTrace();
             }

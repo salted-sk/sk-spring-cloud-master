@@ -1,10 +1,15 @@
 package com.sk.config;
 
 import com.alibaba.fastjson.JSON;
+import com.sk.blog.entity.BlogSysUser;
+import com.sk.blog.service.BlogSysUserService;
+import com.sk.blog.website.constant.WebConst;
+import com.sk.blog.website.model.Vo.UserVo;
 import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
 import com.sk.config.filter.ValidateCodeFilter;
 import com.sk.config.smslogin.SmsCodeAuthenticationSecurityConfig;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
@@ -72,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
                 "/sk/**",
+                "/user/**",
                 "/js/**", "/css/**", "/images/**", "/img/**");
     }
 
@@ -95,11 +101,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(3600)
                 .userDetailsService(userDetailsService)
                 .and()
+            .requestMatchers()
+                .mvcMatchers("/admin/**", "/auth/**", "/signin")
+                .and()
             .authorizeRequests()
                 .antMatchers("/auth/**",//三方账号登陆
                         "/social/**",//三方账号注册绑定等
                         "/admin/login",
                         "/login",
+                        "/",
                         "/code/**",
                         "/mobile/login",
                         "/actuator/health")
@@ -162,6 +172,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    private BlogSysUserService usersService;
     //登录成功处理
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -169,6 +181,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             LoginUser loginUser = ((LoginUser) authentication.getPrincipal());
             String account = loginUser.getAccount();
             loginUser.setServerSession(request.getSession().getId());
+            BlogSysUser user = usersService.getUserByUsername(account);
+            UserVo userVo = new UserVo();
+            user.setPassword("");
+            BeanUtils.copyProperties(user, userVo);
+            request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userVo);
             //调用默认的successhandler
             new SavedRequestAwareAuthenticationSuccessHandler().onAuthenticationSuccess(request, response, authentication);
         };

@@ -1,5 +1,7 @@
 package com.sk.config.social;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 import org.springframework.stereotype.Component;

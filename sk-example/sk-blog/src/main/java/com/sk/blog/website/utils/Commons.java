@@ -4,6 +4,7 @@ package com.sk.blog.website.utils;
 import com.github.pagehelper.PageInfo;
 import com.sk.blog.website.constant.WebConst;
 import com.sk.blog.website.model.Vo.ContentVo;
+import com.sk.common.utils.EmptyUtils;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -134,7 +135,7 @@ public final class Commons {
     public static String gravatar(String email) {
         String avatarUrl = "https://github.com/identicons/";
         if (StringUtils.isBlank(email)) {
-            email = "user@hanshuai.xin";
+            email = "731109627@qq.com";
         }
         String hash = TaleUtils.MD5encode(email.trim().toLowerCase());
         return avatarUrl + hash + ".png";
@@ -274,11 +275,19 @@ public final class Commons {
      * @return
      */
     public static String show_thumb(ContentVo contents) {
+        if (EmptyUtils.isNotEmpty(contents.getImageUrl())) {
+            return contents.getImageUrl();
+        }
         int cid = contents.getCid();
-        int size = cid % 20;
-        size = size == 0 ? 1 : size;
-        return "/user/img/rand/" + size + ".jpg";
+        int size = cid % 19;
+//        int id = localSize.get();
+//        int size = id % 20;
+//        localSize.set(++id);
+//        size = size == 0 ? 1 : size;
+        return "/user/img/rand/" + ++size + ".jpg";
     }
+
+    public static ThreadLocal<Integer> localSize = ThreadLocal.withInitial(() -> 0);
 
 
     /**

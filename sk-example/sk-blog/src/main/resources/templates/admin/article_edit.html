@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='保存文章',active='publish'">
 <header th:replace="admin/header::headerFragment(${title},${active})"></header>
-<link th:href="@{/admin/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
-<link th:href="@{/admin/plugins/select2.dist.css/select2-bootstrap.css}" rel="stylesheet"/>
-<link th:href="@{/admin/plugins/toggles/toggles.css}" rel="stylesheet"/>
+<link th:href="@{/sk/plugins/tagsinput/jquery.tagsinput.css}" rel="stylesheet"/>
+<link th:href="@{/sk/plugins/select2.dist.css/select2-bootstrap.css}" rel="stylesheet"/>
+<link th:href="@{/sk/plugins/toggles/toggles.css}" rel="stylesheet"/>
 
 <link href="//cdn.bootcss.com/multi-select/0.9.12/css/multi-select.css" rel="stylesheet"/>
 <link href="//cdn.bootcss.com/select2/3.4.8/select2.min.css" rel="stylesheet"/>
-<link th:href="@{/admin/plugins/md/css/style.css}" rel="stylesheet"/>
+<link th:href="@{/sk/plugins/md/css/style.css}" rel="stylesheet"/>
 <style>
     #tags_tagsinput {
         background-color: #fafafa;
@@ -90,6 +90,11 @@
                                     </th:block>
                                 </select>
                             </div>
+                            <div class="form-group col-md-12" style="padding: 0 0 0 10px;">
+                                <input type="text" class="form-control" placeholder="可设置背景（可选）" name="imageUrl"
+                                       th:value="${contents!=null and contents.imageUrl!=null }?${contents.imageUrl}: ''"/>
+                            </div>
+
                             <div class="clearfix"></div>
                             <div class="form-group">
                                 <textarea style="height: 450px" autocomplete="off" id="text" name="text"
@@ -144,18 +149,18 @@
 </div>
 <div th:replace="admin/footer :: footer"></div>
 
-<script th:src="@{/admin/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
-<script th:src="@{/admin/plugins/jquery-multi-select/jquery.quicksearch.js}"></script>
+<script th:src="@{/sk/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
+<script th:src="@{/sk/plugins/jquery-multi-select/jquery.quicksearch.js}"></script>
 
-<script th:src="@{/admin/plugins/md/js/jquery.scrollto.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown-extra.js}"></script>
-<script th:src="@{/admin/plugins/md/js/diff.js}"></script>
-<script th:src="@{/admin/plugins/md/js/md.js}"></script>
+<script th:src="@{/sk/plugins/md/js/jquery.scrollto.js}"></script>
+<script th:src="@{/sk/plugins/md/js/pagedown.js}"></script>
+<script th:src="@{/sk/plugins/md/js/pagedown-extra.js}"></script>
+<script th:src="@{/sk/plugins/md/js/diff.js}"></script>
+<script th:src="@{/sk/plugins/md/js/md.js}"></script>
 
 <script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
-<script th:src="@{/admin/js/article.js}"></script>
+<script th:src="@{/sk/js/article.js}"></script>
 </body>
 </html>

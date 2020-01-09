@@ -19,11 +19,11 @@
                 <span class="login100-form-title-1">登 录</span>
             </div>
 
-            <form class="login100-form validate-form" th:action="@{login}" method="post">
+            <form class="login100-form validate-form" th:action="@{/admin/login}" method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="用户名不能为空">
                     <span class="label-input100">用户名</span>
-                    <input class="input100" type="text" value="zhangsan" placeholder="请输入用户名" onchange="syncnum('account', this);">
-                    <input type="hidden" name="username" id="account" value="account:zhangsan">
+                    <input class="input100" type="text" value="admin" placeholder="请输入用户名" onchange="syncnum('account', this);">
+                    <input type="hidden" name="username" id="account" value="account:admin">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -58,14 +58,9 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;
-                    <a th:href="@{auth/qq}"><img th:src="@{/img/qq.jpg}" width="50px" height="50px"></a>
-                    <a th:href="@{auth/weixin}"><img th:src="@{/img/weixin.jpg}" width="50px" height="50px"></a>
-                    <a th:href="@{auth/weibo}"><img th:src="@{/img/weibo.jpg}" width="50px" height="50px"></a>
-                </div>
-                <div class="page-header">
-                    <h3 class="page-title">
-                        <a  href="http://www.xn--sksu-h70j.xyz:8080/index">图片墙</a>
-                    </h3>
+                    <a th:href="@{/auth/qq}"><img th:src="@{/img/qq.jpg}" width="50px" height="50px"></a>
+                    <a th:href="@{/auth/weixin}"><img th:src="@{/img/weixin.jpg}" width="50px" height="50px"></a>
+                    <a th:href="@{/auth/weibo}"><img th:src="@{/img/weibo.jpg}" width="50px" height="50px"></a>
                 </div>
             </form>
         </div>
@@ -78,7 +73,7 @@
                 <span class="login100-form-title-1">登 录</span>
             </div>
 
-            <form class="login100-form validate-form" th:action="@{mobile/login}" method="post">
+            <form class="login100-form validate-form" th:action="@{/admin/mobile/login}" method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="手机号不能为空">
                     <span class="label-input100">手机号</span>
                     <input class="input100" type="text" value="13275829049" placeholder="请输入手机号" onchange="syncnum('mobile', this);">

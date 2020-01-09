@@ -31,6 +31,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
     static {
         filterUris = new HashMap();
         filterUris.put("/login", "POST");
+        filterUris.put("/admin/login", "POST");
     }
 
 	@Override

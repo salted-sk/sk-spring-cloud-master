@@ -30,7 +30,7 @@ public class SmsCodeFilter extends OncePerRequestFilter {
 
     static {
         filterUris = new HashMap();
-        filterUris.put("/mobile/login", "POST");
+        filterUris.put("/admin/mobile/login", "POST");
     }
 
 	@Override
