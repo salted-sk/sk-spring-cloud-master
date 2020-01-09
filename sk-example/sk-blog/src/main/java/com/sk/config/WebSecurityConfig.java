@@ -89,7 +89,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.apply(smsCodeAuthenticationSecurityConfig);
         //支持三方登陆
         http.apply(springSocialConfigurer);
-        http.formLogin()
+        http.headers()//配置解决X-Frame-Options deny 造成的页面空白
+                .frameOptions()
+                .disable().and()
+            .formLogin()
                 .loginPage("/admin/login")
                 //自定义登陆验证异常
                 .failureHandler(authenticationFailureHandler())
@@ -102,7 +105,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .and()
             .requestMatchers()
-                .mvcMatchers("/admin/**", "/auth/**", "/signin")
+                .mvcMatchers("/admin/**",
+                        "/auth/**",
+                        "/oauth/**",
+                        "/signin")
                 .and()
             .authorizeRequests()
                 .antMatchers("/auth/**",//三方账号登陆

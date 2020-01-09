@@ -31,7 +31,7 @@ public class PermissionController extends BaseController {
     @Value("${server.port}")
     private String port;
 
-    private String prefix = "/permission";
+    private String prefix = "permission";
 
     @Autowired
     private SysPermissionService permissionService;

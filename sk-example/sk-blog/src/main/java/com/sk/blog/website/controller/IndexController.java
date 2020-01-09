@@ -30,6 +30,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -156,7 +157,12 @@ public class IndexController extends BaseController {
      */
     @RequestMapping("logout")
     public void logout(HttpSession session, HttpServletResponse response) {
-        TaleUtils.logout(session, response);
+        try {
+            response.sendRedirect("admin/logout");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        TaleUtils.logout(session, response);
     }
 
     /**

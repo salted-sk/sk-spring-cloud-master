@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping("/role")
 public class RoleController extends BaseController {
 
-    private String prefix = "/role";
+    private String prefix = "role";
 
     @Value("${server.port}")
     private String port;

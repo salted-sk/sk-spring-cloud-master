@@ -31,7 +31,11 @@
 <body>
 <div class="block">
     <section class="ui-notice">
-        <i class="icon icon-notice"></i>
+        <img th:src="${imageUrl}" width="100px" height="100px">
+        <div>
+            <span th:text="${username}"></span>
+
+        </div>
         <p>是否授权：<span th:text="${session.authorizationRequest.clientId}">clientId</span></p>
         <div class="ui-notice-btn">
             <form id='confirmationForm' name='confirmationForm' th:action="@{/oauth/authorize}" action="/oauth/authorize" method='post'>
