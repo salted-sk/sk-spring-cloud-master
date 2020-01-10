@@ -26,8 +26,8 @@
                             <th:block th:each="link : ${links}">
                                 <tr th:attr="mid=${link.mid}">
                                     <td th:text="${link.name}"></td>
-                                    <td><a th:href="@{${link.slug}}" target="_blank" th:text="${link.slug}"></a></td>
-                                    <td th:text="${link.description}"></td>
+                                    <td><a th:href="@{${link.slug}}" target="_blank" th:text="${#strings.abbreviate(link.slug,40)}" th:title="${link.slug}"></a></td>
+                                    <td th:text="${#strings.abbreviate(link.description,50)}" th:title="${link.description}"></td>
                                     <td th:text="${link.sort}"></td>
                                     <td>
                                         <a href="javascript:void(0)" onclick="editLink(this);"

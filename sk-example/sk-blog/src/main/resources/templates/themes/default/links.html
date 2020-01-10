@@ -7,7 +7,10 @@
         <h3>友情链接</h3>
         <ul class="flinks">
             <th:block th:each="link : ${links}">
-                <li>🔒 <a th:href="${link.slug}" target="_blank" th:text="${link.name}"></a></li>
+                <li>
+                    <img th:src="${link.description}" width="32px" height="32px"/>
+                    <a th:href="${link.slug}" target="_blank" th:text="${link.name}"></a>
+                </li>
             </th:block>
         </ul>
         <h3>链接须知</h3>
