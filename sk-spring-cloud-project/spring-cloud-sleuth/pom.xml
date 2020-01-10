@@ -9,6 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <description>服务线路追踪</description>
+
     <artifactId>spring-cloud-sleuth</artifactId>
 
     <dependencies>
