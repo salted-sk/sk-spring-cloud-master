@@ -17,7 +17,7 @@
         <module>spring-cloud-server-demo</module>
         <module>spring-cloud-client-demo</module>
         <module>spring-cloud-gateway</module>
-        <module>spring-cloud-sleuth</module>
+        <module>spring-cloud-zipkin-server</module>
     </modules>
 
     <dependencies>

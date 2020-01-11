@@ -1,0 +1,42 @@
+#启动、停止脚本 进入文件所在目录
+#不知道为什么在docker下面不支持mysql 本地可以 我好难
+
+#docker-compose up -d
+#docker-compose down -d
+version: '2'
+
+services:
+  # The zipkin process services the UI, and also exposes a POST endpoint that
+  # instrumentation can send trace data to. Scribe is disabled by default.
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin-server
+    environment:
+      - STORAGE_TYPE=mysql
+      # Point the zipkin at the storage backend
+      - MYSQL_DB=zipkin
+      - MYSQL_USER=root
+      - MYSQL_PASS=frzxbkw
+      - MYSQL_HOST=112.124.3.225
+      - MYSQL_TCP_PORT=3333
+      - RABBIT_URI=amqp://guest:guest@47.104.23.202:8672
+      - RABBIT_ADDRESSES=47.104.23.202:8672
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
+      # Uncomment to enable scribe
+      # - SCRIBE_ENABLED=true
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 8411:9411
+      # Uncomment if you set SCRIBE_ENABLED=true
+      # - 9410:9410
+    #networks: 
+    #  - default 
+    #  - my_net #创建网路 docker network create my_net 删除网络 docker network rm my_net
+    #networks:
+    #my_net:
+    #external: true

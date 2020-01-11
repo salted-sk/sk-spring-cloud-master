@@ -1,0 +1,57 @@
+#启动、停止脚本
+
+# docker-compose docker-compose.yml up -d
+#docker-compose docker-compose.yml down -d
+version: '2'
+
+services:
+  # The zipkin process services the UI, and also exposes a POST endpoint that
+  # instrumentation can send trace data to. Scribe is disabled by default.
+  es:
+    image: elasticsearch
+    container_name: elasticsearch
+    # Uncomment to expose the storage port for testing
+    ports:
+      - 8200:9200
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms128m -Xmx256m
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin-server
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      # Point the zipkin at the storage backend
+      - ES_HOSTS=47.104.23.202:8200
+      # Uncomment to enable scribe
+      # - SCRIBE_ENABLED=true
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+      - RABBIT_URI=amqp://guest:guest@47.104.23.202:8672
+      - RABBIT_ADDRESSES=47.104.23.202:8672
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
+      # Uncomment to enable scribe
+      # - SCRIBE_ENABLED=true
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 8411:9411
+      # Uncomment if you set SCRIBE_ENABLED=true
+      # - 9410:9410
+    #networks: 
+    #  - default 
+    #  - my_net #创建网路 docker network create my_net 删除网络 docker network rm my_net
+    #networks:
+    #my_net:
+    #external: true

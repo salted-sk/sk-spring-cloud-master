@@ -1,0 +1,25 @@
+#springboot2.0之后不再推荐自己搭建zipkin-server服务器了，推荐使用openzipkin/zipkin
+#所以我这里什么都没有 就别找了
+#下载地址https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/
+#注，不知道为毛，此方法无法使用mysql作为媒介，没劲
+docker run \
+--name zipkin-server \
+-d -p 8411:9411 \
+-e RABBIT_URI=amqp://guest:guest@47.104.23.202:8672 \
+-e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_HOST=47.104.23.202 \
+-e MYSQL_TCP_PORT=3333 -e MYSQL_USER=root -e MYSQL_PASS=frzxbkw \
+--restart=on-failure \
+openzipkin/zipkin \
+-e RABBIT_ADDRESSES=47.104.23.202:5672 \
+-e RABBIT_USER=guest \
+-e RABBIT_PASSWORD=guest
+
+
+java -jar zipkin-server-2.12.9-exec.jar \
+--zipkin.collector.rabbitmq.addresses=localhost \
+--zipkin.storage.type=mysql \
+--zipkin.storage.mysql.host=112.124.3.225 \
+--zipkin.storage.mysql.port=3333 \
+--zipkin.storage.mysql.username=root \
+--zipkin.storage.mysql.password=frzxbkw \
+--zipkin.storage.mysql.db=zipkin

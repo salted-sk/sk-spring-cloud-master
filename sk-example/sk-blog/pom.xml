@@ -14,6 +14,17 @@
     <artifactId>sk-blog</artifactId>
 
     <dependencies>
+        <!-- 添加服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!-- 官网说明 spring-cloud-sleuth-stream 已不推荐使用，并且与这些目的地不兼容。-->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
