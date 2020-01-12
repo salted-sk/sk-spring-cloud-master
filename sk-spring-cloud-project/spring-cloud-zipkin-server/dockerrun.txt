@@ -1,7 +1,7 @@
 #springboot2.0之后不再推荐自己搭建zipkin-server服务器了，推荐使用openzipkin/zipkin
 #所以我这里什么都没有 就别找了
 #下载地址https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/
-#注，不知道为毛，此方法无法使用mysql作为媒介，没劲
+#注，不知道为毛，docker中无法使用mysql作为媒介，没劲
 docker run \
 --name zipkin-server \
 -d -p 8411:9411 \
