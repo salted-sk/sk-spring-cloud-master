@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @since 2020/1/8 16:30
  */
 @MapperScan("com.sk.blog.website.dao")
-@tk.mybatis.spring.annotation.MapperScan(basePackages = {"com.sk.blog.dao", "com.sk.common.base.dao"})
+@tk.mybatis.spring.annotation.MapperScan(basePackages = {"com.sk.blog.dao"})
 @SpringBootApplication
 @EnableTransactionManagement
 public class BlogApplication {

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  * @since 2019/12/13 14:12
  */
 @Configuration
-@MapperScan(basePackages = {"com.sk.dao", "com.sk.common.base.dao"})
+@MapperScan(basePackages = {"com.sk.dao"})
 @RefreshScope
 public class DynamicDataSource {
 

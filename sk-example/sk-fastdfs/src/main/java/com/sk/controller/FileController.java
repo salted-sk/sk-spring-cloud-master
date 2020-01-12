@@ -1,6 +1,7 @@
 package com.sk.controller;
 
 import com.sk.common.base.BaseController;
+import com.sk.common.base.service.SysPermissionService;
 import com.sk.common.config.page.TableDataInfo;
 import com.sk.common.config.po.Result;
 import com.sk.config.FdfsUpAndDowServiceImpl;
