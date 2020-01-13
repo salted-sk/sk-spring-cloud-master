@@ -30,6 +30,11 @@
 <header id="header" class="header bg-white">
     <div class="navbar-container">
         <div class="navbar-logo">
+<!--            <select id="province">-->
+<!--                <option value="none">请选择</option>-->
+<!--            </select>-->
+<!--            <select id="city"></select>-->
+<!--            <select id="county" style="display: none"></select>-->
             <a th:href="${commons.site_url()}">
                 <!--        <a th:href="${'/admin'}" target="_self" class="navbar-logo">-->
                 骚年,来一起996吧！
@@ -38,6 +43,7 @@
             <img th:src="@{/user/img/9962icu.jpg}" title="工作996到ICU" alt="工作996到ICU"/>
             <img th:src="@{/user/img/icu.jpg}" title="ICU" alt="ICU"/>
         </div>
+
         <div class="navbar-menu">
             <a th:href="${commons.site_url('/archives')}">归档</a>
             <a th:href="${commons.site_url('/links')}">友链</a>

@@ -207,5 +207,34 @@
     InstantClick.init('mousedown');
     /*]]>*/
 </script>
+
+<script data-no-instant="">
+    /*<![CDATA[*/
+    var datas = { "河北": ["衡水","保定","唐山"],"河南":["郑州","许昌","开封"]};
+
+    $(function() {
+        $.each(datas, function (key, value) {
+            var option = $("<option value=" + key + ">" + key + "</option>");
+            $("#province").append(option);
+        });
+
+        $("#province").change(function () {
+            var selectprovine = $("#province").val();
+            $("#city option").remove();
+            if(selectprovine == "none") {
+                return;
+            }
+            $(datas[selectprovine]).each(function () {
+                var cityoption = $("<option value=" + this + ">" + this + "</option>");
+                $("#city").append(cityoption);
+            });
+        });
+
+    });
+    function info() {
+        alert("您选择的是地方为" + $("#province").val() + $("#city").val());
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
