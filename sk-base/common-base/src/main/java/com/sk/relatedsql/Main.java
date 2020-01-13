@@ -1,4 +1,4 @@
-package com.sk.common;
+package com.sk.relatedsql;
 
 import com.sk.common.utils.UUIDUtils;
 
