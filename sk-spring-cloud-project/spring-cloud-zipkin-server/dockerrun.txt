@@ -6,17 +6,17 @@ docker run \
 --name zipkin-server \
 -d -p 8411:9411 \
 -e RABBIT_URI=amqp://guest:guest@47.104.23.202:8672 \
--e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_HOST=47.104.23.202 \
+-e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_HOST=112.124.3.225 \
 -e MYSQL_TCP_PORT=3333 -e MYSQL_USER=root -e MYSQL_PASS=frzxbkw \
 --restart=on-failure \
 openzipkin/zipkin \
--e RABBIT_ADDRESSES=47.104.23.202:5672 \
+-e RABBIT_ADDRESSES=47.104.23.202:8672 \
 -e RABBIT_USER=guest \
 -e RABBIT_PASSWORD=guest
 
 
-java -jar zipkin-server-2.12.9-exec.jar \
---zipkin.collector.rabbitmq.addresses=localhost \
+java -jar app.jar \
+--zipkin.collector.rabbitmq.addresses=47.104.23.202:8672 \
 --zipkin.storage.type=mysql \
 --zipkin.storage.mysql.host=112.124.3.225 \
 --zipkin.storage.mysql.port=3333 \
