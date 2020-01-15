@@ -1,5 +1,5 @@
 FROM java:8
-#ADD ./target/restful.war $DIR_WEBAPP/ROOT.war
+#jar包下载地址https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/
 ADD *.jar app.jar
 
 ENTRYPOINT ["java","-jar","/app.jar"]
