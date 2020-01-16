@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta content="width=device-width,user-scalable=no" name="viewport">
+    <title>制造厂生产线_合肥鹏锦自动化有限公司</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="applicable-device" content="mobile">
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="css/layout.css" rel="stylesheet" />
+    <link href='css/css.css' rel="stylesheet" type="text/css" />
+    <link href='css/css_structure.css' rel="stylesheet" type="text/css" />
+    <script src="js/1.js" type="text/javascript"></script>
+    <script src="js/jqwithval.js"></script>
+    <script src="js/jqueryextend.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/touchslider.min.js"></script>
+    <script src="js/jsrender.min.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/jquery.scrollLoading-min.js"></script>
+    <script src="js/jweixin-1.1.0.js"></script>
+    <style type="text/css">
+        img{background: none;}
+    </style>
+</head>
+<body>
+    <div id="pg_margins">
+        <div id="tips"></div>
+            <div id="header">
+                <h1 class="logo">
+                    <span class="hd_tel"><a href="tel:17755145587"></a></span>
+                    <span class="hd_home"><a href="/"></a></span>
+                    <div class="logoimg" style="background:url(./images/index-pic1.jpg) no-repeat 50% 50%;background-size:contain"><a id="logoTel" href="tel:17755145587"></a></div>
+                </h1>
+                <div class="navBtn">
+                    <div class="navArea">
+                        <ul>
+                            <li class=navnum_5><div class="wrap"><a href="index.html"  >网站首页</a></div></li>
+                            <li class=navnum_5><div class="wrap"><a href="69128.html"  >产品中心</a></div></li>
+                            <li class=navnum_5><div class="wrap"><a href="69140.html"  >关于我们</a></div></li>
+                            <li class=navnum_5><div class="wrap"><a href="69137.html"  >经典案例</a></div></li>
+                            <li class=navnum_5><div class="wrap"><a href="69142.html"  >资讯动态</a></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="box_info">
+                <div class="second_categoryList">
+                    <ul class="more_nav_box" id="categoryList"></ul>
+                </div>
+                <div class="info_view">
+                    <div class="box_display">
+                        <div class="display_content">
+                            <div class="eye"><i class="icons icon-eye"></i><span>100</span></div>
+                                <h1 class="theme">马鞍山某机械制造厂生产线</h1>
+                                <p class="ms_time">2018/9/30</p>
+                                <div class="intro">
+                                    <div align='center'>
+                                        <img src="/Content/pixel.gif" class='intro-info-img' data-url="./images/index-pic5.jpg" alt='马鞍山某机械制造厂生产线' class='b-pic' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            function addHites() {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/display/addHites',
+                                    dataType: 'text',
+                                    data: { id: '392184' },
+                                    cache: false,
+                                    success: function (data) {
+                                        $("#hits").html(data);
+                                    }
+                                });
+                            }
+                            $(document).ready(function () {
+                                addHites();
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="youlink">
+                    <p class="copyright">
+                        <div class="cr" align="justify">
+                            <p style="text-align:center;">合肥鹏锦自动化有限公司 &nbsp;  版权所有&nbsp;&nbsp; <a href="http://www.beian.miit.gov.cn/" target="_blank"  rel="nofollow">皖ICP备19014989号</a><a class="ke-tmlp"><span class="s-red">&nbsp;&nbsp;</span></a><a class="ke-tmlp"><span class="s-red"><a href="http://www.ibw.cn/mianze.htm" target="_blank" rel="nofollow">免责声明</a></span></a></p>
+                        </div>
+                    </p>
+                </div>
+               <script type="text/javascript"> 
+                $(".bottom-li").click(function(){
+                    var arry = $(".bottom-li");
+                    if($(this).className=="bottom-li active")
+                    {
+                    }
+                    else
+                    {
+                        var index = $(this).index();
+                        arry[index].className = "bottom-li active";
+                       
+                        var childspan = arry[index].children[0].children[0];
+                        if (childspan != null)
+                        {
+                            var url = $("#" + arry[index].id).attr("data-select-url");
+                            $("#"+childspan.id).css("background-image", "url(" + url + ")");
+                        }
+                        for (var i = 0; i < arry.length; i++)
+                        {
+                            if (i != index)
+                            {
+                                if (arry[i].className == "bottom-li active")
+                                {
+                                    arry[i].className = "bottom-li";
+                                    var childspan = arry[i].children[0].children[0];
+                                    var url = $("#" + arry[i].id).attr("data-url");
+                                    $("#" + childspan.id).css("background-image", "url(" + url + ")");
+                                }
+                            }
+
+                        }
+                    }
+                    
+               });
+               </script>
+            </div>
+            <script id="fulldiv_tmpl" type="text/x-jsrender">
+                <div id="shadeDiv" class="shadeDiv">
+                    <div id="fullbg" class="shadeFullBg"></div>
+                    <div id="tablesDiv" class="tablesDiv">
+                        <div id="scrollTable" class="scrollTable">
+                               {{for Data}}
+                                <div id="fullTableDiv" class="fullTableDiv">
+                                    <a id="linkRow" href="{{:Href}}" {{if Target}} target="{{:Target}}" {{/if}} data-type="{{:Type}}">
+                                        <div id="tableDiv" class="tableBox tableDiv">
+                                            <div class="buttonName tableCell">
+                                                {{:Name}}
+                                            </div>
+                                            <div class="contentNumber tableCell">
+                                                {{:Number}}
+                                            </div>
+                                            <div class="shadeOperation tableCell">
+                                                <div class="shadeOperImg {{:Icon}}"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dividingLine"></div>
+                            {{/for}}
+                        </div>
+                        <div id="pCancle" class="pCancle">
+                            <div id="divCancle" class="divCancle">
+                                取消
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </script>  
+            <script type="text/javascript">  
+                $('.look_more_item .more_item_box').click(function () {
+                    $('#shade_div').fadeIn();
+                    $('.more_item_content').css('left', 0).height($('body').height());
+                })
+                $('.more_item_content .head').click(function () {
+                    $('#shade_div').fadeOut();
+                    $('.more_item_content').css('left', '100%');
+                })
+
+                var _hmt = _hmt || [];
+
+                $(".intro-info-img").scrollLoading();
+                $(".b-pic").scrollLoading();
+                
+                var firstPic = $('img[data-url^="/u/"]')[0];
+                var firstPicSrc = '';
+                if (firstPic) {
+                    firstPicSrc = location.origin + firstPic.getAttribute('data-url');
+                }
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: '', // 必填，公众号的唯一标识
+                    timestamp: '1562482787', // 必填，生成签名的时间戳
+                    nonceStr: '4b49fe66d69b4cbe9d8a2b0a561528e7', // 必填，生成签名的随机串
+                    signature: '57381A46189EB6A3C61B8C7764C3FB042EDB4855',// 必填，签名，见附录1
+                    jsApiList: ["checkJsApi", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareQZone", "updateAppMessageShareData", "updateTimelineShareData"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2                
+                });
+                wx.ready(function () {
+                    wx.onMenuShareAppMessage({
+                        title: '马鞍山某机械制造厂生产线_合肥辉创自动化设备有限公司',
+                        desc: '',
+                        link: window.location.href.split('#')[0],
+                        imgUrl: firstPicSrc,
+                        type: '', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            // 用户点击了分享后执行的回调函数
+                        }
+                    });
+                    wx.onMenuShareTimeline({
+                        title: '马鞍山某机械制造厂生产线_合肥辉创自动化设备有限公司', // 分享标题
+                        link: window.location.href.split('#')[0], // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: firstPicSrc,// 分享图标
+                        success: function () {
+                            // alert('分享成功！');
+                        },
+                    });
+                });
+            </script>
+</body>
+</html>
