@@ -8,12 +8,12 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 #\
 #--zipkin.storage.type=mysql
 #\
-#--zipkin.storage.mysql.host=112.124.3.225
+#--zipkin.storage.mysql.host=127.0.0.1
 #\
 #--zipkin.storage.mysql.port=3333
 #\
 #--zipkin.storage.mysql.username=root
 #\
-#--zipkin.storage.mysql.password=frzxbkw
+#--zipkin.storage.mysql.password=123456
 #\
 #--zipkin.storage.mysql.db=zipkin

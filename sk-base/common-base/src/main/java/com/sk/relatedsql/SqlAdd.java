@@ -15,11 +15,11 @@ import java.util.Map;
  */
 public class SqlAdd {
 //    static final String url = "jdbc:oracle:thin:@47.104.23.202:49161:xe";
-    static final String url = "jdbc:mysql://112.124.3.225:3333/blog";
+    static final String url = "jdbc:mysql://127.0.0.1:3306/blog";
     static final String name = "com.mysql.jdbc.Driver";
 //    static final String name = "oracle.jdbc.driver.OracleDriver";
     static final String user = "root";
-    static final String password = "frzxbkw";
+    static final String password = "123456";
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //        final String url = "jdbc:mysql://ip";

@@ -16,9 +16,9 @@ services:
       # Point the zipkin at the storage backend
       - MYSQL_DB=zipkin
       - MYSQL_USER=root
-      - MYSQL_PASS=frzxbkw
-      - MYSQL_HOST=112.124.3.225
-      - MYSQL_TCP_PORT=3333
+      - MYSQL_PASS=123456
+      - MYSQL_HOST=127.0.0.1
+      - MYSQL_TCP_PORT=3306
       - RABBIT_URI=amqp://guest:guest@47.104.23.202:8672
       - RABBIT_ADDRESSES=47.104.23.202:8672
       - RABBIT_USER=guest

@@ -32,9 +32,9 @@ CREATE TABLE `properties` (
 -- ----------------------------
 -- Records of properties
 -- ----------------------------
-INSERT INTO `properties` VALUES ('1', 'spring.datasource.url', 'jdbc:mysql://112.124.3.225:3333/fdfs?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'fdfs', 'master', '连接url', '1', '\0', '2019-12-13 10:07:05', '2019-12-13 10:07:05');
+INSERT INTO `properties` VALUES ('1', 'spring.datasource.url', 'jdbc:mysql://127.0.0.1:3306/fdfs?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'fdfs', 'master', '连接url', '1', '\0', '2019-12-13 10:07:05', '2019-12-13 10:07:05');
 INSERT INTO `properties` VALUES ('2', 'spring.datasource.username', 'root', 'sk', 'fdfs', 'master', '数据库连接用户名', '1', '\0', '2019-12-18 08:29:01', '2019-12-18 08:29:01');
-INSERT INTO `properties` VALUES ('3', 'spring.datasource.password', 'frzxbkw', 'sk', 'fdfs', 'master', '数据库密码', '1', '\0', '2019-12-18 08:29:15', '2019-12-18 08:29:15');
+INSERT INTO `properties` VALUES ('3', 'spring.datasource.password', '123456', 'sk', 'fdfs', 'master', '数据库密码', '1', '\0', '2019-12-18 08:29:15', '2019-12-18 08:29:15');
 INSERT INTO `properties` VALUES ('4', 'spring.datasource.driver-class-name', 'com.mysql.jdbc.Driver', 'sk', 'default', 'master', 'jdbcdriver', '1', '\0', '2019-12-13 09:58:59', '2019-12-13 09:58:59');
 INSERT INTO `properties` VALUES ('5', 'mybatis.mapper-locations', 'classpath:mapper/**/*.xml', 'sk', 'default', 'master', '', '1', '\0', '2019-12-13 10:10:03', '2019-12-13 10:10:03');
 INSERT INTO `properties` VALUES ('6', 'spring.thymeleaf.mode', 'LEGACYHTML5', 'sk', 'default', 'master', null, '1', '\0', '2019-12-13 10:10:52', '2019-12-13 10:10:52');
@@ -46,9 +46,9 @@ INSERT INTO `properties` VALUES ('11', 'fdfs.connect-timeout', '600', 'sk', 'fdf
 INSERT INTO `properties` VALUES ('12', 'fdfs.thumb-image.width', '150', 'sk', 'fdfs', 'master', null, '1', '\0', '2019-12-13 10:13:41', '2019-12-13 10:13:41');
 INSERT INTO `properties` VALUES ('13', 'fdfs.thumb-image.height', '150', 'sk', 'fdfs', 'master', null, '1', '\0', '2019-12-13 10:13:42', '2019-12-13 10:13:42');
 INSERT INTO `properties` VALUES ('14', 'fdfs.tracker-list[0]', '112.124.3.225:22122', 'sk', 'fdfs', 'master', null, '1', '\0', '2019-12-13 10:13:44', '2019-12-13 10:13:44');
-INSERT INTO `properties` VALUES ('15', 'spring.datasource.url', 'jdbc:mysql://112.124.3.225:3333/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'oauth-server', 'master', '', '1', '\0', '2019-12-27 13:08:42', '2019-12-27 13:08:42');
+INSERT INTO `properties` VALUES ('15', 'spring.datasource.url', 'jdbc:mysql://127.0.0.1:3306/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'oauth-server', 'master', '', '1', '\0', '2019-12-27 13:08:42', '2019-12-27 13:08:42');
 INSERT INTO `properties` VALUES ('16', 'spring.datasource.username', 'root', 'sk', 'oauth-server', 'master', '', '1', '\0', '2019-12-27 13:07:13', '2019-12-27 13:07:13');
-INSERT INTO `properties` VALUES ('17', 'spring.datasource.password', 'frzxbkw', 'sk', 'oauth-server', 'master', '', '1', '\0', '2019-12-27 13:07:54', '2019-12-27 13:07:54');
+INSERT INTO `properties` VALUES ('17', 'spring.datasource.password', '123456', 'sk', 'oauth-server', 'master', '', '1', '\0', '2019-12-27 13:07:54', '2019-12-27 13:07:54');
 INSERT INTO `properties` VALUES ('18', 'oauth2.server.url', 'http://localhost/oauth2-server', 'sk', 'default', 'master', '资源认证服务器url', '1', '\0', '2019-12-29 01:00:22', '2019-12-29 01:00:22');
 INSERT INTO `properties` VALUES ('19', 'security.oauth2.client.access-token-uri', '${oauth2.server.url}/oauth/token', 'sk', 'default', 'master', '', '1', '\0', '2019-12-27 13:44:32', '2019-12-27 13:44:32');
 INSERT INTO `properties` VALUES ('20', 'security.oauth2.client.user-authorization-uri', '${oauth2.server.url}/oauth/authorize', 'sk', 'default', 'master', '', '1', '\0', '2019-12-27 13:44:51', '2019-12-27 13:44:51');
@@ -74,14 +74,14 @@ INSERT INTO `properties` VALUES ('39', 'ribbon.MaxAutoRetriesNextServer', '0', '
 INSERT INTO `properties` VALUES ('40', 'security.oauth2.client.client-id', 'client-demo', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 13:55:36', '2019-12-27 13:55:36');
 INSERT INTO `properties` VALUES ('41', 'security.oauth2.client.client-secret', '123456', 'sk', 'client-demo', 'master', 'oauth2认证客户端secret', '1', '\0', '2019-12-27 13:56:25', '2019-12-27 13:56:25');
 INSERT INTO `properties` VALUES ('42', 'security.oauth2.resource.filter-order', '99', 'sk', 'client-demo', 'master', '配置使普通浏览器请求order大于资源认证的order', '1', '\0', '2019-12-27 13:57:09', '2019-12-27 13:57:09');
-INSERT INTO `properties` VALUES ('43', 'spring.datasource.url', 'jdbc:mysql://112.124.3.225:3333/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 13:58:25', '2019-12-27 13:58:25');
+INSERT INTO `properties` VALUES ('43', 'spring.datasource.url', 'jdbc:mysql://127.0.0.1:3306/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 13:58:25', '2019-12-27 13:58:25');
 INSERT INTO `properties` VALUES ('44', 'spring.datasource.username', 'root', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 13:58:45', '2019-12-27 13:58:45');
-INSERT INTO `properties` VALUES ('45', 'spring.datasource.password', 'frzxbkw', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 14:01:04', '2019-12-27 14:01:04');
+INSERT INTO `properties` VALUES ('45', 'spring.datasource.password', '123456', 'sk', 'client-demo', 'master', '', '1', '\0', '2019-12-27 14:01:04', '2019-12-27 14:01:04');
 INSERT INTO `properties` VALUES ('46', 'security.oauth2.client.client-id', 'server-demo', 'sk', 'server-demo', 'master', '认证服务端id', '1', '\0', '2019-12-29 06:31:28', '2019-12-29 06:31:28');
 INSERT INTO `properties` VALUES ('47', 'security.oauth2.client.client-secret', '123456', 'sk', 'server-demo', 'master', '认证客户端secret', '1', '\0', '2019-12-27 14:03:16', '2019-12-27 14:03:16');
-INSERT INTO `properties` VALUES ('48', 'spring.datasource.url', 'jdbc:mysql://112.124.3.225:3333/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'server-demo', 'master', '', '1', '\0', '2019-12-27 14:03:52', '2019-12-27 14:03:52');
+INSERT INTO `properties` VALUES ('48', 'spring.datasource.url', 'jdbc:mysql://127.0.0.1:3306/oauth2?serverTimezone=UTC&characterEncoding=utf-8', 'sk', 'server-demo', 'master', '', '1', '\0', '2019-12-27 14:03:52', '2019-12-27 14:03:52');
 INSERT INTO `properties` VALUES ('49', 'spring.datasource.username', 'root', 'sk', 'server-demo', 'master', '', '1', '\0', '2019-12-27 14:04:06', '2019-12-27 14:04:06');
-INSERT INTO `properties` VALUES ('50', 'spring.datasource.password', 'frzxbkw', 'sk', 'server-demo', 'master', '', '1', '\0', '2019-12-27 14:04:23', '2019-12-27 14:04:23');
+INSERT INTO `properties` VALUES ('50', 'spring.datasource.password', '123456', 'sk', 'server-demo', 'master', '', '1', '\0', '2019-12-27 14:04:23', '2019-12-27 14:04:23');
 INSERT INTO `properties` VALUES ('51', 'security.oauth2.client.client-id', 'server-demo', 'sk', 'default', 'server-demo', '', '1', '', '2019-12-29 06:25:35', '2019-12-29 06:25:35');
 INSERT INTO `properties` VALUES ('52', 'spring.datasource.initialSize', '5', 'sk', 'default', 'master', '', '1', '\0', '2019-12-29 07:28:54', '2019-12-29 07:28:54');
 INSERT INTO `properties` VALUES ('53', 'spring.datasource.minIdle', '5', 'sk', 'default', 'master', '', '1', '\0', '2019-12-29 07:29:10', '2019-12-29 07:29:10');
