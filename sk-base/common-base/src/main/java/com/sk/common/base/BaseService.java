@@ -162,7 +162,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * 将属性数组转为key-value值
      */
     private Map<String, Boolean> getNullUpdatePropertyMap(String[] nullUpdatePropertyKvs) {
-        Map<String, Boolean> map = new HashMap<>();
+        Map<String, Boolean> map = new HashMap<>(16);
         String[] propertyKv;
         for (String property : nullUpdatePropertyKvs) {
             propertyKv = property.split(":");
