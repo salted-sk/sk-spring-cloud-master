@@ -36,6 +36,15 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
 
     protected Logger log = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 当前数据库实体类型
+     */
+    private Class<? super T> getOfClass;
+
+    {
+        getOfClass = getOfClass();
+    }
+
     @Autowired
     protected E dao;
 
@@ -59,9 +68,9 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
             t = getInstanceOf();
         }
         t.setDeleted(false);
-        List list = dao.select(t);
+        List<? super T> list = dao.select(t);
         //判断返回类型与对应数据库实体类型是否相同
-        boolean sameClass = (getOfClass() == t.getClass());
+        boolean sameClass = (getOfClass == t.getClass());
         return selectList(list, sameClass);
     }
 
@@ -72,13 +81,13 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @return 查询列表
      */
     public List<T> selectList(BiConsumer<Example.Criteria, Example> consumer) {
-        Example example = new Example(getOfClass());
+        Example example = new Example(getOfClass);
         Example.Criteria criteria = example.createCriteria();
         consumer.accept(criteria, example);
         criteria.andEqualTo("deleted",false);
-        List list = dao.selectByExample(example);
+        List<? super T> list = dao.selectByExample(example);
         //判断返回类型与对应数据库实体类型是否相同
-        boolean sameClass = (getOfClass() == getInstanceOf().getClass());
+        boolean sameClass = (getOfClass == getInstanceOf().getClass());
         return selectList(list, sameClass);
     }
 
@@ -89,7 +98,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param sameClass 返回类型与对应数据库实体类型是否相同
      * @return 返回结果
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private List<T> selectList(List list, boolean sameClass) {
         List<T> resultList = list;
         if (!sameClass) {
@@ -133,7 +142,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
                     if (t2 != null) {
                         Map<String, Boolean> nullPropertyMap = getNullUpdatePropertyMap(nullUpdatePropertyKvs);
                         //将数据库查询的不为null的值赋予当前传入为null的实体中
-                        Field[] fields = getOfClass().getDeclaredFields();
+                        Field[] fields = getOfClass.getDeclaredFields();
                         updateFieldOf(t, t2, fields, nullPropertyMap);
                         Field[] supperFields = BaseEntity.class.getDeclaredFields();
                         updateFieldOf(t, t2, supperFields, nullPropertyMap);
@@ -208,7 +217,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
     public int saveAndUpdate(Integer[] ids, T t) {
         int ret = 0;
         if (t != null) {
-            Example example = new Example(getOfClass());
+            Example example = new Example(getOfClass);
             Example.Criteria criteria = example.createCriteria();
             if (EmptyUtils.isNotEmpty(ids)) {
                 criteria.andIn("id", Arrays.asList(ids));
@@ -271,7 +280,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      */
     public int delete(Integer[] ids) {
         int ret = 0;
-        Example example = new Example(getOfClass());
+        Example example = new Example(getOfClass);
         Example.Criteria criteria = example.createCriteria();
         if (EmptyUtils.isNotEmpty(ids)) {
             criteria.andIn("id", Arrays.asList(ids));
@@ -314,7 +323,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @return 数量
      */
     public int selectCount(BiConsumer<Example.Criteria, Example> consumer) {
-        Example example = new Example(getOfClass());
+        Example example = new Example(getOfClass);
         Example.Criteria criteria = example.createCriteria();
         if (consumer != null) {
             consumer.accept(criteria, example);
@@ -329,7 +338,6 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param id ID
      * @return 1成功/0失败
      */
-    @SuppressWarnings("unchecked")
     public int undelete(Integer id) {
         T t = getInstanceOf();
         t.setId(id);
@@ -364,9 +372,10 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
     /**
      * 获取当前数据库实体类Class
      */
-    private Class getOfClass() {
+    private Class<? super T> getOfClass() {
         ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
-        Class t = (Class) superClass.getActualTypeArguments()[0];
+        @SuppressWarnings("unchecked")
+        Class<? super T> t = (Class<? super T>) superClass.getActualTypeArguments()[0];
         if (t != null && BaseEntity.class.isAssignableFrom(t)) {
             while (t.getSuperclass() != BaseEntity.class) {
                 t = t.getSuperclass();
