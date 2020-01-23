@@ -1,7 +1,8 @@
 package com.sk.common.config.page;
 
 import com.sk.common.utils.EmptyUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 分页数据
@@ -9,7 +10,8 @@ import lombok.Data;
  * @author zhangqiao
  * @since 2019/12/17 16:18
  */
-@Data
+@Getter
+@Setter
 public class PageDomain {
 
     /**

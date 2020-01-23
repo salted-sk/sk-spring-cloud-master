@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
  * @author zhangqiao
  * @since 2019/8/31 20:12
  */
-@Data
+@Getter
+@Setter
 public class BaseEntity {
 
     /**

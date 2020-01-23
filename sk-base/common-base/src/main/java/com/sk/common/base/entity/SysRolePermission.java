@@ -1,7 +1,8 @@
 package com.sk.common.base.entity;
 
 import com.sk.common.base.BaseEntity;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -12,8 +13,9 @@ import javax.persistence.Table;
  * @author zhangqiao
  * @since 2019-11-11 09:25:07
  */
+@Getter
+@Setter
 @Table(name = "sys_role_permission")
-@Data
 public class SysRolePermission extends BaseEntity {
 
     /**

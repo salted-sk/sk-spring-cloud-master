@@ -1,6 +1,7 @@
 package com.sk.common.config.page;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
  * @author zhangqiao
  * @since 2019/12/17 16:18
  */
-@Data
+@Getter
+@Setter
 public class TableDataInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
