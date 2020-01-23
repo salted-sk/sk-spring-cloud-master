@@ -394,6 +394,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
 
     /**
      * 获取当前T类型对象实例
+     * 可在对应seveice层通过new重写该方法
      */
     protected T getInstanceOfT() {
         try {
