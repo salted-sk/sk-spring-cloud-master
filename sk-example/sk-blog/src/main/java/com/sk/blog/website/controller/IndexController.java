@@ -324,6 +324,11 @@ public class IndexController extends BaseController {
         return this.render("page");
     }
 
+    @GetMapping("/favicon.ico")
+    @ResponseBody
+    public void favicon() {
+
+    }
 
     /**
      * 搜索页

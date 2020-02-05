@@ -19,4 +19,6 @@ public class SocialProperties {
 
     WeiboProperties weibo = new WeiboProperties();
 
+    SkselfProperties skself = new SkselfProperties();
+
 }
