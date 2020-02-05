@@ -12,7 +12,7 @@ import org.springframework.social.oauth2.TokenStrategy;
  */
 public class SKImpl extends AbstractOAuth2ApiBinding implements SK {
 	
-	private static final String URL_GET_USERINFO = "http://127.0.0.1/skblog/getUserInfo.json?oauth_consumer_key=%s";
+	private static final String URL_GET_USERINFO = "http://oauth.chaseself.com/skblog/getUserInfo.json?oauth_consumer_key=%s";
 
 	private String appId;
 	
