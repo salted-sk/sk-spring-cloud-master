@@ -10,6 +10,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @since 2019/12/18 8:59
  */
 @Configuration
-@MapperScan(basePackages = "com.sk.common.base.dao")
+@MapperScan(basePackages = {"com.sk.common.base.dao", "com.sk.dao"})
 public class BaseMapperScan {
 }

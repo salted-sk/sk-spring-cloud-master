@@ -11,7 +11,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @since 2019/12/29 12:18
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.sk.dao")
 public class DataSourcesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DataSourcesApplication.class, args);

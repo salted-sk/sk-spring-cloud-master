@@ -109,7 +109,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
         List<T> resultList = list;
         if (!sameClass) {
             //将返回的数据库实体结果集转为T类型的结果集
-            resultList = Stream.of(list.toArray()).map(this::getOffrom).collect(toList());
+            resultList = Stream.of(list.toArray()).map(this::getOfFrom).collect(toList());
             if (list instanceof Page) {
                 list.clear();
                 list.addAll(resultList);
@@ -240,7 +240,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @return 实例
      */
     public T selectOne(Object id) {
-        return EmptyUtils.isNotEmpty(id) ? getOffrom(dao.selectByPrimaryKey(id)) : null;
+        return EmptyUtils.isNotEmpty(id) ? getOfFrom(dao.selectByPrimaryKey(id)) : null;
     }
 
     /**
@@ -265,7 +265,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
         }
         T t = supplier.get();
         t.setDeleted(false);
-        return getOffrom(dao.selectOne(t));
+        return getOfFrom(dao.selectOne(t));
     }
 
     /**
@@ -366,7 +366,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
     /**
      * 将数据库实体类转为T类型
      */
-    private T getOffrom(Object o) {
+    private T getOfFrom(Object o) {
         if (o == null) {
             return null;
         }
