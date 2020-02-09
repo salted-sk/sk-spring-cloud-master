@@ -3,9 +3,7 @@ package com.sk.config;
 import com.sk.blog.entity.BlogSysUser;
 import com.sk.blog.service.BlogSysUserService;
 import com.sk.common.base.entity.SysPermission;
-import com.sk.common.base.entity.SysUser;
 import com.sk.common.base.service.SysPermissionService;
-import com.sk.common.base.service.SysUserService;
 import com.sk.common.utils.EmptyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Service;
@@ -38,9 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
 
     @Autowired
     private SysPermissionService permissionService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

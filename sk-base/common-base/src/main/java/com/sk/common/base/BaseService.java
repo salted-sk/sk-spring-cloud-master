@@ -59,7 +59,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      *
      * @return 查询列表
      */
-    public List<T> selectList() {
+    public final List<T> selectList() {
         return selectList(getInstanceOfT());
     }
 
@@ -69,7 +69,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 查询列表
      */
-    public List<T> selectList(T t) {
+    public final List<T> selectList(T t) {
         if (t == null) {
             t = getInstanceOfT();
         }
@@ -86,7 +86,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param consumer 参数条件
      * @return 查询列表
      */
-    public List<T> selectList(BiConsumer<Example.Criteria, Example> consumer) {
+    public final List<T> selectList(BiConsumer<Example.Criteria, Example> consumer) {
         Example example = new Example(ofClass);
         Example.Criteria criteria = example.createCriteria();
         consumer.accept(criteria, example);
@@ -125,7 +125,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 1成功/0失败
      */
-    public int saveAndUpdate(T t) {
+    public final int saveAndUpdate(T t) {
         return saveAndUpdate(t, (String[]) null);
     }
 
@@ -138,7 +138,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      *        默认字段属性为false(只将传入为null的参数置为null),true(该字段一定置为null)
      * @return 1成功/0失败
      */
-    public int saveAndUpdate(T t, String... nullUpdatePropertyKvs) {
+    public final int saveAndUpdate(T t, String... nullUpdatePropertyKvs) {
         int ret = 0;
         if (EmptyUtils.isNotEmpty(t)) {
             if (EmptyUtils.isNotEmpty(t.getId())) {
@@ -220,7 +220,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 成功数/0失败
      */
-    public int saveAndUpdate(Integer[] ids, T t) {
+    public final int saveAndUpdate(Integer[] ids, T t) {
         int ret = 0;
         if (t != null) {
             Example example = new Example(ofClass);
@@ -249,7 +249,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 实例
      */
-    public T selectOne(T t) {
+    public final T selectOne(T t) {
         return selectOne(() -> t);
     }
 
@@ -259,7 +259,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param supplier supplier
      * @return 实例
      */
-    public T selectOne(Supplier<T> supplier) {
+    public final T selectOne(Supplier<T> supplier) {
         if (EmptyUtils.isEmpty(supplier) || EmptyUtils.isEmpty(supplier.get())) {
             return null;
         }
@@ -301,7 +301,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param t t
      * @return 数量
      */
-    public int selectCount(T t) {
+    public final int selectCount(T t) {
         return selectCount(() -> t);
     }
 
@@ -311,7 +311,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param supplier supplier
      * @return 数量
      */
-    public int selectCount(Supplier<T> supplier) {
+    public final int selectCount(Supplier<T> supplier) {
         T t;
         if (EmptyUtils.isNotEmpty(supplier) && EmptyUtils.isNotEmpty(supplier.get())) {
             t = supplier.get();
@@ -328,7 +328,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param consumer consumer
      * @return 数量
      */
-    public int selectCount(BiConsumer<Example.Criteria, Example> consumer) {
+    public final int selectCount(BiConsumer<Example.Criteria, Example> consumer) {
         Example example = new Example(ofClass);
         Example.Criteria criteria = example.createCriteria();
         if (consumer != null) {
@@ -344,7 +344,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param id ID
      * @return 1成功/0失败
      */
-    public int undelete(Integer id) {
+    public final int undelete(Integer id) {
         T t = getInstanceOfT();
         t.setId(id);
         t.setDeleted(true);
@@ -357,7 +357,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param ids IDs
      * @return 成功数/0失败
      */
-    public int undelete(Integer[] ids) {
+    public final int undelete(Integer[] ids) {
         T t = getInstanceOfT();
         t.setDeleted(true);
         return saveAndUpdate(ids, t);

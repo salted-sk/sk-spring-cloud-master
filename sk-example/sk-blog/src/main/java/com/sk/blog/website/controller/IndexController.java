@@ -65,6 +65,16 @@ public class IndexController extends BaseController {
     }
 
     /**
+     * 首页
+     *
+     * @return
+     */
+    @GetMapping(value = "/to")
+    public String to(HttpServletRequest request) {
+        return "sk/index";
+    }
+
+    /**
      * 首页分页
      *
      * @param request request
