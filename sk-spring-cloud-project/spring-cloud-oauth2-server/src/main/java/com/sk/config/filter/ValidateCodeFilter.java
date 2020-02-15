@@ -5,6 +5,8 @@ import com.sk.common.config.po.CommonCode;
 import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
 import com.sk.config.WebSecurityConfig;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -13,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 验证码过滤器，可设置所有需要验证码之后才能继续请求执行
@@ -25,20 +27,18 @@ import java.util.Map;
  */
 public class ValidateCodeFilter extends OncePerRequestFilter {
 
-    //需要通过验证码验证的uri
-    private static Map<String, String> filterUris;
+    private List<RequestMatcher> validateCodeRequestMatcher;
 
-    static {
-        filterUris = new HashMap();
-        filterUris.put("/login", "POST");
+    public ValidateCodeFilter() {
+        List<RequestMatcher> requestMatchers = new ArrayList<>();
+        requestMatchers.add(new AntPathRequestMatcher("/login", "POST"));
+        setFilterProcessesUrls(requestMatchers);
     }
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        //访问请求，判断是否拦截此请求
-		String uri = request.getServletPath();
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //校验验证码是否符合
-        if (filterUris.containsKey(uri) && filterUris.get(uri).equalsIgnoreCase(request.getMethod())) {
+        if (requiresValidateCode(request)) {
             HttpSession session = request.getSession();
             String storageCode = (String) session.getAttribute(ValidateCodeUtil.RANDOM_CODE_KEY);
             //获取验证码
@@ -58,8 +58,21 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
                 }
             }
         }
-		//验证通过后下一步
-		filterChain.doFilter(request, response);
-	}
+        //验证通过后下一步
+        filterChain.doFilter(request, response);
+    }
+
+    private boolean requiresValidateCode(HttpServletRequest request) {
+        for (RequestMatcher matcher : validateCodeRequestMatcher) {
+            if (matcher.matches(request)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setFilterProcessesUrls(List<RequestMatcher> requestMatchers) {
+        this.validateCodeRequestMatcher = requestMatchers;
+    }
 
 }

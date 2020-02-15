@@ -9,10 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Enumeration;
 
 /**
  * 判断当前用户是否登录，如未登录时，清除session信息，防止session共享时单点登录引发的无限重定向问题
@@ -34,19 +32,18 @@ public class ClearRedisSessionFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
-		HttpServletResponse response = (HttpServletResponse)servletResponse;
 		System.out.println(request.getServletPath() + ":" + request.getMethod());
 		Principal principal = request.getUserPrincipal();
-		if (principal == null && requiresClearRedisSession(request, response)
+		//用户未登录；登录请求；不是第三方引发的跳转->则清除相关认证信息
+		if (principal == null && requiresClearRedisSession(request)
 				&& request.getParameter("code") == null) {
-			Enumeration em = request.getSession().getAttributeNames();
 			request.getSession().removeAttribute(CLEAR_ATTRIBUTE);
 		}
 
 		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
-	private boolean requiresClearRedisSession(HttpServletRequest request, HttpServletResponse response) {
+	private boolean requiresClearRedisSession(HttpServletRequest request) {
 		return this.clearRedisSessionRequestMatcher.matches(request);
 	}
 
