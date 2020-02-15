@@ -23,6 +23,8 @@ import java.util.Enumeration;
  */
 public class ClearRedisSessionFilter extends GenericFilterBean {
 
+	private static final String CLEAR_ATTRIBUTE = "scopedTarget.oauth2ClientContext";
+
 	private RequestMatcher clearRedisSessionRequestMatcher;
 
 	public ClearRedisSessionFilter() {
@@ -38,9 +40,7 @@ public class ClearRedisSessionFilter extends GenericFilterBean {
 		if (principal == null && requiresClearRedisSession(request, response)
 				&& request.getParameter("code") == null) {
 			Enumeration em = request.getSession().getAttributeNames();
-			while(em.hasMoreElements()){
-				request.getSession().removeAttribute(em.nextElement().toString());
-			}
+			request.getSession().removeAttribute(CLEAR_ATTRIBUTE);
 		}
 
 		filterChain.doFilter(servletRequest, servletResponse);
