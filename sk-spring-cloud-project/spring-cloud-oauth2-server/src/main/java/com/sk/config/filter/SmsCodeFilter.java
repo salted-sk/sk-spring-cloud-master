@@ -11,7 +11,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +26,11 @@ import java.util.Map;
 public class SmsCodeFilter extends OncePerRequestFilter {
 
     //需要通过验证码验证的uri
-    private static Map<String, String> filterUris;
+    private static final Map<String, String> FILTER_URIS;
 
     static {
-        filterUris = new HashMap();
-        filterUris.put("/mobile/login", "POST");
+        FILTER_URIS = new HashMap();
+        FILTER_URIS.put("/mobile/login", "POST");
     }
 
 	@Override
@@ -39,7 +38,7 @@ public class SmsCodeFilter extends OncePerRequestFilter {
         //访问请求，判断是否拦截此请求
         String uri = request.getServletPath();
         //校验验证码是否符合
-        if (filterUris.containsKey(uri) && filterUris.get(uri).equalsIgnoreCase(request.getMethod())) {
+        if (FILTER_URIS.containsKey(uri) && FILTER_URIS.get(uri).equalsIgnoreCase(request.getMethod())) {
             //获取验证码
             String code = request.getParameter("smsCode");
             //判断验证码是否通过

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,6 +39,10 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        //使用redis进行session共享时，登录前清除session信息，防止session共享时单点登录引发的无限重定向问题
+        http.addFilterBefore(new ClearRedisSessionFilter(), LogoutFilter.class);
+
         http.exceptionHandling()
                 .accessDeniedHandler(handleAccessDeniedForUser())
                 .and()

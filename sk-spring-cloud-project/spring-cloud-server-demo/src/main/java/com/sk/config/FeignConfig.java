@@ -2,8 +2,8 @@ package com.sk.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.apache.http.HttpHeaders;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

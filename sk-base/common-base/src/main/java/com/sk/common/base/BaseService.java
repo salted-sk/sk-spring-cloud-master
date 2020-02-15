@@ -239,7 +239,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * @param id ID
      * @return 实例
      */
-    public T selectOne(Object id) {
+    public T selectOne(Integer id) {
         return EmptyUtils.isNotEmpty(id) ? getOfFrom(dao.selectByPrimaryKey(id)) : null;
     }
 

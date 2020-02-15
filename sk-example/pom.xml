@@ -20,6 +20,8 @@
         <module>sk-netty</module>
         <module>sk-blog</module>
         <module>sk-easypoi</module>
+        <module>sk-weixin-public</module>
+        <module>sk-elasticsearch</module>
     </modules>
 
     <dependencies>
