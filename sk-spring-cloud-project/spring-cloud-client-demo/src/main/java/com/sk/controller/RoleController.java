@@ -90,7 +90,7 @@ public class RoleController extends BaseController {
     @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @RequestMapping(value = "/tableList", method = RequestMethod.POST)
     @ResponseBody
-    public TableDataInfo tableList(SysRole sysRole) {
+    public TableDataInfo tableList(SysRole sysRole, Principal principal) {
         //开启分页
         startPage();
         List<SysRole> sysRoles = roleService.selectList((c, e) -> {
