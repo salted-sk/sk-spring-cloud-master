@@ -1,14 +1,11 @@
 package com.sk.blog.website.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Created by Administrator on 2017/3/10 010.
@@ -41,16 +38,8 @@ public class DateKit {
         }
     };
 
-    public DateKit() {
-    }
-
-    public static boolean isToday(Date date) {
-        Date now = new Date();
-        boolean result = true;
-        result &= date.getYear() == now.getYear();
-        result &= date.getMonth() == now.getMonth();
-        result &= date.getDate() == now.getDate();
-        return result;
+    public static boolean isToday(LocalDate date) {
+        return LocalDate.now().equals(date);
     }
 
     public static long DaysBetween(Date date1, Date date2) {

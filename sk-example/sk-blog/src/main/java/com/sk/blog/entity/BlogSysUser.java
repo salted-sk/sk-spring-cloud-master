@@ -1,13 +1,15 @@
 package com.sk.blog.entity;
 
 import com.sk.common.base.BaseEntity;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Table(name = "sys_user")
-@Data
+@Getter
+@Setter
 public class BlogSysUser extends BaseEntity {
 	/**
 	 * 用户名称

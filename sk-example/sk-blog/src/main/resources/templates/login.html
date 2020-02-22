@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" th:href="@{http://112.124.3.225:8100/favicon.ico}">
-    <link rel="stylesheet" type="text/css" href="http://112.124.3.225:8100/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://chaseself.com/static/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
 </head>
@@ -103,14 +103,14 @@
     </div>
 </div>
 </body>
-<script th:src="@{http://112.124.3.225:8100/js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{http://112.124.3.225:8100/ajax/libs/validate/jquery.validate.min.js}"></script>
+<script th:src="@{https://chaseself.com/static/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{https://chaseself.com/static/ajax/libs/validate/jquery.validate.min.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/login.js}"></script>
 <script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 <script>
     $(function () {
-        logout();
+        // logout();
 
         $('#imgcode').click(function() {
             var url = ctx + "code/validate/code?"+ Math.random();
