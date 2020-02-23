@@ -42,17 +42,12 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
     /**
      * 当前数据库实体类型
      */
-    private Class<? super T> ofClass;
+    private Class<? super T> ofClass = getOfClass();
 
     /**
      * 当前T类型对应的class
      */
-    private Class<T> ofTClass;
-
-    {
-        ofClass = getOfClass();
-        ofTClass = getOfTClass();
-    }
+    private Class<T> ofTClass = getOfTClass();
 
     /**
      * 获取列表（未删除）
