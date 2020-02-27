@@ -168,7 +168,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
         for (String property : nullUpdatePropertyKvs) {
             propertyKv = property.split(":");
             if (propertyKv.length > 1) {
-                map.put(propertyKv[0].trim(), Boolean.valueOf(propertyKv[1]));
+                map.put(propertyKv[0].trim(), Boolean.valueOf(propertyKv[1].trim()));
             } else {
                 map.put(propertyKv[0].trim(), Boolean.FALSE);
             }

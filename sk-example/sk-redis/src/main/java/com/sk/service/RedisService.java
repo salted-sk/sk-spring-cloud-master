@@ -17,7 +17,7 @@ public class RedisService {
 	private RedisTemplate redisTemplate;
 
 	public void test() {
-
+		redisTemplate.afterPropertiesSet();
 	}
 
 }
