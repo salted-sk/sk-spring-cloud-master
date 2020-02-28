@@ -22,6 +22,7 @@
         <module>sk-easypoi</module>
         <module>sk-weixin-public</module>
         <module>sk-elasticsearch</module>
+        <module>sk-activemq</module>
     </modules>
 
     <dependencies>
