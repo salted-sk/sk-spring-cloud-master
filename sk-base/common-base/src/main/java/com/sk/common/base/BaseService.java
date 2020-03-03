@@ -125,6 +125,23 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
     }
 
     /**
+     * 保存/更新(选择是否将null更新到数据库)
+     *
+     * @param t t
+     * @param selective fasle：将为null的数据更新到数据库/true：不更新为null的数据
+     * @return 1成功/0失败
+     */
+    public final int saveAndUpdate(T t, boolean selective) {
+        if (!selective) {
+            return saveAndUpdate(t);
+        }
+        if (EmptyUtils.isEmpty(t) || EmptyUtils.isEmpty(t.getId())) {
+            throw new ServiceException();
+        }
+        return dao.updateByPrimaryKey(t);
+    }
+
+    /**
      * 保存/更新(并可以根据需要将实体中部分属性值设置为null)
      *
      * @param t 实例
@@ -203,8 +220,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
                 }
             }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            log.error("实体字段转换失败！");
-            throw new ServiceException(e);
+            throw new ServiceException("实体字段转换失败！", e);
         }
     }
 
@@ -383,8 +399,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
             }
             return t;
         }
-        log.error("无法获取当前对应数据库实体类！");
-        throw new ServiceException();
+        throw new ServiceException("无法获取当前对应数据库实体类！");
     }
 
     /**
@@ -395,8 +410,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
         try {
             return ofTClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            log.error("无法获取当前对象实体！");
-            throw new ServiceException(e);
+            throw new ServiceException("无法获取当前对象实体！", e);
         }
     }
 
