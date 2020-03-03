@@ -128,15 +128,15 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      * 保存/更新(选择是否将null更新到数据库)
      *
      * @param t t
-     * @param selective fasle：将为null的数据更新到数据库/true：不更新为null的数据
+     * @param unselective true：将为null的数据更新到数据库/false：不更新为null的数据
      * @return 1成功/0失败
      */
-    public final int saveAndUpdate(T t, boolean selective) {
-        if (!selective) {
+    public final int saveAndUpdate(T t, boolean unselective) {
+        if (!unselective) {
             return saveAndUpdate(t);
         }
         if (EmptyUtils.isEmpty(t) || EmptyUtils.isEmpty(t.getId())) {
-            throw new ServiceException();
+            throw new ServiceException("仅支持更新，id不能为null");
         }
         return dao.updateByPrimaryKey(t);
     }
