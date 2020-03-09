@@ -4,9 +4,9 @@
     定位用当下最流行的springcloud技术，搭建了一套易理解、高可用、高扩展的分布式微服务框架，方便实现快速开发。
 ## 组织结构
 
-sk-spring-cloud-master
-├── sk-base -- 公共模块\
-├───── common-base -- 公共核心模块（mybatis等）\
+sk-spring-cloud-master</br>
+├── sk-base -- 公共模块</br>
+├───── common-base -- 公共核心模块（mybatis等）
 ├───── spring-social -- 三方登陆模块
 ├── spring-cloud-project -- springcloud相关服务
 ├───── spring-cloud-client-demo --接口调用方demo 
