@@ -5,8 +5,8 @@
 ## 组织结构
 
 sk-spring-cloud-master
-├── sk-base -- 公共模块
-├───── common-base -- 公共核心模块（mybatis等）
+├── sk-base -- 公共模块\
+├───── common-base -- 公共核心模块（mybatis等）\
 ├───── spring-social -- 三方登陆模块
 ├── spring-cloud-project -- springcloud相关服务
 ├───── spring-cloud-client-demo --接口调用方demo 
