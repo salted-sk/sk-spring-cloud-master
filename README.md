@@ -25,12 +25,13 @@ sk-spring-cloud-master</br>
 - springboot：2.2.2.RELEASE
 - springcloud：Hoxton.RC1
 - 项目构建工具：Maven 3.5.0
+- 文件服务器：fastdfs
 - 数据库连接池：Hikari
 - 日志管理：SLF4J
 - 单点登录：基于oauth2协议
 - 三方登陆登录：springsocial
 - 网关：springcloud-gateway
-- 高可用：redis
+- 高可用：redis+nginx+mq等
 
 ### 相关demo
 
