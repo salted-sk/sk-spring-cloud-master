@@ -19,6 +19,7 @@ sk-spring-cloud-master</br>
 ## 技术选型
 
 ### 后端
+
 - JDK：1.8+
 - 数据库：Mysql
 - springboot：2.2.2.RELEASE
@@ -31,5 +32,10 @@ sk-spring-cloud-master</br>
 - 网关：springcloud-gateway
 - 高可用：redis
 
-## 作者寄语
+### 相关demo
+
+[https://chaseself.com/admin]:
+
+作者寄语
+
 共同学习，共同进步
