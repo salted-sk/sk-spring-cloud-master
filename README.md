@@ -34,7 +34,7 @@ sk-spring-cloud-master</br>
 - 数据库连接池：Hikari
 - 日志管理：SLF4J
 - 单点登录：基于oauth2协议
-- 三方登陆登录：springsocial
+- 三方登录：springsocial
 - 权限管理：springsecurity
 - 网关：springcloud-gateway
 - 高可用：redis+nginx+mq等
