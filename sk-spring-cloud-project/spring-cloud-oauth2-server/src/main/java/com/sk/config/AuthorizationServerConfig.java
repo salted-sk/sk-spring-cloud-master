@@ -59,14 +59,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //若无，refresh_token会有UserDetailsService is required错误
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager)
-                .accessTokenConverter(jwtAccessTokenConverter())
+                .accessTokenConverter(jwtAccessTokenConverter())//扩展jwttoken时取消
                 //多节点下可使用redis持久化token
                 .tokenStore(jwtTokenStore());
+//                .tokenStore(redisTokenStore());
                 //扩展jwttoken
                 TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
                 List<TokenEnhancer> enhancerList = new ArrayList<>();
                 enhancerList.add(tokenEnhancer());
-                enhancerList.add(jwtAccessTokenConverter());
+                enhancerList.add(jwtAccessTokenConverter());//扩展jwttoken时取消
                 tokenEnhancerChain.setTokenEnhancers(enhancerList);
                 endpoints.tokenEnhancer(tokenEnhancerChain);
 
@@ -108,7 +109,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //
 //    @Bean
 //    public TokenStore redisTokenStore() {
-//        return new RedisTokenStore(redisConnectionFactory);
+//        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+//        return tokenStore;
 //    }
 
 }
