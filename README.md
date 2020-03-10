@@ -8,6 +8,11 @@ sk-spring-cloud-master</br>
 ├── sk-base -- 公共模块</br>
 ├───── common-base -- 公共核心模块（mybatis等）</br>
 ├───── spring-social -- 三方登陆模块</br>
+├── sk-example -- 相关example模块</br>
+├───── sk-fastdfs -- fastdfs使用相关模块</br>
+├───── sk-multiple-data-sources -- 多数据源模块</br>
+├───── sk-rabbitmq -- rabbitmq相关demo模块</br>
+├───── sk-redis -- redis相关demo模块</br>
 ├── spring-cloud-project -- springcloud相关服务</br>
 ├───── spring-cloud-client-demo --接口调用方demo </br>
 ├───── spring-cloud-config-server -- 配置文件服务器</br>
