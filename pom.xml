@@ -22,7 +22,6 @@
 
     <properties>
         <java.version>11</java.version>
-        <java.version>11</java.version>
         <spring-cloud.version>Hoxton.RC1</spring-cloud.version>
         <tk-mybatis.version>2.1.5</tk-mybatis.version>
         <mybatis.version>2.1.1</mybatis.version>
