@@ -12,7 +12,7 @@
     <artifactId>spring-cloud-client-demo</artifactId>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-boot-starter -->
+        <!-- 接口文档生成相关依赖  待实现 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
