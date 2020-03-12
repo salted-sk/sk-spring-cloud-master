@@ -37,7 +37,7 @@ sk-spring-cloud-master</br>
 - 三方登录：springsocial
 - 安全及权限管理：springsecurity
 - 网关：springcloud-gateway
-- token：jwttoken
+- token：基于jwttoken的安全api调用
 - 高可用：redis+nginx+mq+token等
 
 ### 相关demo
