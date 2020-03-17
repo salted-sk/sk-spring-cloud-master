@@ -35,9 +35,9 @@ sk-spring-cloud-master</br>
 - 日志管理：SLF4J
 - 单点登录：基于oauth2协议
 - 三方登录：springsocial
-- 权限管理：springsecurity
+- 安全及权限管理：springsecurity
 - 网关：springcloud-gateway
-- token：jwttoken
+- token：基于jwttoken的安全api调用
 - 高可用：redis+nginx+mq+token等
 
 ### 相关demo
@@ -46,4 +46,4 @@ sk-spring-cloud-master</br>
 
 作者寄语
 
-共同学习，共同进步
+不只是做一个技术者、更要做一个思考者。
