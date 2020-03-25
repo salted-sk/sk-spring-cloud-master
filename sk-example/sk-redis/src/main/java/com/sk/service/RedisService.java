@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * redis测试类
  *
@@ -14,9 +16,13 @@ import org.springframework.stereotype.Service;
 public class RedisService {
 
 	@Autowired
-	private RedisTemplate redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 
 	public void test() {
+	    redisTemplate.expire("a", 1, TimeUnit.SECONDS);
+
+
+
 		redisTemplate.afterPropertiesSet();
 	}
 

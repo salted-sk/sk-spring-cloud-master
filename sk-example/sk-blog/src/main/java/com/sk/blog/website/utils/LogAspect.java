@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class LogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);
 
-    @Pointcut("execution(public * com.my.blog.website.controller..*.*(..))")
+    @Pointcut("execution(public * com.sk.blog.website.controller..*.*(..))")
     public void webLog() {
     }
 
