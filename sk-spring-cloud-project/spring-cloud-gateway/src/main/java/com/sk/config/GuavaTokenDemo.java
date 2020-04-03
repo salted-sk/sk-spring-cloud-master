@@ -5,10 +5,6 @@ import com.google.common.util.concurrent.RateLimiter;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 腾讯课堂搜索 咕泡学院
- * 加群获取视频：608583947
- * 风骚的Michael 老师
- *
  * //模拟演示令牌桶和漏桶的差异
  */
 public class GuavaTokenDemo {
