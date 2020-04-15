@@ -23,6 +23,7 @@
         <module>sk-weixin-public</module>
         <module>sk-elasticsearch</module>
         <module>sk-activemq</module>
+        <module>sk-data-jpa</module>
     </modules>
 
     <dependencies>
