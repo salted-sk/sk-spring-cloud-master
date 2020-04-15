@@ -1,5 +1,6 @@
 package com.sk.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class JpaTable1 {
     @Column(unique = true, columnDefinition = "varchar(100) COMMENT '字典名'")
     private String name;
 
+    @JsonIgnore
     private String userName;
 
 }
