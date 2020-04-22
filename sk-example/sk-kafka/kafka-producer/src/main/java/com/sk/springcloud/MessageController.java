@@ -32,13 +32,14 @@ public class MessageController {
     @GetMapping("")
     public String send() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("a",1);
-        jsonObject.put("b",2);
-        jsonObject.put("c",3);
+        jsonObject.put("user_id",10058);
+        jsonObject.put("scene","爆仓了");
+        jsonObject.put("params","{\"user_id\":10058,\"update_datetime\":\"20200422133101\",\"scene\":\"爆仓了\"}");
+        jsonObject.put("update_datetime","20200422133101");
 
         //发送消息至exchange-data系统消费
-        kafkaTemplate.send("pAsset", jsonObject.toString().getBytes());
-        kafkaTemplate.send("pAsset", "ceshi".getBytes(), jsonObject.toString().getBytes());
+        kafkaTemplate.send("send_sms", jsonObject.toString().getBytes());
+//        kafkaTemplate.send("pAsset", "ceshi".getBytes(), jsonObject.toString().getBytes());
         log.info("发送Kafka测试消息成功，memberId={},json={}","ceshi",jsonObject.toJSONString());
         return "OK";
     }
