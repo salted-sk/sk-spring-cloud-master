@@ -24,7 +24,7 @@ import java.util.Map;
 @Slf4j
 public class MessageController {
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate kafkaTemplate;
 
     @Autowired
     private KafkaMessageService kafkaMessageService;
@@ -38,8 +38,8 @@ public class MessageController {
 
         //发送消息至exchange-data系统消费
         kafkaTemplate.send("pAsset", jsonObject.toString().getBytes());
-        kafkaTemplate.send("pAsset", "ceshi", jsonObject.toString().getBytes());
-        log.info("发送Kafka更新杠杠钱包消息成功，memberId={},json={}","ceshi",jsonObject.toJSONString());
+        kafkaTemplate.send("pAsset", "ceshi".getBytes(), jsonObject.toString().getBytes());
+        log.info("发送Kafka测试消息成功，memberId={},json={}","ceshi",jsonObject.toJSONString());
         return "OK";
     }
 
