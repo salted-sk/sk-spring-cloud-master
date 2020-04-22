@@ -24,6 +24,7 @@
         <module>sk-elasticsearch</module>
         <module>sk-activemq</module>
         <module>sk-data-jpa</module>
+        <module>sk-kafka</module>
     </modules>
 
     <dependencies>
