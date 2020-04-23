@@ -38,8 +38,8 @@ public class MessageController {
         jsonObject.put("update_datetime","20200422133101");
 
         //发送消息至exchange-data系统消费
-        kafkaTemplate.send("send_sms", jsonObject.toString().getBytes());
-//        kafkaTemplate.send("pAsset", "ceshi".getBytes(), jsonObject.toString().getBytes());
+//        kafkaTemplate.send("send_sms", jsonObject.toString().getBytes());
+        kafkaTemplate.send("send_sms", "ceshi".getBytes(), jsonObject.toString().getBytes());
         log.info("发送Kafka测试消息成功，memberId={},json={}","ceshi",jsonObject.toJSONString());
         return "OK";
     }
