@@ -18,6 +18,7 @@
         <module>spring-cloud-client-demo</module>
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-zipkin-server</module>
+        <module>spring-cloud-eureka</module>
     </modules>
 
     <dependencies>
