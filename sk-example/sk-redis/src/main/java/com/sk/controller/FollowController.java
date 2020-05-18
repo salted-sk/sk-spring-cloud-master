@@ -60,8 +60,8 @@ public class FollowController {
      * @param id
      * @return
      */
-    @GetMapping("/addOrRelease/{id}/{id2}")
-    public Set addOrRelease(@PathVariable  Integer id){
+    @GetMapping("/findFans/{id}/{id2}")
+    public Set findFans(@PathVariable  Integer id){
         return followService.findFans(id);
     }
 
