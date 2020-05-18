@@ -21,7 +21,7 @@ public class FollowService {
 
     private static final String FOLLOWING = "FOLLOWING_";
     private static final String FANS = "FANS_";
-    private static final String COMMON_KEY = "COMMON_FOLLOWING";
+    private static final String COMMON_KEY = "COMMON_FOLLOWING_";
 
     /**
      * 关注或者取消关注
@@ -70,7 +70,7 @@ public class FollowService {
             relation += 1;
         }
         String fansKey = FANS + userId;
-        if (redisTemplate.opsForZSet().rank(fansKey, String.valueOf(userId)) != null) {// userId粉丝列表中是否有otherUserId
+        if (redisTemplate.opsForZSet().rank(fansKey, String.valueOf(otherUserId)) != null) {// userId粉丝列表中是否有otherUserId
             relation += 2;
         }
         return relation;
@@ -109,7 +109,7 @@ public class FollowService {
         }
         String commonKey = COMMON_KEY + userId + "_" + otherUserId;
         // 取交集
-        redisTemplate.opsForZSet().intersectAndStore(commonKey + userId + "_" + otherUserId, FOLLOWING + userId, FOLLOWING + otherUserId);
+        redisTemplate.opsForZSet().intersectAndStore(FOLLOWING + userId, FOLLOWING + otherUserId, commonKey);
         Set<Integer> result = redisTemplate.opsForZSet().range(commonKey, 0, -1);
         redisTemplate.delete(commonKey);
         return result;
