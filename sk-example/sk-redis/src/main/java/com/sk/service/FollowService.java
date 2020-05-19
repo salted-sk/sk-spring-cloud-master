@@ -59,10 +59,7 @@ public class FollowService {
      * @return
      */
     public int checkRelations (Integer userId, Integer otherUserId) {
-        if (userId == null || otherUserId == null) {
-            return 0;
-        }
-        if (userId.equals(otherUserId)) {
+        if (userId == null || otherUserId == null || userId.equals(otherUserId)) {
             return 0;
         }
         String followingKey = FOLLOWING + userId;
