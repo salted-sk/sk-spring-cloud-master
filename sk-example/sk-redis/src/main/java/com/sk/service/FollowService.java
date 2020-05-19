@@ -42,7 +42,8 @@ public class FollowService {
             redisTemplate.opsForZSet().add(followingKey, String.valueOf(followingId), System.currentTimeMillis());
             redisTemplate.opsForZSet().add(fansKey, String.valueOf(userId), System.currentTimeMillis());
             isFollow = 1;
-        } else {// 取消关注
+        } else {
+            // 取消关注
             redisTemplate.opsForZSet().remove(followingKey, String.valueOf(followingId));
             redisTemplate.opsForZSet().remove(fansKey, fansKey);
         }
