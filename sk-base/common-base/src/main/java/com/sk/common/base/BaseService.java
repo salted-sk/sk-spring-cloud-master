@@ -408,8 +408,8 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
      */
     protected T getInstanceOfT() {
         try {
-            return ofTClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return ofTClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new ServiceException("无法获取当前对象实体！", e);
         }
     }
