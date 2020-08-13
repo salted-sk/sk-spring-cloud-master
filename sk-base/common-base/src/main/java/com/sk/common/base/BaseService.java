@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toCollection;
 
 /**
  * 通用service(包含单表的查询、新增、(多)修改,(多)删除)
@@ -104,12 +104,15 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
         List<T> resultList = list;
         if (!sameClass) {
             //将返回的数据库实体结果集转为T类型的结果集
-            resultList = Stream.of(list.toArray()).map(this::getOfFrom).collect(toList());
-            if (list instanceof Page) {
-                list.clear();
-                list.addAll(resultList);
-                resultList = list;
-            }
+            resultList = Stream.of(list.toArray()).map(this::getOfFrom).collect(toCollection(() -> {
+                                    if (list instanceof Page) {
+                                        Page page = new Page();
+                                        BeanUtils.copyProperties(list, page);
+                                        return page;
+                                    } else {
+                                        return new ArrayList<>();
+                                    }
+                                }));
         }
         return resultList;
     }
