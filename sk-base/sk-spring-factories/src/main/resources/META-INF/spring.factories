@@ -1,0 +1,2 @@
+##×Ô¶¯×¢Èë
+org.springframework.boot.autoconfigure.EnableAutoConfiguration =com.sk.autoconfig.FactoriesConfig

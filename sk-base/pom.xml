@@ -15,6 +15,7 @@
         <module>common-base</module>
         <module>pojo-api</module>
         <module>spring-social</module>
+        <module>sk-spring-factories</module>
     </modules>
 
 </project>
