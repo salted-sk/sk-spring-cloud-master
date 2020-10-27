@@ -106,7 +106,7 @@ public abstract class BaseService<T extends BaseEntity, E extends MyMapper<? sup
             //将返回的数据库实体结果集转为T类型的结果集
             resultList = Stream.of(list.toArray()).map(this::getOfFrom).collect(toCollection(() -> {
                                     if (list instanceof Page) {
-                                        Page page = new Page();
+                                        Page<T> page = new Page<>();
                                         BeanUtils.copyProperties(list, page);
                                         return page;
                                     } else {
