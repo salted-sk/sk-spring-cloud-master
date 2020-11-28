@@ -1,8 +1,8 @@
 package com.sk.controller;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.sk.domain.Demo1Domain1;
+import com.sk.domain.Demo1Domain2;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +27,12 @@ public class Demo1 {
             @ApiImplicitParam(name = "param3", value = "参数3", required = true, defaultValue = "1", dataType = "String"),
             @ApiImplicitParam(name = "param4", value = "参数4", defaultValue = "1", dataType = "String"),
     })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "返回成功", response = Demo1Domain1.class),
+            @ApiResponse(code = 201, message = "返回成功2", response = Demo1Domain2.class)
+    })
     @GetMapping("/a")
-    public Object demo1(){
+    public Map demo1(){
         Map map = new HashMap();
         map.put("A", "a");
         return map;

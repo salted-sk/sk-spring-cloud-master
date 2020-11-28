@@ -25,7 +25,21 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         return  new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
+                .groupName("1.0版本")
                 .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.sk.controller"))
+                .paths(PathSelectors.any())
+                .build();
+
+    }
+
+    @Bean
+    public Docket createRestApi2() {
+        return  new Docket(DocumentationType.SWAGGER_2)
+                .useDefaultResponseMessages(false)
+                .apiInfo(apiInfo())
+                .groupName("2.0版本")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sk.controller"))
                 .paths(PathSelectors.any())
