@@ -25,6 +25,7 @@
         <module>sk-activemq</module>
         <module>sk-data-jpa</module>
         <module>sk-kafka</module>
+        <module>sk-knife4j</module>
     </modules>
 
     <dependencies>
