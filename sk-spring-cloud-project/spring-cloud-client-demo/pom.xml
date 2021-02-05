@@ -40,14 +40,14 @@
         </dependency>
 
         <!-- 如何客户端要进行多节点使用oauth的单点登录的话，需要session共享 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.session</groupId>-->
-<!--            <artifactId>spring-session-data-redis</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
 
         <!--springsecurity 要指定3.0以上版本，否则权限标签可能无法工作-->
         <dependency>
@@ -118,6 +118,11 @@
 <!--            <groupId>org.springframework.amqp</groupId>-->
 <!--            <artifactId>spring-rabbit</artifactId>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <!--            <artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
+            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

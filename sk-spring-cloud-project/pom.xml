@@ -19,6 +19,7 @@
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-zipkin-server</module>
         <module>spring-cloud-eureka</module>
+        <module>config-test</module>
     </modules>
 
     <dependencies>

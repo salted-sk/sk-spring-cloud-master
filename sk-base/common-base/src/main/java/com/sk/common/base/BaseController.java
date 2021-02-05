@@ -7,7 +7,9 @@ import com.sk.common.config.page.TableDataInfo;
 import com.sk.common.config.page.TableSupport;
 import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,6 +19,9 @@ import java.util.List;
  * @since 2019/12/4 13:01
  */
 public class BaseController {
+
+    @Autowired
+    private HttpServletRequest request;
 
     /**
      * 设置请求分页数据

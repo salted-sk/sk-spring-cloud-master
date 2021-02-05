@@ -3,6 +3,10 @@ package com.sk.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -17,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -59,17 +64,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //若无，refresh_token会有UserDetailsService is required错误
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager)
-                .accessTokenConverter(jwtAccessTokenConverter())//扩展jwttoken时取消
+//                .accessTokenConverter(jwtAccessTokenConverter())//扩展jwttoken时取消
                 //多节点下可使用redis持久化token
-                .tokenStore(jwtTokenStore());
-//                .tokenStore(redisTokenStore());
+//                .tokenStore(jwtTokenStore());
+                .tokenStore(redisTokenStore());
                 //扩展jwttoken
                 TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
                 List<TokenEnhancer> enhancerList = new ArrayList<>();
                 enhancerList.add(tokenEnhancer());
                 enhancerList.add(jwtAccessTokenConverter());//扩展jwttoken时取消
                 tokenEnhancerChain.setTokenEnhancers(enhancerList);
-                endpoints.tokenEnhancer(tokenEnhancerChain);
+//                endpoints.tokenEnhancer(tokenEnhancerChain);
 
                 //使用jdbc保存code以达到多节点认证
                 //.authorizationCodeServices(authorizationCodeServices());
@@ -104,13 +109,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     //使用reids来持久化token
-//    @Autowired
-//    private RedisConnectionFactory redisConnectionFactory;
-//
-//    @Bean
-//    public TokenStore redisTokenStore() {
-//        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-//        return tokenStore;
-//    }
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
 
+    @Bean
+    public TokenStore redisTokenStore() {
+        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+        tokenStore.setPrefix("taiyi:oauth2.0:");
+        tokenStore.setAuthenticationKeyGenerator(new SkAuthenticationKeyGenerator(tokenStore));
+        return tokenStore;
+    }
 }

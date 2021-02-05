@@ -54,7 +54,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**")
                 .and()
             .authorizeRequests()
-                .antMatchers("/actuator/health")
+                .antMatchers("/actuator/health", "/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

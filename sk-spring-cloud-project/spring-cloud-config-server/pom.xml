@@ -58,10 +58,11 @@
             </exclusions>
         </dependency>
 
-        <!--&lt;!&ndash; 全局刷新配置 &ndash;&gt;-->
+        <!-- 全局刷新配置 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+<!--            <artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
+            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
         </dependency>
     </dependencies>
 

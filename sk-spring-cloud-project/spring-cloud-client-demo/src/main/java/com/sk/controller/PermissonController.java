@@ -28,22 +28,22 @@ public class PermissonController {
     @Autowired
     private FeignPermissonService permissonService;
 
-    @HystrixCommand(
-            fallbackMethod = "hysPermission",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
-                            value = "200")
-            }
-    )
+//    @HystrixCommand(
+//            fallbackMethod = "hysPermission",
+//            commandProperties = {
+//                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
+//                            value = "200")
+//            }
+//    )
     @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @GetMapping("/getList")
     public Result getPermissionJson() {
-        try {
-            //随机设置超时时间，进入熔断
-            Thread.sleep(new Random().nextInt(300));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //随机设置超时时间，进入熔断
+//            Thread.sleep(new Random().nextInt(300));
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         Result result = permissonService.getListJson();
         return result;
     }

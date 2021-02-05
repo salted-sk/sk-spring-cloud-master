@@ -3,6 +3,7 @@ package com.sk.common.base.entity;
 import com.sk.common.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "sys_user")
+@ToString
 public class SysUser extends BaseEntity {
 
     /**

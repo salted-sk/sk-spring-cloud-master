@@ -53,6 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
         } else {
             user = userService.getUserByUsername(username);
         }
+        System.out.println("用户登录-用户登录信息="+ user.toString());
         return getUserDetails(user);
     }
 
