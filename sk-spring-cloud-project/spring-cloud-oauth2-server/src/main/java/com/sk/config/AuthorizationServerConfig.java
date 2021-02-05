@@ -115,7 +115,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public TokenStore redisTokenStore() {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-        tokenStore.setPrefix("taiyi:oauth2.0:");
+        tokenStore.setPrefix("sk:oauth2.0:");
         tokenStore.setAuthenticationKeyGenerator(new SkAuthenticationKeyGenerator(tokenStore));
         return tokenStore;
     }
