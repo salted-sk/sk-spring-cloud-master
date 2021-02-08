@@ -26,6 +26,7 @@ import java.util.Set;
  *
  * @author zhangqiao
  * @since 2019/11/19 15:12
+ * @see org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService;
  */
 @Service
 @Slf4j

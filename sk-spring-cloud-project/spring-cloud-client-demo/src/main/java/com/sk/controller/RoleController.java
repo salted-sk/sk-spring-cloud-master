@@ -68,7 +68,7 @@ public class RoleController extends BaseController {
      * @param principal
      * @return
      */
-    @PreAuthorize("hasAuthority('ROLE:QUERY')")
+//    @PreAuthorize("hasAuthority('ROLE:QUERY')")
     @GetMapping("/getList.json")
     @ResponseBody
     public Result getListJson(Principal principal) {

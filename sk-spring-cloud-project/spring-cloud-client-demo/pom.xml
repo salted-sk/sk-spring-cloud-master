@@ -118,11 +118,11 @@
 <!--            <groupId>org.springframework.amqp</groupId>-->
 <!--            <artifactId>spring-rabbit</artifactId>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <!--            <artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
-            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            &lt;!&ndash;            <artifactId>spring-cloud-starter-bus-amqp</artifactId>&ndash;&gt;-->
+<!--            <artifactId>spring-cloud-starter-bus-kafka</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>

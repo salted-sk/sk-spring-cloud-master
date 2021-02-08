@@ -64,6 +64,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //若无，refresh_token会有UserDetailsService is required错误
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager)
+                //重置refreshtoken
+                .reuseRefreshTokens(false)
 //                .accessTokenConverter(jwtAccessTokenConverter())//扩展jwttoken时取消
                 //多节点下可使用redis持久化token
 //                .tokenStore(jwtTokenStore());

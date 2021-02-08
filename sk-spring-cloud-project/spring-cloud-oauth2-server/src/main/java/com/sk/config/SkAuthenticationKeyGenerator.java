@@ -52,7 +52,8 @@ public class SkAuthenticationKeyGenerator implements AuthenticationKeyGenerator 
         if (!authentication.isClientOnly()) {
             values.put(USERNAME, authentication.getName());
         }
-
+        boolean isRefresh = authorizationRequest.isRefresh();
+        System.out.println("是刷新token操作=" + isRefresh);
         values.put(CLIENT_ID, authorizationRequest.getClientId());
         if (authorizationRequest.getScope() != null) {
             values.put(SCOPE, OAuth2Utils.formatParameterList(new CopyOnWriteArraySet<>(authorizationRequest.getScope())));
@@ -68,7 +69,8 @@ public class SkAuthenticationKeyGenerator implements AuthenticationKeyGenerator 
                     String refreshToken = ServletUtils.getRequest().getParameter("refresh_token");
                     if (StringUtils.isEmpty(refreshToken)) {
                         redisTokenStore.removeRefreshToken(oAuth2AccessToken.getRefreshToken());
-
+//                        redisTokenStore.removeRefreshToken(oAuth2AccessToken.getRefreshToken());
+//                        redisTokenStore.storeRefreshToken(oAuth2AccessToken.getRefreshToken(), authentication);
                     }
                 }
             }

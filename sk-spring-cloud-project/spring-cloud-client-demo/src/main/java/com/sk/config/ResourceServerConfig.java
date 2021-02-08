@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resource) throws Exception {
@@ -44,6 +44,7 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
     @Bean
     public TokenStore redisTokenStore() {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+        tokenStore.setPrefix("sk:oauth2.0:");
         return tokenStore;
     }
 
@@ -56,7 +57,7 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers("/**")
-                    .access("#oauth2.hasScope('admin,api')");//配置所有请求必须要有a的权限
+                    .access("#oauth2.hasScope('all')");//配置所有请求必须要有a的权限
     }
 
     private AccessDeniedHandler handleAccessDeniedForUser() {
