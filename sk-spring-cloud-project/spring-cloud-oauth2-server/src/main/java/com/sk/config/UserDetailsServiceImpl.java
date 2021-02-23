@@ -69,6 +69,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
             if (user.getStatus() != 1) {
                 //当前用户被锁
                 return LoginUser.withUsername(user.getAccount())
+                        .userId(Long.valueOf(user.getId()))
                         .truename(user.getTrueName())
                         .password(user.getPassword())
                         .authorities(new ArrayList<>())
@@ -84,6 +85,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
             });
             log.info("用户:" + user.getTrueName() + "登陆！");
             return LoginUser.withUsername(user.getAccount())
+                    .userId(Long.valueOf(user.getId()))
                     .truename(user.getTrueName())
                     .account(user.getAccount())
                     .sex(user.getSex())

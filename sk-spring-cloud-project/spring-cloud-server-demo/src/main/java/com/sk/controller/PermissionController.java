@@ -6,6 +6,7 @@ import com.sk.common.base.service.SysPermissionService;
 import com.sk.common.config.page.TableDataInfo;
 import com.sk.common.config.po.Result;
 import com.sk.common.utils.EmptyUtils;
+import com.sk.common.utils.ServletUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -82,10 +83,11 @@ public class PermissionController extends BaseController {
      * @param principal
      * @return
      */
-    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
+//    @PreAuthorize("hasAuthority('PERMISSION:QUERY')")
     @GetMapping("/getList.json")
     @ResponseBody
     public Result getListJson(Principal principal) {
+        Principal userPrincipal = ServletUtils.getRequest().getUserPrincipal();
         List<SysPermission> syspermissions = permissionService.selectList();
         Map<String, Object> map = new HashMap<>();
         map.put("数据", syspermissions);

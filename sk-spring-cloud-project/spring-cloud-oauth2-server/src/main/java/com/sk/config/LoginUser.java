@@ -27,6 +27,7 @@ import java.util.function.Function;
 public class LoginUser implements UserDetails, CredentialsContainer, SocialUserDetails {
     private static final long serialVersionUID = 520L;
     private static final Log logger = LogFactory.getLog(LoginUser.class);
+    private Long userId;
     private String account;
     private String truename;
     private String imageUrl;
@@ -41,11 +42,12 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
     private final boolean enabled;
 
     public LoginUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this(username, password, null, null, null, null, true, true, true, true, authorities);
+        this(null, username, password, null, null, null, null, true, true, true, true, authorities);
     }
 
-    public LoginUser(String account, String truename, String imageUrl, String sex, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public LoginUser(Long userId, String account, String truename, String imageUrl, String sex, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         if (username != null && !"".equals(username) && password != null) {
+            this.userId = userId;
             this.account = account;
             this.truename = truename;
             this.imageUrl = imageUrl;
@@ -130,6 +132,7 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString()).append(": ");
+        sb.append("UserId: ").append(this.userId).append("; ");
         sb.append("Account: ").append(this.account).append("; ");
         sb.append("Truename: ").append(this.truename).append("; ");
         sb.append("Sex: ").append(this.sex).append("; ");
@@ -185,10 +188,11 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
 
     @Override
     public String getUserId() {
-        return this.account;
+        return String.valueOf(this.userId);
     }
 
     public static class UserBuilder {
+        private Long userId;
         private String account;
         private String truename;
         private String imageUrl;
@@ -204,6 +208,12 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
 
         private UserBuilder() {
             this.passwordEncoder = (password) -> password;
+        }
+
+        public LoginUser.UserBuilder userId(Long userId) {
+            Assert.notNull(userId, "userId cannot be null");
+            this.userId = userId;
+            return this;
         }
 
         public LoginUser.UserBuilder account(String account) {
@@ -293,7 +303,7 @@ public class LoginUser implements UserDetails, CredentialsContainer, SocialUserD
 
         public LoginUser build() {
             String encodedPassword = this.passwordEncoder.apply(this.password);
-            return new LoginUser(this.account, this.truename, this.imageUrl, this.sex, this.username, encodedPassword, !this.disabled, !this.accountExpired, !this.credentialsExpired, !this.accountLocked, this.authorities);
+            return new LoginUser(this.userId, this.account, this.truename, this.imageUrl, this.sex, this.username, encodedPassword, !this.disabled, !this.accountExpired, !this.credentialsExpired, !this.accountLocked, this.authorities);
         }
     }
 
