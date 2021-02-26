@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author zhangqiao
  * @since 2019/11/6 16:13
  */
-@Configuration
-@EnableOAuth2Sso
+//@Configuration
+//@EnableOAuth2Sso
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${app.sso.logout.url}")

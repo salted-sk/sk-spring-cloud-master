@@ -44,6 +44,7 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
     @Bean
     public TokenStore redisTokenStore() {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+        tokenStore.setPrefix("sk:oauth2.0:");
         return tokenStore;
     }
 
