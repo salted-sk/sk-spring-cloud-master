@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebSession;
+import org.springframework.web.server.session.InMemoryWebSessionStore;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.MonoProcessor;
 
 /**
  * TODO
@@ -21,6 +24,9 @@ public class SkFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         System.out.println("GlobalFilter");
         ServerHttpRequest request = exchange.getRequest();
+        WebSession memoryWebSession = exchange.getSession().block();
+        //添加session信息
+        memoryWebSession.getAttributes().put("username", "sk");
         HttpHeaders headers = request.getHeaders();
         //不能这样追加，因为header是readonly的
         //headers.add("add", "addd");
