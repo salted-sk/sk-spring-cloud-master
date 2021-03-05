@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class RedisDistributedLock extends AbstractDistributedLock {
 
     @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     private final Logger logger = LoggerFactory.getLogger(RedisDistributedLock.class);
 
@@ -67,12 +68,12 @@ public class RedisDistributedLock extends AbstractDistributedLock {
         return result;
     }
 
-    private boolean setRedis(final String key, final long expire ) {
+    private Boolean setRedis(final String key, final long expire ) {
         try{
             RedisCallback<Boolean> callback = (connection) -> {
                 String uuid = UUID.randomUUID().toString();
                 lockFlag.set(uuid);
-                return connection.set(key.getBytes(Charset.forName("UTF-8")), uuid.getBytes(Charset.forName("UTF-8")), Expiration.milliseconds(expire), RedisStringCommands.SetOption.SET_IF_ABSENT);
+                return connection.set(key.getBytes(StandardCharsets.UTF_8), uuid.getBytes(StandardCharsets.UTF_8), Expiration.milliseconds(expire), RedisStringCommands.SetOption.SET_IF_ABSENT);
             };
             return redisTemplate.execute(callback);
         } catch (Exception e) {
@@ -88,12 +89,12 @@ public class RedisDistributedLock extends AbstractDistributedLock {
      * @return
      */
     @Override
-    public boolean releaseLock(String key) {
+    public Boolean releaseLock(String key) {
         // 释放锁的时候，有可能因为持锁之后方法执行时间大于锁的有效期，此时有可能已经被另外一个线程持有锁，所以不能直接删除
         try {
             RedisCallback<Boolean> callback = (connection) -> {
                 String value = lockFlag.get();
-                return connection.eval(UNLOCK_LUA.getBytes(), ReturnType.BOOLEAN ,1, key.getBytes(Charset.forName("UTF-8")), value.getBytes(Charset.forName("UTF-8")));
+                return connection.eval(UNLOCK_LUA.getBytes(), ReturnType.BOOLEAN ,1, key.getBytes(StandardCharsets.UTF_8), value.getBytes(StandardCharsets.UTF_8));
             };
             return redisTemplate.execute(callback);
         } catch (Exception e) {

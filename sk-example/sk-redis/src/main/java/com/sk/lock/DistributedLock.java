@@ -26,6 +26,6 @@ public interface DistributedLock {
 
     boolean lock(String key, long expire, int retryTimes, long sleepMillis);
 
-    boolean releaseLock(String key);
+    Boolean releaseLock(String key);
 
 }
