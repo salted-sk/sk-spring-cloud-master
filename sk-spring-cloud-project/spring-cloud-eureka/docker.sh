@@ -1,0 +1,1 @@
+docker build -t eureka:1.0 . -f Dockerfile

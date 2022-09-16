@@ -3,7 +3,6 @@ package com.sk.controller;
 import com.sk.common.utils.EmptyUtils;
 import com.sk.config.LoginUser;
 import com.sk.config.properties.SocialProperties;
-import com.sk.my.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

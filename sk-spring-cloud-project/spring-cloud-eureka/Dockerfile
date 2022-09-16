@@ -1,5 +1,5 @@
 # 基础镜像使用Java
-FROM openjdk:11.0.4
+FROM openjdk:11.0.16-oracle
 # 作者
 MAINTAINER sk
 # VOLUME指定了临时文件目录为/tmp

@@ -1,0 +1,59 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: nacos-getway  #本服务的名称
+  cloud:
+    gateway:                 #注册网关
+      discovery:
+        locator:
+          enabled: true  #开启注册中心路由功能
+          lower-case-service-id: true
+      routes:
+        - id: payment_routh
+          #          uri: http://localhost:8001
+          uri: lb://nacos-payment-provider #此处如果有问题，请注意依赖spring-cloud-starter-netflix-eureka-client依赖不能错
+          predicates:
+            - Path=/payment/**
+        #        - id: payment_routh2
+        #          #          uri: http://localhost:8001
+        #          uri: lb://nacos-payment-provider
+        #          predicates:
+        #            - Path=/payment/lb/**  #指定路径
+        - id: oauth_routh
+          uri: lb://nacos-oauth
+          predicates:
+            - Path=/security/**  #指定路径
+
+    #            - After=2020-06-17T11:09:08.176+08:00[Asia/Shanghai]  #在这个时间之后才能访问
+    #            - Cookie=username,zs   #带指定cookie再能访问
+    #            - Header=X-Request-Id, \d+ #携带指定请求头才能访问 前面属性名称  后面正则表达式（整数）
+    #            - Host=**.baidu.com #接收一组参数，一组匹配的域名列表，这个模板是一个ant分隔的模板，用.做分隔符
+    #            - Method=GET #指定请求方法
+    #            - Query=username, \d+ #指定参数，可接受两个值一个属性名，后面是正则表达式
+
+
+    nacos:                    #注册到nacos
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719 #默认8719，假如被占用了会自动从8719开始依次+1扫描。直至找到未被占用的端口
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848   #nacos地址
+            dataID: nacos-payment-provider
+            groupId: DEFAULT_GROUP
+            data-type: json      #注意是json类型
+            rule-type: flow
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
